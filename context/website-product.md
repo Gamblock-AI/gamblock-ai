@@ -362,6 +362,8 @@ Operations
 Current locale-aware Next.js routes already cover landing/legal pages, auth,
 dashboard, recovery, progress, education, accountability, partner invitation,
 quick approval, settings/profile/support, data requests, and an admin surface.
+The current prototype also includes a public `/post-intervention` route with a
+local grounding exercise and no browsing-context parameters.
 
 When adding target features:
 
@@ -374,6 +376,27 @@ When adding target features:
   changes;
 - never put detected-page details in URL parameters, analytics, referrers, or
   client error reporting.
+
+### Current website prototype boundary
+
+- The student dashboard is action-first: intention, structured private
+  check-in, one API-backed mission, an explained skill, then weekly review.
+- Intention, mood/urge, mission alternative, and weekly-plan state currently use
+  the versioned browser-local `gamblock:recovery:v1` store with bounded history
+  and an explicit clear action.
+- Skill ranking is deterministic and non-diagnostic. It uses only the mood and
+  urge values the student entered; no browsing signal or hidden risk score is
+  available to the recommender.
+- Weekly patterns require at least three check-ins in seven days. With less
+  data, the UI shows an insufficient-data state instead of inventing a chart.
+- Education list/detail shows only `published` API modules on the client and
+  renders Markdown through a text-only allowlist. Backend status enforcement,
+  review metadata, and completion persistence still need hardening.
+- Mission completion uses the existing backend endpoints; alternative choice
+  remains browser-local because the current contract exposes only five boolean
+  slots.
+- The public post-intervention page is useful independently, but the native
+  detection-to-web handoff is not yet wired or proven.
 
 ## State and error requirements
 

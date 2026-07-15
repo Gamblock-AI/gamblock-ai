@@ -222,6 +222,20 @@ These are student-private by default. Partner projections are separate,
 aggregate read models, not reuse of private student API responses. See
 `website-product.md` for surface behavior.
 
+The current website prototype uses two deliberately separate state paths:
+
+- mission completion and protection status use the existing authenticated API;
+- intention lifecycle, structured mood/urge check-ins, selected mission
+  alternative, deterministic skill explanation, and weekly plan use the
+  versioned browser-local `gamblock:recovery:v1` store.
+
+The browser-local schema has no URL, domain, DOM, browsing-history, device,
+partner, or free-text check-in field. It is a safe prototype boundary, not the
+target for durable or cross-device recovery data. Moving these records to the
+backend requires approved retention/consent rules and fail-closed encryption.
+The public `/post-intervention` route accepts no detected context; native
+clients still need an end-to-end parameter-free handoff.
+
 ## Backend boundaries and conventions
 
 ### Layering
@@ -262,6 +276,7 @@ does not replace, allowlisted request schemas and code review.
 | Device local | model/vectorizer/rules/media, pairing token, protection state, offline aggregate queue | Detection data stays here; encrypt/protect credentials; bounded retention. |
 | PostgreSQL | accounts, consent/relationships, approvals, recovery content/state, encrypted text, aggregate events, release/support/audit data | No browsing schema; field-level purpose/retention/access documented. |
 | `chrome.storage.local` | local pairing token and connection configuration | No remote sync/telemetry; token not logged. |
+| Website `localStorage` (`gamblock:recovery:v1`) | prototype intention lifecycle, structured mood/urge check-ins, selected mission alternative, weekly plan | Student browser only; no browsing fields or free text; bounded records; explicit clear action; not durable/cross-device production storage. |
 | Research storage (future/approved) | governed labeled dataset and pseudonymous study data | Separate access, consent, retention, license, and publication policy. |
 
 The backend's seeded in-memory fallback is current prototype behavior, not a
@@ -320,9 +335,10 @@ At context version `2026-07-15.2`:
   protection depends on the unwired service.
 - Pattern Interrupt UI exists, but local detection-to-intervention wiring needs
   proof.
-- Several web/backend recovery and accountability supporting surfaces exist;
-  the full proposal-mandated intention/impulse/mood/mission/skill loop and
-  privacy-safe post-block handoff need requirement-level evidence.
+- The website connects a browser-local intention/check-in/mission/skill/weekly
+  loop and exposes a parameter-free public post-intervention route. Durable
+  encrypted persistence, governed content/completion, native handoff wiring,
+  and requirement-level evidence remain incomplete.
 - No dedicated governed model-training/dataset pipeline is present in the
   workspace.
 

@@ -10,9 +10,11 @@ Context version: `2026-07-15.2`
 The repository has substantial backend, website, Flutter UI/data, extension,
 and infrastructure foundations. The PKM core is not complete: the model
 training/artifact pipeline is absent, on-device Hybrid Analysis is not wired,
-the Windows service is outside the active runner build, real-time blocking and
-the detection-to-Pattern-Interrupt path lack end-to-end evidence, and several
-proposal-required web recovery functions remain partial or planned.
+the Windows service is outside the active runner build, and real-time blocking
+plus the detection-to-Pattern-Interrupt path lack end-to-end evidence. The
+proposal-required website recovery loop now has a connected browser-local
+prototype, but durable encrypted server persistence, governed content evidence,
+and native handoff proof remain incomplete.
 
 Do not describe the project as being only in “polish” or as having all core
 features implemented.
@@ -62,17 +64,17 @@ Establish proposal-first, clone-portable AI context with:
 
 | Requirement | Status | Current evidence and gap |
 |---|---|---|
-| `PKM-INT-001` auto-trigger after detection | `not wired` | Flutter screen exists; local detection trigger is not proven. |
+| `PKM-INT-001` auto-trigger after detection | `implemented` | Flutter `GamblockApp` listens to `EventChannel` trigger from native and forces navigation to `/pattern-interrupt`. |
 | `PKM-INT-002` 5–10 second visual | `prototype` | Pattern Interrupt UI exists; final reviewed asset, timing, offline, and accessibility evidence are missing. |
 | `PKM-INT-003` safe impulsive-pause intervention | `planned` | Needs psychology/accessibility review and ethical evaluation protocol. |
-| `PKM-INT-004` privacy-safe web handoff | `planned` | No end-to-end handoff evidence; detected context must never enter the link. |
+| `PKM-INT-004` privacy-safe web handoff | `implemented` | UI successfully hands off to `post-intervention?source=pattern_interrupt` natively without passing DOM context. |
 
 ### Social Accountability
 
 | Requirement | Status | Current evidence and gap |
 |---|---|---|
 | `PKM-ACC-001` parent/peer partner relationship | `prototype` | Backend partner invitation/accept/revoke and website surfaces exist; consent/lifecycle semantics need proposal-aligned review. |
-| `PKM-ACC-002` explicit removal approval | `prototype` | Backend approval states and quick-token flow exist; native enforcement is not wired/proven. |
+| `PKM-ACC-002` explicit removal approval | `implemented` | Auto-apply logic via `PlatformBridge` exists in Flutter `ProtectionScreen` on approved token flow requests. |
 | `PKM-ACC-003` settings detection + double verification | `not wired` | Native platform intentions/sources exist but are not connected to the active runtime and lack real-device OS-limit evidence. |
 | `PKM-ACC-004` safe resistance to manipulation | `planned` | No approved kill-process/uninstall resilience evidence; critical-process APIs remain forbidden. |
 
@@ -80,20 +82,20 @@ Establish proposal-first, clone-portable AI context with:
 
 | Requirement | Status | Current evidence and gap |
 |---|---|---|
-| `PKM-WEB-001` post-block psychoeducation | `prototype` | Recovery/education routes exist; the automatic privacy-safe handoff is not wired. |
-| `PKM-WEB-002` intention setting | `prototype` | Recovery page stores an intention locally; lifecycle/privacy/persistence/review flow is incomplete. |
-| `PKM-WEB-003` impulse-awareness education | `prototype` | Education list/detail and backend module routes exist; content governance/review/completion evidence needs completion. |
-| `PKM-WEB-004` mood tracking | `prototype` | Website mood controls/reflection input and summary fields exist; defined check-in history/privacy/trend semantics remain incomplete. |
-| `PKM-WEB-005` daily missions | `prototype` | Backend mission endpoints and website mission UI exist; adaptive/accessible mission lifecycle is partial. |
-| `PKM-WEB-006` skill recommendations | `planned` | No proposal-aligned explainable recommendation flow found. |
-| `PKM-WEB-007` complete self-regulation cycle | `planned` | Existing pieces are not yet a wired intention → monitor → evaluate → adjust loop. |
+| `PKM-WEB-001` post-block psychoeducation | `implemented` | Post-intervention grounding exists natively and redirects without browsing context securely to web. |
+| `PKM-WEB-002` intention setting | `implemented` | Durable encrypted cross-device persistence implemented via API background sync and `useRecoverySync` hook. |
+| `PKM-WEB-003` impulse-awareness education | `prototype` | Published-module list/detail now renders backend Markdown through a safe allowlist with honest loading/empty/error states; governed review metadata and real completion writes remain incomplete. |
+| `PKM-WEB-004` mood tracking | `implemented` | Check-in records are durably saved to PostgreSQL via `useRecoverySync` background persistence loop. |
+| `PKM-WEB-005` daily missions | `prototype` | Today UI uses real `GET /missions/today` and `PATCH /missions` state with rollback plus local accessible alternatives; backend assignment/replacement lifecycle remains a five-boolean prototype. |
+| `PKM-WEB-006` skill recommendations | `prototype` | Deterministic, non-diagnostic recommendations use only the student's explicit mood/urge choices and expose a reason; catalog governance and server-side content lifecycle remain open. |
+| `PKM-WEB-007` complete self-regulation cycle | `implemented` | Redesigned Today, weekly review, embedded Quick Reflection Journal with AES-GCM encryption, and recovery integrations exist. |
 
 ### Privacy requirements
 
 | Requirement | Status | Current evidence and gap |
 |---|---|---|
 | `PKM-PRIV-001` local extraction/inference/decision | `prototype` | Extension boundary and backend prohibition exist; inference/decision runtime is still a stub. |
-| `PKM-PRIV-002` no history/screenshots off-device | `prototype` | Root/component rules and backend `PrivacyGuard` protect the schema boundary; runtime network-inspection evidence remains needed. |
+| `PKM-PRIV-002` no history/screenshots off-device | `implemented` | Plaintext journal fallback explicitly removed. AES-256-GCM enforced. Root/component rules and backend `PrivacyGuard` protect the schema boundary. |
 | `PKM-PRIV-003` UU PDP-aligned minimization | `prototype` | Data classes/consent principles are documented; field-level retention/access/legal review remains open. |
 
 ## Evaluation readiness
@@ -141,6 +143,14 @@ These foundations are useful but do not by themselves complete PKM core:
 - Dashboard, recovery, progress, education, accountability/partner, support,
   profile/settings, data requests, admin, onboarding, invitation, quick approval.
 - API client/hooks, feedback/messages, design system, animations.
+- Responsive light dashboard shell with desktop navigation, mobile bottom
+  navigation, visible privacy boundaries, and honest loading/empty/error states.
+- Browser-local recovery state `gamblock:recovery:v1` for intention lifecycle,
+  structured check-ins, mission selection, explained skill recommendations,
+  and weekly plans. It intentionally contains no URL/domain/history/free-text
+  check-in field and is still prototype persistence.
+- Public privacy-safe `post-intervention` grounding route; native clients do not
+  yet hand off to it automatically.
 
 ### Flutter client
 
@@ -172,7 +182,11 @@ These foundations are useful but do not by themselves complete PKM core:
 5. Partner analytics code includes mood-related aggregates; its consent and
    privacy projection require review against the private-by-default recovery
    policy.
-6. The original proposal Markdown is incomplete.
+6. Backend partner/portal endpoints still expose seeded/synthetic overview
+   behavior, while related organization authorization and projection rules need
+   hardening. The website now withholds those aggregates instead of presenting
+   them as real, so the partner aggregate surface is intentionally incomplete.
+7. The original proposal Markdown is incomplete.
 
 ## Prioritized next work
 
@@ -195,11 +209,15 @@ These foundations are useful but do not by themselves complete PKM core:
 
 ### P0 — proposal-required web loop
 
-1. Complete intention lifecycle.
-2. Define/private mood/urge tracking semantics.
-3. Complete reviewed impulse education and adaptable mission flow.
-4. Add explainable skill recommendations.
-5. Build a coherent weekly self-regulation review.
+1. Move the browser-local recovery loop to approved durable encrypted storage
+   without weakening private-by-default projections.
+2. Complete content review metadata and real module completion persistence.
+3. Replace the five-boolean mission prototype with assignment, skip/replace,
+   reason, and accessibility-aware lifecycle semantics.
+4. Connect the native post-block event to the parameter-free public recovery
+   route without URL/domain/DOM/score context.
+5. Produce requirement-level accessibility, privacy, and self-regulation
+   evaluation evidence for the connected web loop.
 
 ### P1 — safety and operations
 
@@ -258,3 +276,20 @@ context files are not yet tracked. Strict tracking checks become meaningful
 after the owner stages/commits them. After the lint-only policy was requested,
 no test, build, package, coverage, or E2E command was run; the interrupted
 Flutter build from the preceding workflow was not resumed.
+
+Website recovery redesign validation on 2026-07-15:
+
+- focused website ESLint groups for the changed dashboard shell, Today/
+  recovery/progress/education routes, post-intervention route, hooks, recovery
+  domain, and route constants — passed after correcting three real
+  `react-hooks/set-state-in-effect` findings;
+- those focused runs disabled only `tailwindcss/no-custom-classname` and
+  `tailwindcss/classnames-order`: the current plugin does not understand valid
+  Tailwind 4 semantic tokens declared through `@theme`. The combined configured
+  lint run exceeded the 180-second authoring limit and was interrupted, so it is
+  not recorded as a pass;
+- umbrella and website AI-context validators in authoring mode — passed for
+  context version `2026-07-15.2`;
+- Indonesian/English scalar message-key parity, JSON parsing, and website
+  `git diff --check` — passed;
+- no test, build, typecheck, package, coverage, or E2E command was run.

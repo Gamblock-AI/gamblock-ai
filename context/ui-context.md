@@ -265,6 +265,13 @@ detail view is understood as intentional protection, not missing data.
 
 Detailed website sitemap and feature states are in `website-product.md`.
 
+The current website dashboard implementation follows this pattern with a
+248px light desktop rail, a five-destination mobile bottom navigation, one page
+heading per route, 44px interactive targets, and explicit loading/empty/error
+or insufficient-data states. The durable page-level specification is
+`gamblock-ai-website/design-system/gamblock-ai-recovery-dashboard/`; repository
+context and the PKM proposal remain authoritative if that reference conflicts.
+
 ## Motion and micro-interactions
 
 - GSAP is for public storytelling; Framer Motion for small web transitions and
