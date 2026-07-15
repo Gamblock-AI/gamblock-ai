@@ -1,0 +1,15 @@
+[submodule "gamblock-ai-backend"]
+	path = gamblock-ai-backend
+	url = https://github.com/Gamblock-AI/Gamblock-AI-Backend.git
+[submodule "gamblock-ai-website"]
+	path = gamblock-ai-website
+	url = https://github.com/Gamblock-AI/Gamblock-AI-Website.git
+[submodule "gamblock_ai_apps"]
+	path = gamblock_ai_apps
+	url = https://github.com/Gamblock-AI/Gamblock-AI-Apps.git
+[submodule "browser_extension"]
+	path = browser_extension
+	url = https://github.com/Gamblock-AI/Gamblock-AI-Browser-Extention.git
+[submodule "gamblock-ai-infrastructure"]
+	path = gamblock-ai-infrastructure
+	url = https://github.com/Gamblock-AI/Gamblock-AI-Infrastructure.git

@@ -1,0 +1,18 @@
+name: AI Context Integrity
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+jobs:
+  verify-context:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: recursive
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: bash scripts/verify-ai-context.sh

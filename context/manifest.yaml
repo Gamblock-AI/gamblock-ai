@@ -1,0 +1,43 @@
+schema_version: 1
+context_version: 2026-07-15.2
+topology: multi-repository-with-umbrella
+canonical_files:
+  - context/README.md
+  - context/proposal-requirements.md
+  - context/project-overview.md
+  - context/architecture.md
+  - context/privacy-security.md
+  - context/website-product.md
+  - context/ui-context.md
+  - context/research-evaluation.md
+  - context/glossary.md
+  - context/ai-workflow-rules.md
+  - context/progress-tracker.md
+  - context/pkm_proposal.md
+  - context/decisions/0001-multi-repo-context.md
+  - context/decisions/0002-proposal-first-governance.md
+component_snapshots:
+  - browser_extension/docs/ai/manifest.yaml
+  - gamblock-ai-backend/docs/ai/manifest.yaml
+  - gamblock-ai-infrastructure/docs/ai/manifest.yaml
+  - gamblock-ai-website/docs/ai/manifest.yaml
+  - gamblock_ai_apps/docs/ai/manifest.yaml
+contracts:
+  proposal_authority: 1
+  proposal_traceability: 1
+  local_ai_lint_policy: 1
+  privacy_boundary: 1
+  websocket_loopback: 1
+  api_error_catalog: 1
+required_providers:
+  - agents
+  - claude
+  - gemini
+  - github-copilot
+  - cursor
+global_templates:
+  - templates/global/codex-AGENTS.md
+  - templates/global/claude-CLAUDE.md
+  - templates/global/gemini-GEMINI.md
+  - templates/global/copilot-instructions.md
+  - templates/global/cursor-user-rules.txt

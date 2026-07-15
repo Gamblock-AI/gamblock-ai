@@ -1,0 +1,19 @@
+schema_version: 1
+umbrella_repository: https://github.com/Gamblock-AI/Gamblock-AI.git
+default_branch: main
+components:
+  backend:
+    path: gamblock-ai-backend
+    repository: https://github.com/Gamblock-AI/Gamblock-AI-Backend.git
+  website:
+    path: gamblock-ai-website
+    repository: https://github.com/Gamblock-AI/Gamblock-AI-Website.git
+  flutter:
+    path: gamblock_ai_apps
+    repository: https://github.com/Gamblock-AI/Gamblock-AI-Apps.git
+  extension:
+    path: browser_extension
+    repository: https://github.com/Gamblock-AI/Gamblock-AI-Browser-Extention.git
+  infrastructure:
+    path: gamblock-ai-infrastructure
+    repository: https://github.com/Gamblock-AI/Gamblock-AI-Infrastructure.git

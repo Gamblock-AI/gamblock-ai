@@ -1,0 +1,4 @@
+# Legacy Cursor pointer
+
+Cursor project rules live in `.cursor/rules/gamblock-ai.mdc`. Follow
+`AGENTS.md` as the canonical workspace instruction file.
