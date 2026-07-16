@@ -76,6 +76,7 @@ ROOT_REQUIRED = (
     "context/architecture.md",
     "context/privacy-security.md",
     "context/website-product.md",
+    "context/mobile-product.md",
     "context/ui-context.md",
     "context/research-evaluation.md",
     "context/glossary.md",

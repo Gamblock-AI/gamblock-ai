@@ -1,5 +1,5 @@
 schema_version: 1
-context_version: 2026-07-16.4
+context_version: 2026-07-16.5
 topology: multi-repository-with-umbrella
 canonical_files:
   - context/README.md
@@ -8,6 +8,7 @@ canonical_files:
   - context/architecture.md
   - context/privacy-security.md
   - context/website-product.md
+  - context/mobile-product.md
   - context/ui-context.md
   - context/research-evaluation.md
   - context/glossary.md

@@ -1,6 +1,6 @@
 # Gamblock-AI Context Router
 
-Context version: `2026-07-16.4`
+Context version: `2026-07-16.5`
 
 This directory is the durable knowledge base for Gamblock-AI. It separates
 academic intent, derived product decisions, technical design, and current
@@ -49,7 +49,7 @@ request and a reliable source from the proposal owners.
 |---|---|
 | Any product or implementation change | `pkm_proposal.md` relevant section, `proposal-requirements.md`, `ai-workflow-rules.md`, affected component `docs/ai/README.md` |
 | Product scope, actors, journeys, or priorities | `project-overview.md`, `glossary.md` |
-| Detection, native client, API, storage, or cross-component design | `architecture.md`, `privacy-security.md` |
+| Detection, native client, API, storage, or cross-component design | `architecture.md`, `privacy-security.md`, `mobile-product.md` for client behavior |
 | Website feature or route | `website-product.md`, `ui-context.md`, relevant component `AGENTS.md` |
 | Visual or interaction design | `ui-context.md`, `website-product.md` when web-facing |
 | Dataset, model, metric, experiment, or academic claim | `research-evaluation.md`, `proposal-requirements.md` |

@@ -153,8 +153,13 @@ This flow maps `PKM-PLAT-001`, `PKM-PLAT-002`, and `PKM-PLAT-003`.
 6. Removal/stop requests use the accountability workflow and safe recovery.
 
 The extension never receives block commands and never closes/redirects tabs.
-The current Windows service source is a prototype and must be included in the
-active build/install/runtime path before claiming this flow is implemented.
+The Windows implementation separates the LocalSystem authority from the
+interactive user-session agent. The service owns loopback validation,
+classification, pairing/grants, aggregate counters, and SCM recovery. The
+agent owns Flutter UI, supported `SendInput` navigation, settings-surface
+friction, and Pattern Interrupt. Their named pipe is restricted to LocalSystem
+and the active logon SID. Source/CMake inclusion is still only code-complete
+prototype evidence until a Windows build and VM/device trace pass.
 
 ## Pattern Interrupt and recovery handoff
 
@@ -293,9 +298,11 @@ PostgreSQL cannot open, migrate, or load.
   recipient consent. Multiple relationship records are supported.
 - Quick approval uses a high-entropy, 24-hour, single-use scoped token stored
   only as a hash. Relationship authorization is checked on every decision.
-- Emergency recovery requires a request from one platform administrator and
-  approval from a distinct second administrator within 30 minutes; the issued
-  hashed key is single-use and expires after 24 hours.
+- Emergency recovery begins with the protected user requesting access for an
+  owned device. One platform administrator reviews it and a distinct second
+  platform administrator issues the key within the 30-minute request window;
+  the issued hashed key is device-bound, single-use, and expires after 24
+  hours.
 - API stable error codes remain synchronized across backend, website, Flutter.
 - Client-facing API changes update all available consumers and document absent
   repository follow-ups.

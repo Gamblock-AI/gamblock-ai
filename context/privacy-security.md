@@ -126,10 +126,11 @@ withdrawal paths consistent with defined legal/academic obligations.
   and excluded from logs/referrers/analytics.
 - Bind partner actions to the approved relationship/member and requested state.
 - Apply least privilege to content, support, release, and platform roles.
-- Emergency recovery requires a request by one platform administrator and
-  approval by a distinct second administrator. The request expires after 30
-  minutes; the resulting hashed key is single-use and expires after 24 hours.
-  It is not ordinary access or a partner-approval substitute.
+- Emergency recovery starts from the protected user's owned device. One
+  platform administrator reviews it and a distinct second platform
+  administrator issues the key. The request expires after 30 minutes; the
+  resulting hashed key is device-bound, single-use, and expires after 24
+  hours. It is not ordinary access or a partner-approval substitute.
 
 ## Local IPC security
 
@@ -140,6 +141,9 @@ For the Windows extension/service WebSocket:
 - validate message type, size, schema, and rate;
 - reject/ignore service messages that ask the extension to block or redirect;
 - rotate/revoke pairing credentials when re-paired;
+- protect the Windows pairing token and local grants with DPAPI at rest;
+- restrict service/agent named-pipe access to LocalSystem and the active logon
+  SID;
 - do not put pairing tokens in logs or error reports;
 - document origin assumptions and defend against another local process sending
   malformed messages;
@@ -152,6 +156,9 @@ The protection must be resistant, not destructive:
 - Android uses documented Accessibility/administrative capabilities with
   transparent permission disclosure.
 - Windows uses a normal LocalSystem service and SCM recovery as appropriate.
+- Windows user-interaction actions run in a separate user-session agent; the
+  LocalSystem service does not request `SeDebugPrivilege`, scan gambling
+  process names, or terminate arbitrary processes.
 - Never use `RtlSetProcessIsCritical`, undocumented critical-process behavior,
   boot-loop tactics, filesystem sabotage, or anything that can BSOD/brick the
   device.

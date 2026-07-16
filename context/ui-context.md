@@ -273,8 +273,9 @@ detail view is understood as intentional protection, not missing data.
   aggregate, support guidance.
 - **Operations:** dense but readable tables/forms with explicit role, status,
   version, audit, and destructive-action confirmation.
-- **Flutter:** bottom navigation for ordinary client tasks; protection and
-  intervention states use native/full-screen patterns when necessary.
+- **Flutter:** four labeled bottom destinations—Protection, Analytics, Partner,
+  and Settings. Protection and intervention states use native/full-screen
+  patterns when necessary; detailed recovery remains on the website.
 
 Detailed website sitemap and feature states are in `website-product.md`.
 
