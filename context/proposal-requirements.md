@@ -4,8 +4,8 @@ This document normalizes the requirements that are explicitly present in
 `pkm_proposal.md`. It is a navigation and traceability aid, not a replacement
 for the proposal. If this file conflicts with the proposal, the proposal wins.
 
-Status and evidence are intentionally kept in `progress-tracker.md` so target
-requirements are not confused with current implementation.
+Status and evidence are intentionally kept in component `docs/ai/README.md`
+files so target requirements are not confused with current implementation.
 
 ## Source integrity and interpretation rules
 

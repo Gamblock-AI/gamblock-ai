@@ -80,7 +80,6 @@ ROOT_REQUIRED = (
     "context/research-evaluation.md",
     "context/glossary.md",
     "context/ai-workflow-rules.md",
-    "context/progress-tracker.md",
     "context/decisions/0001-multi-repo-context.md",
     "context/decisions/0002-proposal-first-governance.md",
     "repos.yaml",
@@ -261,21 +260,10 @@ def main() -> int:
                 errors.append(f"global template lacks lint-only policy: {relative}")
 
     requirements_path = ROOT / "context/proposal-requirements.md"
-    tracker_path = ROOT / "context/progress-tracker.md"
-    if requirements_path.is_file() and tracker_path.is_file():
+    if requirements_path.is_file():
         requirement_ids = set(
             re.findall(r"`(PKM-[A-Z]+-[0-9]{3})`", requirements_path.read_text())
         )
-        tracker_ids = set(
-            re.findall(r"`(PKM-[A-Z]+-[0-9]{3})`", tracker_path.read_text())
-        )
-        missing_status = sorted(requirement_ids - tracker_ids)
-        if missing_status:
-            errors.append(
-                "progress tracker lacks proposal requirements: "
-                + ", ".join(missing_status)
-            )
-
         context_ids: set[str] = set()
         for path in (ROOT / "context").rglob("*.md"):
             if path.name == "pkm_proposal.md":
@@ -288,25 +276,6 @@ def main() -> int:
             errors.append(
                 "context references undefined proposal requirements: "
                 + ", ".join(unknown_ids)
-            )
-
-        allowed_statuses = {
-            "implemented",
-            "prototype",
-            "stub",
-            "not wired",
-            "planned",
-            "blocked",
-        }
-        tracker_statuses = re.findall(
-            r"(?m)^\| `PKM-[A-Z]+-[0-9]{3}`[^|]*\| `([^`]+)` \|",
-            tracker_path.read_text(),
-        )
-        invalid_statuses = sorted(set(tracker_statuses) - allowed_statuses)
-        if invalid_statuses:
-            errors.append(
-                "progress tracker uses invalid capability statuses: "
-                + ", ".join(invalid_statuses)
             )
 
         shorthand_pattern = re.compile(

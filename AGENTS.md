@@ -1,6 +1,6 @@
 # Gamblock-AI Umbrella Agent Rules
 
-Context version: `2026-07-15.2`
+Context version: `2026-07-16.4`
 
 This workspace coordinates five independent Git repositories. The umbrella
 repository owns shared product context, cross-repository contracts, and
@@ -11,8 +11,8 @@ workspace validation. Every component repository also carries a self-contained
 
 1. Read `context/README.md` and follow its proposal-first, task-based routing.
 2. Read the relevant section of `context/pkm_proposal.md`, then
-   `context/proposal-requirements.md`, `context/ai-workflow-rules.md`, and
-   `context/progress-tracker.md` for any product or implementation task.
+   `context/proposal-requirements.md` and `context/ai-workflow-rules.md` for any
+   product or implementation task.
 3. Load the relevant domain context (`architecture.md`, `privacy-security.md`,
    `website-product.md`, `ui-context.md`, or `research-evaluation.md`).
 4. Before reading or changing a component, read that component's `AGENTS.md`.
@@ -108,8 +108,8 @@ Run `./scripts/verify-ai-context.sh` from this root after changing a catalog.
   into an implementation claim without evidence.
 - Label every feature as PKM core, supporting product, or operational. Cite the
   relevant exact PKM requirement IDs for core behavior.
-- Put stable behavior and decisions in context/architecture docs. Use
-  `progress-tracker.md` for current status and evidence, not speculative plans.
+- Put stable behavior and decisions in context/architecture docs. Keep current
+  status and evidence in the affected component's `docs/ai/README.md`.
 - Update the affected component `README.md`, `AGENTS.md`, and `docs/ai/` when
   commands, paths, architecture, or capability status change.
 - At the end of normal development work, run only the narrowest relevant

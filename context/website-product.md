@@ -18,8 +18,8 @@ The website has two feature classes:
   additions. They may
   enrich the product but must not displace unfinished core recovery work.
 
-Current implementation status belongs in `progress-tracker.md`; this file is
-the target product specification.
+Current implementation status belongs in component `docs/ai/README.md` files;
+this file is the target product specification.
 
 ## Experience principles
 
@@ -40,15 +40,15 @@ the target product specification.
 
 ## Actors and access
 
-| Surface | Protected Student | Accountability Partner | Operational role | Public |
-|---|---:|---:|---:|---:|
-| Personal intention, mood, private reflection | Own data only | No | No by default | No |
-| Missions, education, skill recommendations | Own journey | Support summary only if approved | Content management, not private answers | Selected public education |
-| Protection aggregate/status | Own device | Consented aggregate only | Aggregate support diagnostics | No |
-| Removal approval | Request/status | Approve or deny linked member | Audited emergency/support action | Token holder only for single-use flow |
-| Partner relationship | Invite/revoke per policy | Accept/revoke per policy | Limited support resolution | No |
-| Content administration | No | No | Least-privilege content role | Published content only |
-| Model/release operations | Version visibility | No | Release operator | Public transparency summary only |
+| Surface                                      |        Protected Student |           Accountability Partner |                        Operational role |                                Public |
+| -------------------------------------------- | -----------------------: | -------------------------------: | --------------------------------------: | ------------------------------------: |
+| Personal intention, mood, private reflection |            Own data only |                               No |                           No by default |                                    No |
+| Missions, education, skill recommendations   |              Own journey | Support summary only if approved | Content management, not private answers |             Selected public education |
+| Protection aggregate/status                  |               Own device |         Consented aggregate only |           Aggregate support diagnostics |                                    No |
+| Removal approval                             |           Request/status |    Approve or deny linked member |        Audited emergency/support action | Token holder only for single-use flow |
+| Partner relationship                         | Invite/revoke per policy |         Accept/revoke per policy |              Limited support resolution |                                    No |
+| Content administration                       |                       No |                               No |            Least-privilege content role |                Published content only |
+| Model/release operations                     |       Version visibility |                               No |                        Release operator |      Public transparency summary only |
 
 Possessing an operational role does not grant access to raw browsing data or
 private recovery text.
@@ -377,32 +377,13 @@ When adding target features:
 - never put detected-page details in URL parameters, analytics, referrers, or
   client error reporting.
 
-### Current website prototype boundary
-
-- The student dashboard is action-first: intention, structured private
-  check-in, one API-backed mission, an explained skill, then weekly review.
-- Intention, mood/urge, mission alternative, and weekly-plan state currently use
-  the versioned browser-local `gamblock:recovery:v1` store with bounded history
-  and an explicit clear action.
-- Skill ranking is deterministic and non-diagnostic. It uses only the mood and
-  urge values the student entered; no browsing signal or hidden risk score is
-  available to the recommender.
-- Weekly patterns require at least three check-ins in seven days. With less
-  data, the UI shows an insufficient-data state instead of inventing a chart.
-- Education list/detail shows only `published` API modules on the client and
-  renders Markdown through a text-only allowlist. Backend status enforcement,
-  review metadata, and completion persistence still need hardening.
-- Mission completion uses the existing backend endpoints; alternative choice
-  remains browser-local because the current contract exposes only five boolean
-  slots.
-- The public post-intervention page is useful independently, but the native
-  detection-to-web handoff is not yet wired or proven.
-
 ## State and error requirements
 
 Every core action needs loading, empty, success, validation, offline/degraded,
-permission, expired-token, and safe error states. Production messages use the
-synchronized stable catalog; technical details remain development-only.
+permission, expired-token, and safe error states. UI messages use concise,
+non-technical catalog copy in every environment. Sanitized code/status context
+may appear only in the development console, never in production diagnostics;
+tokens, URLs, form values, and recovery/browsing content are never logged.
 
 Specific recovery states include:
 

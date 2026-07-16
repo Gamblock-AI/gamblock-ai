@@ -1,5 +1,5 @@
 schema_version: 1
-context_version: 2026-07-15.2
+context_version: 2026-07-16.4
 topology: multi-repository-with-umbrella
 canonical_files:
   - context/README.md
@@ -12,7 +12,6 @@ canonical_files:
   - context/research-evaluation.md
   - context/glossary.md
   - context/ai-workflow-rules.md
-  - context/progress-tracker.md
   - context/pkm_proposal.md
   - context/decisions/0001-multi-repo-context.md
   - context/decisions/0002-proposal-first-governance.md
@@ -29,6 +28,9 @@ contracts:
   privacy_boundary: 1
   websocket_loopback: 1
   api_error_catalog: 1
+  accountability_state: 1
+  client_daily_aggregate: 1
+  emergency_two_operator: 1
 required_providers:
   - agents
   - claude

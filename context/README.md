@@ -1,6 +1,6 @@
 # Gamblock-AI Context Router
 
-Context version: `2026-07-15.2`
+Context version: `2026-07-16.4`
 
 This directory is the durable knowledge base for Gamblock-AI. It separates
 academic intent, derived product decisions, technical design, and current
@@ -22,13 +22,14 @@ Use this order when documents disagree:
 4. Domain documents (`architecture.md`, `website-product.md`,
    `ui-context.md`, `privacy-security.md`, `research-evaluation.md`) — explain
    how the product should satisfy the requirements.
-5. `progress-tracker.md` and component `docs/ai/README.md` files — describe
-   current implementation truth and evidence.
+5. Component `docs/ai/README.md` files — describe current implementation truth
+   and evidence for each independently releasable repository.
 6. ADRs under `decisions/` — record long-lived engineering decisions. An ADR
    may choose an implementation, but it may not rewrite the proposal's intent.
 
 Code is evidence of current behavior, not permission to redefine the target.
-When code and the proposal differ, record a gap in `progress-tracker.md`.
+When code and the proposal differ, record the gap in the affected component's
+`docs/ai/README.md`.
 
 ## Proposal integrity warning
 
@@ -46,13 +47,13 @@ request and a reliable source from the proposal owners.
 
 | Task | Required context |
 |---|---|
-| Any product or implementation change | `pkm_proposal.md` relevant section, `proposal-requirements.md`, `ai-workflow-rules.md`, `progress-tracker.md` |
+| Any product or implementation change | `pkm_proposal.md` relevant section, `proposal-requirements.md`, `ai-workflow-rules.md`, affected component `docs/ai/README.md` |
 | Product scope, actors, journeys, or priorities | `project-overview.md`, `glossary.md` |
 | Detection, native client, API, storage, or cross-component design | `architecture.md`, `privacy-security.md` |
 | Website feature or route | `website-product.md`, `ui-context.md`, relevant component `AGENTS.md` |
 | Visual or interaction design | `ui-context.md`, `website-product.md` when web-facing |
 | Dataset, model, metric, experiment, or academic claim | `research-evaluation.md`, `proposal-requirements.md` |
-| PKM status or next work | `progress-tracker.md` |
+| Implementation status or next work | affected component `docs/ai/README.md` |
 | Multi-repository context tooling | `manifest.yaml`, `decisions/0001-multi-repo-context.md` |
 | Product-governance conflict | `decisions/0002-proposal-first-governance.md` |
 
@@ -60,21 +61,9 @@ For a narrow task, read the proposal sections and requirement IDs that apply;
 loading the entire repository is not required. The non-negotiable privacy,
 passive-extension, and safe anti-tamper rules still apply to every task.
 
-## Capability labels
-
-Use these terms consistently:
-
-- `implemented` — working path exists and is wired in the relevant runtime;
-- `prototype` — runnable partial implementation with known limitations;
-- `stub` — interface or placeholder exists but does not perform the behavior;
-- `not wired` — implementation source exists but is not connected to the
-  active runtime/build path;
-- `planned` — specified but no implementation evidence exists;
-- `blocked` — progress requires a named external decision, source, platform,
-  or resource.
-
-Do not use “done”, “complete”, or “production-ready” for a proposal feature
-when only its UI, schema, route, or interface exists.
+Capability and evidence labels are defined once in `glossary.md`. Use those
+terms in every status document; do not invent a stronger synonym for partial
+evidence.
 
 ## Ownership and update rules
 
@@ -86,11 +75,15 @@ when only its UI, schema, route, or interface exists.
 | Visual or behavioral UX | `ui-context.md` | website/client docs and tracker |
 | Research method or metric definition | `research-evaluation.md` | traceability and tracker |
 | Workflow or validation policy | `ai-workflow-rules.md` | root/component `AGENTS.md`, skills, manifests, templates |
-| Current capability evidence | `progress-tracker.md` | relevant component `docs/ai/README.md` |
+| Current capability evidence | relevant component `docs/ai/README.md` | affected README or domain document when behavior/contract changed |
 
 Meaningful scope, architecture, workflow, or shared-contract changes require a
 `context_version` bump in `manifest.yaml` and every affected component
 snapshot. Spelling-only changes do not.
+
+Keep component status documents limited to current status, evidence, gaps,
+blockers, and next work. Historical change and command logs belong in version
+control or CI records.
 
 ## Default validation policy
 

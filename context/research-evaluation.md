@@ -4,8 +4,8 @@
 
 This document turns the proposal's evaluation intentions into a reproducible
 evidence plan. It does not claim that an experiment has been completed.
-Results and current readiness belong in `progress-tracker.md` and approved PKM
-reports.
+Results and current readiness belong in component status documents and approved
+PKM reports.
 
 The evaluation has four distinct questions:
 
@@ -237,9 +237,10 @@ The final evidence bundle should connect each registered PKM requirement to:
 - artifact path/hash and publication restriction;
 - corresponding report section and demo step.
 
-Required and additional PKM outputs are tracked separately in
-`progress-tracker.md`: progress report, final report, prototype, social-media
-account, usage documentation, educational video, and scientific article.
+Required and additional PKM outputs should be recorded in the owning component
+status document or approved PKM report: progress report, final report,
+prototype, social-media account, usage documentation, educational video, and
+scientific article.
 
 ## Decisions still required
 

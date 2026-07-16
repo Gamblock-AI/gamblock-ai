@@ -14,9 +14,9 @@ the proposal into a coherent product shape and clearly separates additions:
 - **supporting product** — useful additions that improve delivery or recovery;
 - **operational** — capabilities needed to administer and run the prototype.
 
-See `proposal-requirements.md` for requirement-level traceability and
-`progress-tracker.md` for current implementation truth. Target behavior in
-this document is not evidence that the runtime is wired.
+See `proposal-requirements.md` for requirement-level traceability and each
+component's `docs/ai/README.md` for current implementation truth. Target
+behavior in this document is not evidence that the runtime is wired.
 
 ## North-star outcome
 

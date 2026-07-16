@@ -67,6 +67,11 @@ crimson sparingly for urgency/destructive actions, cyan for protective-system
 signals, sage for constructive progress, and amber for attention. A future
 dark mode is supporting scope and must not delay core accessibility.
 
+Landing, authentication, and authenticated website shells share the canonical
+cyan-blue mesh background. Dashboard panels use a scoped higher-contrast token
+layer over that mesh so consistency never reduces form, text, border, or focus
+visibility.
+
 Avoid casino/gambling visual vocabulary: neon spectacle, gold jackpots,
 spinning wheels, chips/cards, confetti rewards, countdown pressure, variable
 rewards, or “winning/losing” recovery language.
@@ -120,6 +125,14 @@ views explain units and periods in text, not color alone.
   `--shadow-float`), never glossy casino-style depth.
 - Prefer one clear container hierarchy. Avoid nested cards for every text
   fragment.
+- Dashboard card identity icons use the navy icon tile by default. Sage, amber,
+  and crimson icon tiles are reserved for confirmed success/progress, pending
+  or attention states, and critical/destructive states respectively; do not
+  alternate icon colors merely to decorate adjacent cards.
+- Dashboard card and notice headers place the icon and title on the first row,
+  with compact status or actions at the end. Supporting descriptions use the
+  available width below that row instead of remaining squeezed beside the
+  icon.
 
 ## Component systems
 
@@ -265,13 +278,6 @@ detail view is understood as intentional protection, not missing data.
 
 Detailed website sitemap and feature states are in `website-product.md`.
 
-The current website dashboard implementation follows this pattern with a
-248px light desktop rail, a five-destination mobile bottom navigation, one page
-heading per route, 44px interactive targets, and explicit loading/empty/error
-or insufficient-data states. The durable page-level specification is
-`gamblock-ai-website/design-system/gamblock-ai-recovery-dashboard/`; repository
-context and the PKM proposal remain authoritative if that reference conflicts.
-
 ## Motion and micro-interactions
 
 - GSAP is for public storytelling; Framer Motion for small web transitions and
@@ -326,8 +332,9 @@ Avoid:
 - No data means “not enough data”, never “perfect recovery”.
 - Partner unavailable or token expired routes to a defined safe support path.
 - False-positive path does not request/upload the blocked URL by default.
-- Friendly production messages use the synchronized error catalog; technical
-  detail is development-only.
+- User-facing messages remain friendly and non-technical in every environment.
+  Sanitized technical detail is limited to the development console and is
+  suppressed from production browser diagnostics.
 
 ## Design review checklist
 

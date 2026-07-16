@@ -4,8 +4,7 @@
 
 This document maps the PKM requirements in `proposal-requirements.md` to a
 target technical architecture. It does not claim that every path is currently
-wired. See `progress-tracker.md` and component `docs/ai/README.md` files for
-implementation evidence.
+wired. See component `docs/ai/README.md` files for implementation evidence.
 
 Privacy/data details live in `privacy-security.md`; research and model
 evaluation details live in `research-evaluation.md`.
@@ -222,19 +221,20 @@ These are student-private by default. Partner projections are separate,
 aggregate read models, not reuse of private student API responses. See
 `website-product.md` for surface behavior.
 
-The current website prototype uses two deliberately separate state paths:
+Website recovery state uses deliberately separated paths:
 
-- mission completion and protection status use the existing authenticated API;
-- intention lifecycle, structured mood/urge check-ins, selected mission
-  alternative, deterministic skill explanation, and weekly plan use the
-  versioned browser-local `gamblock:recovery:v1` store.
+- mission completion, protection status, profile, partner approvals, and
+  support cases use authenticated APIs;
+- intention lifecycle and structured mood/urge check-ins remain local-first in
+  `gamblock:recovery:v1` and sync only when the student enables each category;
+- selected mission alternatives, deterministic skill explanations, and weekly
+  plans remain browser-local.
 
 The browser-local schema has no URL, domain, DOM, browsing-history, device,
-partner, or free-text check-in field. It is a safe prototype boundary, not the
-target for durable or cross-device recovery data. Moving these records to the
-backend requires approved retention/consent rules and fail-closed encryption.
-The public `/post-intervention` route accepts no detected context; native
-clients still need an end-to-end parameter-free handoff.
+partner, or detected-page field. Optional synchronization is a per-category
+choice and must never imply partner sharing. The public `/post-intervention`
+route accepts no detected context; Flutter opens it with locale plus the fixed
+`source=pattern_interrupt` category only.
 
 ## Backend boundaries and conventions
 
@@ -276,11 +276,12 @@ does not replace, allowlisted request schemas and code review.
 | Device local | model/vectorizer/rules/media, pairing token, protection state, offline aggregate queue | Detection data stays here; encrypt/protect credentials; bounded retention. |
 | PostgreSQL | accounts, consent/relationships, approvals, recovery content/state, encrypted text, aggregate events, release/support/audit data | No browsing schema; field-level purpose/retention/access documented. |
 | `chrome.storage.local` | local pairing token and connection configuration | No remote sync/telemetry; token not logged. |
-| Website `localStorage` (`gamblock:recovery:v1`) | prototype intention lifecycle, structured mood/urge check-ins, selected mission alternative, weekly plan | Student browser only; no browsing fields or free text; bounded records; explicit clear action; not durable/cross-device production storage. |
+| Website `localStorage` (`gamblock:recovery:v1`) | local-first intention lifecycle, structured mood/urge check-ins, selected mission alternative, weekly plan | No browsing fields; bounded records and explicit clear action. Intention/check-in server sync is separate opt-in by category; other records stay local. |
 | Research storage (future/approved) | governed labeled dataset and pseudonymous study data | Separate access, consent, retention, license, and publication policy. |
 
-The backend's seeded in-memory fallback is current prototype behavior, not a
-production persistence guarantee.
+Non-production can use an empty in-memory store and may explicitly enable
+contextual demo records. Production rejects demo/dev modes and fails closed if
+PostgreSQL cannot open, migrate, or load.
 
 ## Authentication and API contracts
 
@@ -288,7 +289,13 @@ production persistence guarantee.
 - Backend RBAC is authoritative.
 - Website token cookie/middleware and Flutter Bearer client are consumers, not
   substitutes for backend checks.
-- Quick approval uses a high-entropy, expiring, single-use scoped token.
+- Partner invitations are email-bound, expire after seven days, and require
+  recipient consent. Multiple relationship records are supported.
+- Quick approval uses a high-entropy, 24-hour, single-use scoped token stored
+  only as a hash. Relationship authorization is checked on every decision.
+- Emergency recovery requires a request from one platform administrator and
+  approval from a distinct second administrator within 30 minutes; the issued
+  hashed key is single-use and expires after 24 hours.
 - API stable error codes remain synchronized across backend, website, Flutter.
 - Client-facing API changes update all available consumers and document absent
   repository follow-ups.
@@ -324,27 +331,6 @@ dedicated repository.
 - Permission removed/service stopped: display transparent health status and
   follow approved accountability/setup recovery.
 
-## Current known target-versus-runtime gaps
-
-At context version `2026-07-15.2`:
-
-- Flutter exposes an AI inference contract stub but does not load/run the
-  proposal-required model pipeline.
-- Windows service/WebSocket source is not in the active runner build target.
-- Extension DOM extraction/loopback relay exists, but end-to-end Windows
-  protection depends on the unwired service.
-- Pattern Interrupt UI exists, but local detection-to-intervention wiring needs
-  proof.
-- The website connects a browser-local intention/check-in/mission/skill/weekly
-  loop and exposes a parameter-free public post-intervention route. Durable
-  encrypted persistence, governed content/completion, native handoff wiring,
-  and requirement-level evidence remain incomplete.
-- No dedicated governed model-training/dataset pipeline is present in the
-  workspace.
-
-Do not remove these gaps from architecture language until the tracker records
-the runtime/evaluation evidence.
-
 ## Engineering conventions
 
 - Backend layering as above; ent schema changes use generation, never hand-edit
@@ -353,6 +339,9 @@ the runtime/evaluation evidence.
   `presentation/`; presentation does not call Dio directly.
 - Website App Router; hooks call `lib/api-client.ts`; pages/components do not
   scatter raw authenticated `fetch()` calls.
+- Website next-intl catalogs are split into matching domain modules per locale,
+  loaded concurrently through an explicit server loader, and checked for valid
+  JSON, unique namespaces, and identical nested keys before delivery.
 - Configuration through committed examples and typed config modules; secrets
   remain gitignored/encrypted.
 - One component/widget per file where component rules require it; generated

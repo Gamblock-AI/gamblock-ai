@@ -27,15 +27,15 @@ message validation are required.
 
 ## Data classification
 
-| Class | Examples | Location and policy |
-|---|---|---|
-| `D0 Local detection secret` | URL/domain, DOM text, title/headings/anchor text, history, screenshot, search query, app/window identifier, rule hits, feature vector, per-page score | Device only; never sent to backend, analytics, crash reporting, partner, or admin. Shortest practical local lifetime. |
-| `D1 Local protection state` | model/rules versions, pairing token, offline queue, current block/intervention state | Device only except explicitly allowed non-browsing version/health aggregates; pairing token never leaves paired local processes. |
-| `D2 Account and relationship` | identity, role, contact, partner relationship, consent, approval status | Backend allowed for defined purpose; least privilege, retention, audit, export/delete rules. |
-| `D3 Recovery sensitive` | intention, mood/urge check-in, private reflection/journal, coping plan | Backend only when voluntarily entered for web recovery; private by default; encrypt sensitive text; never partner-visible by implication. |
-| `D4 Aggregate protection/recovery` | broad-period block count, privacy-safe heartbeat, mission completion | Backend allowed only if non-reconstructive, purpose-limited, and disclosed; apply cohort/time granularity. |
-| `D5 Public/operational` | published modules, app versions, model card, help resources, support status | Backend/public as appropriate; still protect credentials, audit detail, and internal security metadata. |
-| `D6 Research` | approved pseudonymous study events and outcomes | Separate purpose/consent/schema/access/retention; product consent is insufficient. |
+| Class                              | Examples                                                                                                                                              | Location and policy                                                                                                                       |
+| ---------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
+| `D0 Local detection secret`        | URL/domain, DOM text, title/headings/anchor text, history, screenshot, search query, app/window identifier, rule hits, feature vector, per-page score | Device only; never sent to backend, analytics, crash reporting, partner, or admin. Shortest practical local lifetime.                     |
+| `D1 Local protection state`        | model/rules versions, pairing token, offline queue, current block/intervention state                                                                  | Device only except explicitly allowed non-browsing version/health aggregates; pairing token never leaves paired local processes.          |
+| `D2 Account and relationship`      | identity, role, contact, partner relationship, consent, approval status                                                                               | Backend allowed for defined purpose; least privilege, retention, audit, export/delete rules.                                              |
+| `D3 Recovery sensitive`            | intention, mood/urge check-in, private reflection/journal, coping plan                                                                                | Backend only when voluntarily entered for web recovery; private by default; encrypt sensitive text; never partner-visible by implication. |
+| `D4 Aggregate protection/recovery` | broad-period block count, privacy-safe heartbeat, mission completion                                                                                  | Backend allowed only if non-reconstructive, purpose-limited, and disclosed; apply cohort/time granularity.                                |
+| `D5 Public/operational`            | published modules, app versions, model card, help resources, support status                                                                           | Backend/public as appropriate; still protect credentials, audit detail, and internal security metadata.                                   |
+| `D6 Research`                      | approved pseudonymous study events and outcomes                                                                                                       | Separate purpose/consent/schema/access/retention; product consent is insufficient.                                                        |
 
 When uncertain, assign the more sensitive class and ask the product/privacy
 owner before widening collection or access.
@@ -126,9 +126,10 @@ withdrawal paths consistent with defined legal/academic obligations.
   and excluded from logs/referrers/analytics.
 - Bind partner actions to the approved relationship/member and requested state.
 - Apply least privilege to content, support, release, and platform roles.
-- Emergency recovery requires a narrowly scoped, auditable protocol; a global
-  reusable bypass key is a high-risk prototype feature and must not be treated
-  as ordinary access.
+- Emergency recovery requires a request by one platform administrator and
+  approval by a distinct second administrator. The request expires after 30
+  minutes; the resulting hashed key is single-use and expires after 24 hours.
+  It is not ordinary access or a partner-approval substitute.
 
 ## Local IPC security
 
@@ -163,19 +164,19 @@ The protection must be resistant, not destructive:
 
 ## Threat and abuse cases
 
-| Threat | Required control direction |
-|---|---|
-| Gambling site rotates domain or camouflages content | Hybrid URL + DOM model, time-shifted evaluation, local rules/model updates. |
-| Malicious page injects huge/adversarial DOM | Input length/rate limits, normalization, timeouts, safe parser, no code execution. |
-| Local process impersonates extension/service | Loopback binding, pairing token, schema/rate validation, credential rotation. |
-| User tries ordinary process kill/uninstall | OS-supported service recovery and consented partner approval; no unsafe critical process. |
-| Partner abuses supervisory access | Aggregate-only views, relationship revocation/help, audit, least privilege. |
-| Quick-approval token leaks | Short expiry, single use, revocation, no analytics/referrer/log exposure. |
-| Admin/support overreach | RBAC, audited break-glass, no browsing schema, sensitive recovery access restriction. |
-| Crash/analytics tool captures sensitive input | Redaction at source, no `D0`, no recovery plaintext, vendor review. |
-| Model/rules artifact tampered with | Signed/hashed artifact, compatibility manifest, trusted release channel, rollback. |
-| False positive blocks important content | FPR evaluation, accessible report/recovery path, safe bounded override policy. |
-| Research re-identifies participant | Separate pseudonym, minimal schema, cohort suppression, restricted access/retention. |
+| Threat                                              | Required control direction                                                                |
+| --------------------------------------------------- | ----------------------------------------------------------------------------------------- |
+| Gambling site rotates domain or camouflages content | Hybrid URL + DOM model, time-shifted evaluation, local rules/model updates.               |
+| Malicious page injects huge/adversarial DOM         | Input length/rate limits, normalization, timeouts, safe parser, no code execution.        |
+| Local process impersonates extension/service        | Loopback binding, pairing token, schema/rate validation, credential rotation.             |
+| User tries ordinary process kill/uninstall          | OS-supported service recovery and consented partner approval; no unsafe critical process. |
+| Partner abuses supervisory access                   | Aggregate-only views, relationship revocation/help, audit, least privilege.               |
+| Quick-approval token leaks                          | Short expiry, single use, revocation, no analytics/referrer/log exposure.                 |
+| Admin/support overreach                             | RBAC, audited break-glass, no browsing schema, sensitive recovery access restriction.     |
+| Crash/analytics tool captures sensitive input       | Redaction at source, no `D0`, no recovery plaintext, vendor review.                       |
+| Model/rules artifact tampered with                  | Signed/hashed artifact, compatibility manifest, trusted release channel, rollback.        |
+| False positive blocks important content             | FPR evaluation, accessible report/recovery path, safe bounded override policy.            |
+| Research re-identifies participant                  | Separate pseudonym, minimal schema, cohort suppression, restricted access/retention.      |
 
 ## Logging and observability
 
@@ -184,8 +185,11 @@ redacted status. Never log request bodies by default on sensitive routes.
 Never log tokens, journal plaintext, mood/intention text, DOM, URL, titles,
 headers that contain secrets, or model feature inputs.
 
-Error catalogs provide friendly production messages while technical details
-remain server-side and sanitized. The three stable catalogs stay synchronized.
+Error catalogs provide friendly user messages in every environment. Sanitized
+website code/status context may appear only in the development console and is
+suppressed in production; form values, tokens, URLs, and recovery/browsing
+content never enter client diagnostics. The three stable catalogs stay
+synchronized.
 
 ## Storage and retention decisions
 
@@ -193,10 +197,12 @@ For every server field, document owner, purpose, sensitivity class, lawful/
 consent basis, visibility, encryption, retention, deletion behavior, and audit
 need. “Keep forever in case useful” is not a valid purpose.
 
-Current architecture uses PostgreSQL for account/relationship/recovery state
-and encrypted journal text. Prototype in-memory fallbacks must not be described
-as production persistence. Secrets live outside source control; environment
-examples contain placeholders only.
+Current architecture uses PostgreSQL for account/relationship/recovery state,
+hashed approval/emergency tokens, daily aggregate events, and encrypted journal
+text. Production fails closed when PostgreSQL or required JWT/AES configuration
+is unavailable. Empty memory and contextual demo records are non-production
+behaviors only. Secrets live outside source control; environment examples
+contain placeholders only.
 
 ## Security/privacy review triggers
 

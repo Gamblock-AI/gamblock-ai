@@ -15,8 +15,8 @@ are explicit opt-in actions.
 3. Use `proposal-requirements.md` to identify applicable registered PKM
    requirement
    IDs and supporting/domain documents.
-4. Read `progress-tracker.md` and component status to distinguish target from
-   current capability.
+4. Read the affected component's `docs/ai/README.md` to distinguish target
+   behavior from current capability.
 5. Inspect `git status` in every repository in scope. Existing modifications,
    untracked files, and deletions belong to the user unless proven otherwise.
 6. Inspect adjacent implementation and documentation before proposing a change.
@@ -33,7 +33,7 @@ Use this conflict order:
 1. proposal for academic intent and PKM core requirements;
 2. normalized requirement IDs for traceability;
 3. product/domain context for approved derived design;
-4. progress tracker and code for current-state evidence;
+4. component status documentation and code for current-state evidence;
 5. component instructions for local engineering conventions.
 
 When current code conflicts with the proposal target, do not pretend either
@@ -129,15 +129,15 @@ Update documentation in the same change when reality changes:
 | Proposal scope/claim | owner-authorized proposal edit, `proposal-requirements.md`, affected domain docs |
 | Product scope/supporting feature | `project-overview.md` / `website-product.md` |
 | Architecture/trust/data boundary | `architecture.md`, `privacy-security.md`, ADR when long-lived |
-| Model/dataset/metrics | `research-evaluation.md` and tracker |
+| Model/dataset/metrics | `research-evaluation.md` and affected component status |
 | UI behavior/system | `ui-context.md` |
 | Commands/paths/conventions | closest `AGENTS.md`, README, component `docs/ai/` |
-| Capability state/evidence | `progress-tracker.md`, component status |
+| Capability state/evidence | affected component `docs/ai/README.md` |
 | Shared workflow/contract | context version, manifest, component snapshots, provider adapters/skills |
 
-Update the tracker after a meaningful capability, scope, architecture,
-workflow, evidence, or blocker change—not after formatting-only edits. Record
-dates and exact evidence; avoid brittle file/test counts.
+Update affected component status after a meaningful capability, scope,
+architecture, workflow, evidence, or blocker change—not after formatting-only
+edits. Record dates and exact evidence; avoid brittle file/test counts.
 
 ## 7. Cross-repository coordination
 
