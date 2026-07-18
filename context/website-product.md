@@ -94,6 +94,16 @@ Each module has estimated time, learning objective, short interaction or
 reflection, optional knowledge check, source/reviewer metadata, and an
 accessible completion state.
 
+Published modules use immutable bilingual revisions. A shared section/check
+identifier across locales preserves progress when the student changes
+language. Completion is calculated from required sections, explicitly required
+content media, and required knowledge checks; a new published revision starts a
+separate progress record. Content administrators author allowlisted structured
+rich text, attach one to eight ordered thumbnails, and move drafts through
+review before publication. Uploaded images, video, and PDFs are validated by
+the backend. External education media is allowlisted and click-to-load so no
+third-party request occurs before the student chooses it.
+
 ### `WEB-CORE-004` — mood and urge check-in
 
 A quick check-in records only what is needed:
@@ -120,6 +130,19 @@ Missions are small, achievable, and adaptable, for example:
 
 The student can complete, skip with a reason, replace with an accessible
 alternative, and reflect briefly. Missing a day never resets all progress.
+
+The website may add a supporting, account-private progression layer around
+these missions. The current contract assigns one primary task and two optional
+bonus tasks per `Asia/Jakarta` calendar day, using a deterministic rotation
+rather than user-behavior targeting. Each task discloses a fixed effort-based
+EXP value before action. The backend derives claim eligibility from existing,
+purpose-bound account state such as a saved daily check-in, active protection
+heartbeat, education progress, or active partner relationship. Only a
+server-authorized claim adds EXP; the student cannot self-mark completion or
+reverse a claimed reward. Claims are idempotent. EXP has no chance-based
+outcome, purchasable currency, public leaderboard, punitive streak reset, or
+partner/admin projection. This supporting layer does not replace the core skip,
+replace, reflection, and next-step requirements above.
 
 ### `WEB-CORE-006` — skill-development recommendations
 

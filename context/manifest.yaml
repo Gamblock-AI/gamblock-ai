@@ -1,5 +1,5 @@
 schema_version: 1
-context_version: 2026-07-16.5
+context_version: 2026-07-18.3
 topology: multi-repository-with-umbrella
 canonical_files:
   - context/README.md
@@ -32,6 +32,8 @@ contracts:
   accountability_state: 1
   client_daily_aggregate: 1
   emergency_two_operator: 1
+  education_revisioned_content: 1
+  daily_mission_experience: 1
 required_providers:
   - agents
   - claude

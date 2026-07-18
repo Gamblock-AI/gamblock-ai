@@ -226,10 +226,22 @@ These are student-private by default. Partner projections are separate,
 aggregate read models, not reuse of private student API responses. See
 `website-product.md` for surface behavior.
 
+Psychoeducation is persisted as a mutable bilingual draft plus an immutable
+published document revision. Media metadata is stored separately from files;
+filesystem-backed uploads use configured persistent storage and external media
+stores only an allowlisted HTTPS URL. Student progress is keyed by user,
+module, and published revision. The website renders validated document JSON
+without raw HTML, while the admin WYSIWYG emits the same schema.
+
 Website recovery state uses deliberately separated paths:
 
 - mission completion, protection status, profile, partner approvals, and
   support cases use authenticated APIs;
+- `GET /v1/missions/today` derives a deterministic one-primary/two-bonus task
+  set from the `Asia/Jakarta` date and returns the student's account-private EXP
+  level plus server-derived claim eligibility; `POST /v1/missions/claim`
+  rechecks that eligibility and atomically grants the disclosed fixed EXP once.
+  Legacy `PATCH /v1/missions` is claim-only compatibility and rejects undo;
 - intention lifecycle and structured mood/urge check-ins remain local-first in
   `gamblock:recovery:v1` and sync only when the student enables each category;
 - selected mission alternatives, deterministic skill explanations, and weekly

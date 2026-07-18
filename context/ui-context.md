@@ -212,10 +212,25 @@ and device-performance review before release.
 - Break content into short sections with reflection/action prompts.
 - Knowledge checks teach; they do not shame wrong answers.
 - Completion is visible but optional; content remains revisit-able.
+- Library cards use the first ordered thumbnail as the cover; additional
+  thumbnails appear in an accessible carousel inside the module.
+- Uploaded media may render inline. External media shows a consent gate before
+  contacting its provider, and PDFs also provide a new-tab fallback.
+- Admin authoring keeps Indonesian and English content adjacent in one
+  workspace, uses a structured WYSIWYG document, and crops thumbnails to 16:9
+  before upload.
 
 ### Daily missions
 
 - Present one primary mission and a way to choose an alternative.
+- A supporting FAB may also show two clearly optional bonus tasks and personal
+  EXP progress. Keep the main task visually dominant and bonuses compact.
+- Show each fixed EXP value before action and distinguish “not verified”,
+  “ready to claim”, and “claimed” with text plus iconography. The claim control
+  is enabled only from server-derived eligibility; the task card itself is not
+  a completion toggle. Never use random rewards, spins, loot, loss-framed
+  streaks, countdown pressure, or casino celebration language.
+- The daily task boundary and deterministic rotation use `Asia/Jakarta`.
 - States: available, in progress, completed, skipped, replaced.
 - Skipping never becomes a public failure or breaks all progress.
 - End with a short optional reflection and next-step suggestion.

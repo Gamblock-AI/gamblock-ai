@@ -211,6 +211,15 @@ is unavailable. Empty memory and contextual demo records are non-production
 behaviors only. Secrets live outside source control; environment examples
 contain placeholders only.
 
+Daily mission completion rows may store the authenticated student's mission
+date, stable mission key, fixed EXP reward, status, and completion timestamp.
+The user record may store a non-negative cumulative EXP total used only for the
+student's own level display. Claim eligibility is derived from existing
+purpose-bound records and is not a new analytics event or duplicated sensitive
+payload. Claims are idempotent and cannot be undone by the student. These
+fields contain no browsing context and are not part of partner/admin projections
+or research exports by default.
+
 ## Security/privacy review triggers
 
 Require a focused review before:
