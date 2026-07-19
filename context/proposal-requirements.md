@@ -68,9 +68,10 @@ inspected.
 | `PKM-AI-006` | Run feature extraction and inference on the user's device using a lightweight model. | §1.2, §1.3, §2.2.4 | Flutter/native client | No remote inference call; profiled artifact size, memory, CPU, and latency on representative Android/Windows devices. |
 | `PKM-AI-007` | Make the local decision robust to dynamic domains and content camouflage, including compromised government/education domains. | §1.1, §1.2 | Model/evaluation workstream | Holdout scenarios covering URL churn, legal-domain camouflage, and benign government/education controls. |
 
-The current `0.72` threshold and any model-size number are engineering
-baselines, not proposal mandates. They may be retained only when calibrated
-and recorded with evaluation evidence.
+The current imported `0.4` hybrid threshold, `0.75/0.25` fusion weights, and
+any model-size number are engineering inputs, not proposal mandates. They may
+be treated as evaluated only when calibrated and recorded with reproducible
+evaluation evidence.
 
 ## Privacy requirements
 

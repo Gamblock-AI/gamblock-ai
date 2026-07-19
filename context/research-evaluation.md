@@ -109,10 +109,17 @@ FPR remain an owner decision and must be set before final-test evaluation.
 
 ## Threshold selection
 
-The codebase currently references `0.72`; this is an engineering baseline, not
-a proposal requirement. Calibrate a threshold on validation data using an
-explicit cost trade-off that gives strong weight to false positives on legal,
-academic, and government sites while still detecting harmful content.
+The imported Hybrid-v2 metadata specifies a `0.4` hybrid threshold with model
+and rule weights of `0.75/0.25`. These are supplied engineering inputs, not a
+proposal requirement or independently reproduced calibration result. Calibrate
+the threshold on validation data using an explicit cost trade-off that gives
+strong weight to false positives on legal, academic, and government sites
+while still detecting harmful content.
+
+The bundle reports accuracy, precision, recall, and F1, but does not include a
+dataset card, split manifest, training/evaluation source, FPR, uncertainty, or
+slice results. Preserve those values only as `reported_metrics_unverified`;
+do not promote them to evaluated project results.
 
 Record:
 

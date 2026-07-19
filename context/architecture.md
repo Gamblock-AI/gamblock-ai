@@ -106,13 +106,21 @@ feature order.
 
 ### 3. Rule and model branches
 
-- Rule branch evaluates explicit URL characteristics/patterns locally.
+- Rule branch evaluates explicit URL characteristics plus supplied keyword
+  matches over the bounded URL/DOM text locally; the model's
+  `url_keyword_count` feature remains URL-only.
 - Model branch vectorizes DOM text using the exported Bag-of-Words vocabulary
   and applies Logistic Regression locally.
 - The fusion policy defines precedence, score normalization, exception/safe
   rule behavior, threshold, and ambiguous/error fallback.
-- The current `0.72` threshold is a calibratable engineering baseline. It is
-  not hard-coded as a permanent product requirement.
+- Hybrid-v2 imports the supplied ONNX graph into a dependency-free portable
+  runtime artifact containing 5,664 unigram weights, 4,336 bigram weights, 14
+  scaled URL features, and the Logistic Regression coefficients. Android and
+  Windows consume the same hashed JSON contract locally.
+- The supplied `0.75/0.25` fusion weights and `0.4` threshold are calibratable
+  engineering inputs, not permanent product requirements. Exact parity of the
+  reconstructed URL preprocessing with the training pipeline remains an
+  evidence gate because its source implementation was not supplied.
 
 ### 4. Decision and action
 
@@ -200,7 +208,8 @@ pending -> approved -> bounded apply grant
 
 Rules:
 
-- one account has one authoritative role: `user` (student) or `partner`;
+- one account has one authoritative role: `user` (student), `partner`, or
+  `admin`; organization roles belong to membership relations;
 - a student has at most one live membership; a partner may own multiple groups;
 - code preview identifies the group and partner before explicit confirmation;
 - join codes are hashed at rest, rate-limited, and rotatable;
@@ -354,6 +363,12 @@ PostgreSQL cannot open, migrate, or load.
   the issued hashed key is device-bound, single-use, and expires after 24
   hours.
 - API stable error codes remain synchronized across backend, website, Flutter.
+- Student account recovery uses a non-enumerating email request followed by a
+  hashed, single-use 12-character code that expires after 30 minutes and
+  revokes all refresh sessions on success. Google ID tokens are accepted only
+  for an allowlisted audience; Windows uses installed-app loopback OAuth with
+  state, nonce, and PKCE, while an existing password account must explicitly
+  link the same verified Google email after password authentication.
 - Client-facing API changes update all available consumers and document absent
   repository follow-ups.
 
@@ -413,24 +428,26 @@ explicitly requested and they were actually run.
 The website/backend operational control plane is an operational supporting
 feature, not a PKM core replacement. Its implemented contract is:
 
-- specialist roles are non-cumulative: `content_admin`,
-  `support_operator`, and `model_release_operator` cannot borrow
-  `platform_admin` authority, while the platform administrator cannot perform
-  specialist work merely because it is an administrator;
-- platform administrators manage specialist invitations, disable/enable
-  operator accounts, public social-link settings, emergency approvals, and the
-  audit view. Invitations are email-bound, hashed at rest, single-use, and
-  expire after 24 hours; initial platform-administrator provisioning remains
-  out of band;
+- account roles are exactly `user`, `partner`, and `admin`; the admin role owns
+  content, release, support-queue, research, platform, audit, and emergency
+  operations;
+- all three roles land on `/dashboard`, with a student recovery summary, a
+  consent-bounded partner summary, or an operational admin overview. Admin
+  content, releases, tickets, emergency access, and platform settings are
+  separate sidebar routes;
+- admins create accounts directly with an immutable role. The backend returns
+  a cryptographically random temporary password once, forces its replacement
+  before issuing a normal session, and requires verified email for admin
+  operations;
 - mutable role/disabled state is checked for every bearer request. Refresh
   rotation preserves the original primary-authentication time so refresh does
   not satisfy recent-auth gates;
-- support operators atomically claim an unassigned case before reading or
-  replying, and releases require an audited reason. Platform administrators do
-  not have support-thread access;
+- only students and partners may create requester support cases. Admins use the
+  role-gated queue and atomically claim an unassigned case before reading or
+  replying; releases require an audited reason;
 - content saves immutable revision snapshots. Rollback creates a new draft and
   does not rewrite a published revision;
-- release operators upload an allowlisted artifact into managed storage; the
+- admins upload an allowlisted release artifact into managed storage; the
   server computes SHA-256 and validates that stored content before creating a
   release. Manual cohorts support stage/activate/pause/complete/rollback;
 - account export produces a server-side AES-256-GCM-encrypted ZIP with a

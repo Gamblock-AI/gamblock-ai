@@ -47,8 +47,8 @@ this file is the target product specification.
 | Protection aggregate/status                  |               Own device |         Consented aggregate only |           Aggregate support diagnostics |                                    No |
 | Removal approval                             |           Request/status |    Approve or deny linked member |        Audited emergency/support action | Token holder only for single-use flow |
 | Partner relationship                         | Preview/join one group; leave or stop sharing | Own multiple groups; rotate codes; remove members | Limited safety/support resolution | No |
-| Content administration                       |                       No |                               No |            Least-privilege content role |                Published content only |
-| Model/release operations                     |       Version visibility |                               No |                        Release operator |      Public transparency summary only |
+| Content administration                       |                       No |                               No |                                   Admin |                Published content only |
+| Model/release operations                     |       Version visibility |                               No |                                   Admin |      Public transparency summary only |
 
 Possessing an operational role does not grant access to raw browsing data or
 private recovery text.
@@ -285,8 +285,9 @@ focus-task, room, or private progress record.
 - Student and partner accounts can create and read only their own support
   cases, reply within one encrypted thread, close a resolved case, and reopen
   it within seven days.
-- Support operators use a role-gated queue with explicit ownership and status
-  transitions; generic admin roles do not inherit access.
+- Admins use a role-gated queue with explicit ownership and status transitions.
+  They reply to student/partner reports from the operations ticket workspace
+  and cannot use the requester support surface.
 - Attachments are not accepted. Redaction guidance forbids passwords, tokens,
   URLs, domains, and browsing history.
 
@@ -332,7 +333,8 @@ focus-task, room, or private progress record.
 - Reviewer identity, sources, version, locale, reading time, accessibility
   checklist, and scheduled review date.
 - Preview and rollback; audit every publish action.
-- Separate content roles from platform/security administration.
+- Separate content, release, support, emergency, and platform work areas even
+  though the unified `admin` account role authorizes them.
 
 ### `WEB-OPS-RELEASE-001`
 
@@ -474,20 +476,28 @@ trackers on sensitive recovery/approval pages.
 The current operational workspace uses one shared visual shell with strictly
 separated server-authorized work areas:
 
-- content administrators author bilingual modules, upload/crop media, submit,
+- every authenticated role lands on `/dashboard`; the student, partner, and
+  admin dashboards expose distinct role-relevant summaries;
+- admins author bilingual modules, upload/crop media, submit,
   publish, archive, inspect revisions, and restore a historical version as a
   new draft;
-- support operators claim cases from a shared queue, work the encrypted
+- admins claim cases from a shared queue, work the encrypted
   thread, transition status, release ownership with a reason, and retry or
   reject eligible failed data requests;
-- release operators upload model/ruleset/network artifacts, review their
+- admins upload model/ruleset/network artifacts, review their
   computed checksum, create validated releases, and run manual cohort
   rollouts;
-- platform administrators manage specialist invitations/accounts, public
-  social links, audit history, and dual-control emergency requests. They do
-  not inherit specialist content/support/release actions.
+- admins directly create immutable-role `user`, `partner`, or `admin` accounts,
+  enable/disable other accounts, manage public social links and audit history,
+  and process dual-control emergency requests. Legacy specialist invitations
+  are retired.
+
+Content, releases, tickets, emergency access, and platform settings are
+first-class admin sidebar destinations rather than tabs inside one page.
+Operational counts live on the admin dashboard; the tickets destination is the
+only admin support surface.
 
 The landing footer renders a social icon only when its administrator-managed
 record is enabled and has a validated URL. Empty/null records produce no
-placeholder. Research administration is intentionally outside this v1
-workspace pending governance approval.
+placeholder. Research sandbox access is included in the unified admin
+workspace.

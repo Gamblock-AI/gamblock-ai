@@ -329,11 +329,16 @@ detail view is understood as intentional protection, not missing data.
   next skill—then recovery library and progress.
 - **Partner dashboard:** linked-member status, approval queue, privacy-safe
   aggregate, support guidance.
-- **Operations:** dense but readable tables/forms with explicit role, status,
-  version, audit, and destructive-action confirmation.
-- **Flutter:** four labeled bottom destinations—Protection, Analytics, Partner,
-  and Settings. Protection and intervention states use native/full-screen
-  patterns when necessary; detailed recovery remains on the website.
+- **Admin dashboard:** attention counts and concise links to each operational
+  work area; it does not present a requester support form.
+- **Operations:** the `admin` navigation exposes Content, AI Releases, Tickets,
+  Emergency Access, Platform, and Research as separate destinations. Dense but
+  readable tables/forms show immutable role, verification/status, one-time
+  temporary-password handoff, audit, and destructive-action confirmation.
+- **Flutter:** four labeled destinations—Dashboard, Analytics, Partner, and
+  Settings. Widths below 720dp use bottom navigation; wider Android/Windows
+  layouts use a navigation rail and constrain content to 1120dp. Setup is an
+  optional dashboard task, while Pattern Interrupt remains outside the shell.
 
 Detailed website sitemap and feature states are in `website-product.md`.
 

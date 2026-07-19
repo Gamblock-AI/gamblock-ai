@@ -48,7 +48,7 @@ Supporting or operational work may not replace unfinished core behavior.
 
 The ordinary Flutter shell has four top-level destinations:
 
-1. **Protection** — local health, setup, self-test, approval and emergency
+1. **Dashboard** — local health, setup, self-test, approval and emergency
    state.
 2. **Analytics** — broad 7/30-day protection counters and data sufficiency.
 3. **Partner** — relationship setup, invitation, request history, and consent.
@@ -72,7 +72,7 @@ Implements `PKM-PLAT-001`, `PKM-PLAT-002`, and `PKM-PLAT-003`.
 - Protection never claims active coverage when the required sensor is absent.
 - Sideload/install limitations are documented honestly.
 
-### `MOB-CORE-002` — Hybrid-v1 local decision
+### `MOB-CORE-002` — Hybrid-v2 local decision
 
 Implements `PKM-AI-001`, `PKM-AI-002`, `PKM-AI-003`, `PKM-AI-004`,
 `PKM-AI-005`, `PKM-AI-006`, and `PKM-AI-007`.
@@ -88,9 +88,10 @@ The versioned contract includes:
 - model/rules/fixture hashes and compatibility version;
 - last-known-good fallback on invalid updates.
 
-A dummy/synthetic model is acceptable for prototype wiring only when it is
-marked untrained and unevaluated. Accuracy claims require the governed
-training/evaluation workstream.
+A supplied trained artifact may be wired as a prototype when its source hash,
+conversion, preprocessing assumptions, and evidence gaps are explicit. It is
+not `evaluated` until the governed dataset/training/evaluation workstream can
+reproduce its metrics and platform parity.
 
 ### `MOB-CORE-003` — local block/navigation
 
@@ -133,7 +134,13 @@ Implements `PKM-ACC-001`, `PKM-ACC-002`, `PKM-ACC-003`, and
 
 ### `MOB-SUP-001` — account and device lifecycle
 
-- Register/login/logout with rotating session handling.
+- A persisted three-step onboarding precedes login/register; returning
+  authenticated students open the dashboard directly.
+- Register/login/logout with rotating session handling, non-enumerating email
+  code password reset, and explicit email-verification state.
+- Google sign-in uses the official Android provider flow and a Windows
+  installed-app loopback flow with state, nonce, and PKCE; existing password
+  accounts link the same verified email from Settings.
 - Stable per-install client instance ID and per-user device registration.
 - Profile and current-password-protected password update.
 - Reauthentication after password change.

@@ -1,5 +1,5 @@
 schema_version: 1
-context_version: 2026-07-19.1
+context_version: 2026-07-20.3
 topology: multi-repository-with-umbrella
 canonical_files:
   - context/README.md
@@ -16,6 +16,7 @@ canonical_files:
   - context/pkm_proposal.md
   - context/decisions/0001-multi-repo-context.md
   - context/decisions/0002-proposal-first-governance.md
+  - context/decisions/0003-three-account-roles.md
 component_snapshots:
   - browser_extension/docs/ai/manifest.yaml
   - gamblock-ai-backend/docs/ai/manifest.yaml
@@ -27,8 +28,11 @@ contracts:
   proposal_traceability: 1
   local_ai_lint_policy: 1
   privacy_boundary: 1
+  hybrid_artifact: 2
   websocket_loopback: 1
   api_error_catalog: 1
+  account_recovery: 1
+  account_roles: 1
   accountability_state: 2
   client_daily_aggregate: 1
   emergency_two_operator: 1

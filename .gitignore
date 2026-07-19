@@ -20,7 +20,12 @@ desktop.ini
 *.pfx
 secrets.*
 credentials.*
+user.txt
 
 # ===== Logs =====
 *.log
 logs/
+
+# ===== Generated model artifacts =====
+models/*.onnx
+models/*.pkl

@@ -60,12 +60,12 @@ proposal-facing content, use “Accountability Partner (Pendamping)” first so 
 is clear that the person may be a parent or peer and is not necessarily an
 institutional authority.
 
-### Supporting operational roles
+### Supporting operational role
 
-The codebase additionally models `platform_admin`, `support_operator`,
-`model_release_operator`, and `content_admin`. These roles support operations
-and are not proposal actors. They must never gain access to raw browsing
-signals or unnecessary private recovery content.
+The codebase models one operational account role, `admin`, alongside `user`
+and `partner`. Admins support content, releases, support, research, audit, and
+platform operations and are not proposal actors. They never gain access to raw
+browsing signals or unnecessary private recovery content.
 
 ## Core protection-to-recovery journey
 

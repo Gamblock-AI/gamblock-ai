@@ -137,7 +137,17 @@ withdrawal paths consistent with defined legal/academic obligations.
 - Require verified email for student group entry; require verified email and
   WhatsApp plus a recent (15-minute) authentication context for sensitive
   partner group/decision actions.
-- Apply least privilege to content, support, release, and platform roles.
+- Treat `admin` as the single operational role while retaining least privilege
+  through resource ownership, verified email, recent authentication, audit,
+  and dual-control checks.
+- Password-reset requests do not reveal whether an email exists. Store only a
+  hash of the latest active recovery code, expire it after 30 minutes, cap
+  failed attempts, consume it once, and revoke existing refresh sessions after
+  a successful reset. Never log reset codes or Google tokens.
+- Native Google OAuth uses public client identifiers only. Validate ID-token
+  audience and optional nonce on the backend; desktop loopback callbacks also
+  require state and PKCE. Discard provider access/refresh tokens after the
+  backend session is established.
 - Emergency recovery starts from the protected user's owned device. One
   platform administrator reviews it and a distinct second platform
   administrator issues the key. The request expires after 30 minutes; the
@@ -228,9 +238,10 @@ behaviors only. Secrets live outside source control; environment examples
 contain placeholders only.
 
 Threaded support stores message bodies with the same fail-closed AES-256-GCM
-boundary as other sensitive free text. Requesters can access only their own
-cases; `support_operator` and `platform_admin` are the only operational roles
-that can access the support queue. Status transitions are explicit
+boundary as other sensitive free text. Only student and partner requesters can
+create or access their own cases. Verified admins access the role-gated support
+queue to claim, read, and reply; they cannot use the requester support surface.
+Status transitions are explicit
 (`waiting_support`, `waiting_user`, `resolved`, `closed`), and a requester may
 reopen a resolved case only within seven days.
 

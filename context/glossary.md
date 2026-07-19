@@ -10,6 +10,8 @@ documentation, and status reports.
 | Gamblock-AI | The complete PKM prototype ecosystem: Android/Windows protection, web recovery/accountability, model/research work, backend, and supporting delivery components. |
 | Protected Student / Mahasiswa Terlindungi | Primary proposal user. Existing API role code is `user`; “Member” is acceptable in group/account contexts. Avoid “target” or stigmatizing labels in UI. |
 | Accountability Partner / Pendamping | Parent or peer who mutually accepts responsibility for removal approval and supportive accountability. Existing code/UI may use `partner` or “Kepala”; proposal-facing copy should explain the equivalence. |
+| Admin | The single operational account role (`admin`) for content, release, support queue, research, platform, audit, and emergency work. It never grants raw browsing or private recovery access. |
+| Organization membership role | Relation-level `owner`, `admin`, `member`, or `viewer` inside an organization. It is not an account role. |
 | PKM Team | Researchers/developers responsible for prototype, evidence, content governance, and deliverables. Not automatically an application role. |
 | Supporting feature | Product capability not explicitly required by the proposal but useful for usability, safety, recovery, supervision, or dissemination. |
 | Operational feature | Administration, content/release management, support, infrastructure, or audit needed to operate the prototype. |
@@ -24,7 +26,7 @@ documentation, and status reports.
 | DOM Analysis | Extraction of supported page text, specifically title, headings, and anchor text in the proposal. Raw DOM/page text remains device-local. |
 | Bag-of-Words (BoW) | A fixed vocabulary/vectorization method that converts normalized text into numeric features for Logistic Regression. Vocabulary and preprocessing are part of the versioned model artifact. |
 | Logistic Regression | Lightweight supervised classifier specified by the proposal. Model training/evaluation is a PKM workstream; runtime inference belongs on-device. |
-| Threshold | Engineering decision used to turn a score into a local action. `0.72` is a current baseline, not a proposal mandate; it requires calibration evidence. |
+| Threshold | Engineering decision used to turn a score into a local action. Hybrid-v2 imports `0.4` from supplied metadata; it is not a proposal mandate and requires reproducible calibration evidence. |
 | False Positive | Benign content classified/blocked as gambling. Government, education, and legal-site false positives receive explicit evaluation attention. |
 | Passive sensor | Browser extension boundary: extract and relay permitted local inputs over authenticated loopback IPC; never classify, block, redirect, or call the backend with browsing data. |
 
