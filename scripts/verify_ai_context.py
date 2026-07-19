@@ -153,6 +153,23 @@ def flutter_codes(path: Path) -> set[str]:
     return set(re.findall(r"case '([a-z][a-z0-9_]*)':", path.read_text()))
 
 
+def emitted_backend_codes(component: Path) -> set[str]:
+    codes: set[str] = set()
+    for directory in (component / "internal/handler", component / "internal/middleware"):
+        for path in directory.glob("*.go"):
+            text = path.read_text()
+            codes.update(
+                re.findall(
+                    r"(?:respondCode|respondErrorErr|respondError)\s*\("
+                    r"\s*[^,]{1,200},\s*[^,]{1,200},\s*"
+                    r'"([a-z][a-z0-9_]*)"',
+                    text,
+                    re.S,
+                )
+            )
+    return codes
+
+
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument(
@@ -338,6 +355,14 @@ def main() -> int:
                 errors.append(f"{name}: missing error codes: {', '.join(missing)}")
             if extra:
                 errors.append(f"{name}: codes absent from backend: {', '.join(extra)}")
+
+        emitted = emitted_backend_codes(COMPONENTS["backend"])
+        uncataloged = sorted(emitted - catalogs["backend"])
+        if uncataloged:
+            errors.append(
+                "backend: emitted error codes absent from catalog: "
+                + ", ".join(uncataloged)
+            )
 
     forbidden_absolute = "/home/alfiang"
     text_candidates = [

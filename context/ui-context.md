@@ -279,6 +279,13 @@ and device-performance review before release.
   and cannot archive a group with live members.
 - Unsafe exit is visually distinct from normal exit and explains that sharing
   stops immediately; it is never hidden behind color alone.
+- Aggregate-sharing controls are staged: students review changes, then use
+  explicit Save or Discard actions instead of committing on every toggle.
+- Normal exit remains reversible while its request is pending. Cancelling it
+  restores the active relationship and prevents a later partner decision on
+  that request.
+- Unsafe exit has no direct undo because sharing stops immediately. The UI
+  presents a clear support-review path for rebuilding the relationship safely.
 
 ### Removal approval
 

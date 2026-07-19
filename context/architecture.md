@@ -185,7 +185,7 @@ This state machine maps `PKM-ACC-001`, `PKM-ACC-002`, `PKM-ACC-003`, and
 ```text
 Student membership:
 no_group -> code_preview -> explicit_confirm -> active
-active -> leave_pending -> left
+active -> leave_pending -> active | left
 active -> unsafe_exit -> safety_suspended -> support_review
 active -> partner_removal -> removed
 
@@ -212,8 +212,9 @@ Rules:
 - native client validates authoritative request state before allowing action;
 - offline/unavailable behavior is defined without silently bypassing approval;
 - emergency recovery is least-privilege and cannot be the routine shortcut;
-- normal student exit is reviewable; an unsafe exit stops all sharing
-  immediately and enters support review; partner removal also stops sharing;
+- normal student exit is reviewable and may be cancelled by its student while
+  pending; an unsafe exit stops all sharing immediately and enters support
+  review; partner removal also stops sharing;
 - Accessibility/SCM resistance stays within OS limits and remains recoverable.
 
 ## Web recovery architecture
@@ -250,7 +251,10 @@ Website recovery state uses deliberately separated paths:
   set from the `Asia/Jakarta` date and returns the student's account-private EXP
   level plus server-derived claim eligibility; `POST /v1/missions/claim`
   rechecks that eligibility and atomically grants the disclosed fixed EXP once.
-  Legacy `PATCH /v1/missions` is claim-only compatibility and rejects undo;
+  `POST /v1/missions/adjust` lets the student replace the unresolved primary
+  task once with one of the two non-assigned catalog tasks, then optionally
+  skip that effective primary with a bounded reason. Adjustment never changes
+  EXP. Legacy `PATCH /v1/missions` is claim-only compatibility and rejects undo;
 - structured mood/urge check-ins remain local-first in
   `gamblock:recovery:v1`; submitted account records are separate from drafts;
 - the student recovery room is an account-backed workspace. Completed urge
@@ -259,6 +263,8 @@ Website recovery state uses deliberately separated paths:
   account lifetime until the user exports or deletes the account;
 - reflection text is the only free-text recovery record. Its AES-256-GCM JSON
   payload is versioned and may include an optional mood score and next step;
+  the daily-mission closeout uses the same private encrypted path with a bounded
+  feeling, optional note, and optional next-step suggestion;
   one reflection can be marked as the current focus without exposing it to a
   partner. Legacy browser-local intention text is imported only after an
   explicit one-time student action;
