@@ -183,20 +183,27 @@ This state machine maps `PKM-ACC-001`, `PKM-ACC-002`, `PKM-ACC-003`, and
 `PKM-ACC-004`.
 
 ```text
-no_partner -> invite_pending -> active
-     ^             |             |
-     |             v             +-> removal_requested
-     +---------- expired                |
-                                       +-> approved -> bounded removal window
-                                       +-> denied
-                                       +-> expired
-                                       +-> cancelled
-                                       +-> emergency_review (audited)
-active -> paused/revoked/replaced according to approved relationship policy
+Student membership:
+no_group -> code_preview -> explicit_confirm -> active
+active -> leave_pending -> left
+active -> unsafe_exit -> safety_suspended -> support_review
+active -> partner_removal -> removed
+
+Partner group:
+verified_email_and_phone -> active_group -> code_rotated
+active_group -- only when no live members --> archived
+
+Protection request on an active membership:
+pending -> approved -> bounded apply grant
+        -> denied | expired | cancelled
 ```
 
 Rules:
 
+- one account has one authoritative role: `user` (student) or `partner`;
+- a student has at most one live membership; a partner may own multiple groups;
+- code preview identifies the group and partner before explicit confirmation;
+- join codes are hashed at rest, rate-limited, and rotatable;
 - both parties understand and accept the relationship;
 - partner may be a parent or peer;
 - approval is explicit, scoped to one request/device/action, expiring, and
@@ -205,6 +212,8 @@ Rules:
 - native client validates authoritative request state before allowing action;
 - offline/unavailable behavior is defined without silently bypassing approval;
 - emergency recovery is least-privilege and cannot be the routine shortcut;
+- normal student exit is reviewable; an unsafe exit stops all sharing
+  immediately and enters support review; partner removal also stops sharing;
 - Accessibility/SCM resistance stays within OS limits and remains recoverable.
 
 ## Web recovery architecture
@@ -242,10 +251,33 @@ Website recovery state uses deliberately separated paths:
   level plus server-derived claim eligibility; `POST /v1/missions/claim`
   rechecks that eligibility and atomically grants the disclosed fixed EXP once.
   Legacy `PATCH /v1/missions` is claim-only compatibility and rejects undo;
-- intention lifecycle and structured mood/urge check-ins remain local-first in
-  `gamblock:recovery:v1` and sync only when the student enables each category;
-- selected mission alternatives, deterministic skill explanations, and weekly
-  plans remain browser-local.
+- structured mood/urge check-ins remain local-first in
+  `gamblock:recovery:v1`; submitted account records are separate from drafts;
+- the student recovery room is an account-backed workspace. Completed urge
+  surfing, grounding, and focus practices are retained for a rolling 12-month
+  window, while deterministic room unlocks and placements remain for the
+  account lifetime until the user exports or deletes the account;
+- reflection text is the only free-text recovery record. Its AES-256-GCM JSON
+  payload is versioned and may include an optional mood score and next step;
+  one reflection can be marked as the current focus without exposing it to a
+  partner. Legacy browser-local intention text is imported only after an
+  explicit one-time student action;
+- `GET/PUT /v1/weekly-reviews/current` stores the current structured weekly
+  review in the encrypted recovery-record workflow. The full focus-period and
+  reminder lifecycle required by `PKM-WEB-002` remains a tracked core gap; the
+  supporting room does not redefine that proposal requirement;
+- daily check-ins use the `Asia/Jakarta` day, update that day's entry, and do
+  not accept user-selected backfill dates;
+- progress supports 7/30/90-day private views and requires three check-ins
+  before declaring a trend. It returns category-tagged activity days for a
+  selectable recovery calendar, and student CSV/PDF export is generated
+  client-side.
+
+Published education documents carry an explicit audience (`student`,
+`partner`, or `all`) and experience type (`article` or
+`response_simulator`). Both list and direct-slug reads enforce the caller's
+role. The partner recovery simulator is therefore CMS-authored guidance, not a
+client-only gate and never a projection of student recovery data.
 
 The browser-local schema has no URL, domain, DOM, browsing-history, device,
 partner, or detected-page field. Optional synchronization is a per-category
@@ -293,7 +325,7 @@ does not replace, allowlisted request schemas and code review.
 | Device local | model/vectorizer/rules/media, pairing token, protection state, offline aggregate queue | Detection data stays here; encrypt/protect credentials; bounded retention. |
 | PostgreSQL | accounts, consent/relationships, approvals, recovery content/state, encrypted text, aggregate events, release/support/audit data | No browsing schema; field-level purpose/retention/access documented. |
 | `chrome.storage.local` | local pairing token and connection configuration | No remote sync/telemetry; token not logged. |
-| Website `localStorage` (`gamblock:recovery:v1`) | local-first intention lifecycle, structured mood/urge check-ins, selected mission alternative, weekly plan | No browsing fields; bounded records and explicit clear action. Intention/check-in server sync is separate opt-in by category; other records stay local. |
+| Website `localStorage` (`gamblock:recovery:v1`) | local-first intention lifecycle, structured mood/urge check-ins, selected mission alternative, weekly plan, and unsent recovery-record draft | No browsing fields; bounded records and explicit clear action. A draft is not account data until explicit submission. |
 | Research storage (future/approved) | governed labeled dataset and pseudonymous study data | Separate access, consent, retention, license, and publication policy. |
 
 Non-production can use an empty in-memory store and may explicitly enable
@@ -369,3 +401,41 @@ dedicated repository.
 Default AI completion runs only the relevant linter/analyzer and context
 validator. Tests/builds do not become architecture evidence unless the user
 explicitly requested and they were actually run.
+
+## Operational control-plane v1
+
+The website/backend operational control plane is an operational supporting
+feature, not a PKM core replacement. Its implemented contract is:
+
+- specialist roles are non-cumulative: `content_admin`,
+  `support_operator`, and `model_release_operator` cannot borrow
+  `platform_admin` authority, while the platform administrator cannot perform
+  specialist work merely because it is an administrator;
+- platform administrators manage specialist invitations, disable/enable
+  operator accounts, public social-link settings, emergency approvals, and the
+  audit view. Invitations are email-bound, hashed at rest, single-use, and
+  expire after 24 hours; initial platform-administrator provisioning remains
+  out of band;
+- mutable role/disabled state is checked for every bearer request. Refresh
+  rotation preserves the original primary-authentication time so refresh does
+  not satisfy recent-auth gates;
+- support operators atomically claim an unassigned case before reading or
+  replying, and releases require an audited reason. Platform administrators do
+  not have support-thread access;
+- content saves immutable revision snapshots. Rollback creates a new draft and
+  does not rewrite a published revision;
+- release operators upload an allowlisted artifact into managed storage; the
+  server computes SHA-256 and validates that stored content before creating a
+  release. Manual cohorts support stage/activate/pause/complete/rollback;
+- account export produces a server-side AES-256-GCM-encrypted ZIP with a
+  seven-day download window. Account deletion is limited to student/partner
+  self-service, requires a hashed 30-minute email token plus recent auth, and
+  anonymizes retained audit/request records;
+- the public footer reads enabled social links only. Administrators may use
+  the fixed platform list, exact HTTPS host allowlists, and no query,
+  fragment, user-info, or non-standard port.
+
+These flows are locally wired and linted. External SMTP delivery, production
+storage lifecycle jobs, automated rollout health decisions, artifact signing,
+and production deployment remain environment/operations responsibilities and
+must not be inferred from route presence.

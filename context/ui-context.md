@@ -250,14 +250,35 @@ and device-performance review before release.
 - Keep private detail separate from any partner-shared aggregate.
 - Celebrate participation/learning, not perfect abstinence or competitive rank.
 
+### Recovery room and calendar
+
+- The student recovery hub may use a calm 2.5D dorm-room scene, but every
+  hotspot also has a 44px semantic button and an equivalent labeled mobile
+  dock action. The scene is orientation, not the only navigation mechanism.
+- Window starts a three-minute urge-surfing sequence, rug guides 5-4-3-2-1
+  grounding, desk starts a ten-minute focus sprint, notebook opens the
+  encrypted reflection journal, and phone opens partner/support choices.
+- Active timers and draft task labels are browser-local. A completed practice
+  can ask only for lighter, same, heavier, or prefer-not-to-say feedback.
+- Decor unlocks are deterministic evidence of participation. Do not add random
+  drops, currencies, leaderboards, streak-loss warnings, or confetti.
+- Progress uses a 7/30/90-day calendar with selectable populated days and a
+  category legend. Empty days are neutral; trend language is unavailable below
+  three check-ins. Weekly review is a short guided sequence rather than another
+  unstructured note card.
+
 ## Accountability UX
 
 ### Relationship setup
 
 - Both student and partner see role, permissions, visibility limits, removal
   responsibility, emergency/help route, and how to end/replace the relationship.
-- Invitation has status and expiry; accepting is an active decision.
-- Parent/peer relationship label is explicit.
+- Student enters a group code, previews the named group and verified partner,
+  then confirms membership as a separate active decision.
+- Partner verifies email and WhatsApp before group creation, can rotate a code,
+  and cannot archive a group with live members.
+- Unsafe exit is visually distinct from normal exit and explains that sharing
+  stops immediately; it is never hidden behind color alone.
 
 ### Removal approval
 
@@ -276,6 +297,21 @@ Use broad period summaries and protection-health states. Never show URLs,
 titles, page timelines, raw mood/intention/journal, hidden risk scores, or
 member rankings. Make the privacy boundary visible in the interface so an empty
 detail view is understood as intentional protection, not missing data.
+
+### Support, progress, and recovery
+
+- Support uses one readable thread per case with author, timestamp, status,
+  reply field, and close/reopen actions; badge copy accompanies every color.
+- Student progress offers 7/30/90-day ranges, an insufficient-data state below
+  three check-ins, and a privacy warning before client-side CSV/PDF export.
+- Partner progress never reuses the student trend response; it renders only
+  per-category aggregates or an explicit “not shared” state.
+- Recovery drafts are labeled local and unsent. Account-saved records are
+  labeled encrypted, reminders are off by default, and partner recovery pages
+  are guidance—not a hidden route into student records.
+- Partner recovery guidance may use a CMS-authored response simulator with
+  reviewed scenarios, visible rationale, retry, and completion progress. It
+  must never load student practice, journal, mood, focus-task, or room state.
 
 ## Information architecture patterns
 

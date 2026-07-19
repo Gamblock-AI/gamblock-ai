@@ -32,8 +32,8 @@ message validation are required.
 | `D0 Local detection secret`        | URL/domain, DOM text, title/headings/anchor text, history, screenshot, search query, app/window identifier, rule hits, feature vector, per-page score | Device only; never sent to backend, analytics, crash reporting, partner, or admin. Shortest practical local lifetime.                     |
 | `D1 Local protection state`        | model/rules versions, pairing token, offline queue, current block/intervention state                                                                  | Device only except explicitly allowed non-browsing version/health aggregates; pairing token never leaves paired local processes.          |
 | `D2 Account and relationship`      | identity, role, contact, partner relationship, consent, approval status                                                                               | Backend allowed for defined purpose; least privilege, retention, audit, export/delete rules.                                              |
-| `D3 Recovery sensitive`            | intention, mood/urge check-in, private reflection/journal, coping plan                                                                                | Backend only when voluntarily entered for web recovery; private by default; encrypt sensitive text; never partner-visible by implication. |
-| `D4 Aggregate protection/recovery` | broad-period block count, privacy-safe heartbeat, mission completion                                                                                  | Backend allowed only if non-reconstructive, purpose-limited, and disclosed; apply cohort/time granularity.                                |
+| `D3 Recovery sensitive`            | intention/next step, mood/urge check-in, private reflection/journal, focus-practice task label, weekly review                                          | Backend only when voluntarily entered for web recovery; private by default; encrypt sensitive text; never partner-visible by implication. |
+| `D4 Aggregate protection/recovery` | broad-period block count, privacy-safe heartbeat, mission/education/practice completion, deterministic room unlock                                    | Backend allowed only if non-reconstructive, purpose-limited, and disclosed; apply cohort/time granularity.                                |
 | `D5 Public/operational`            | published modules, app versions, model card, help resources, support status                                                                           | Backend/public as appropriate; still protect credentials, audit detail, and internal security metadata.                                   |
 | `D6 Research`                      | approved pseudonymous study events and outcomes                                                                                                       | Separate purpose/consent/schema/access/retention; product consent is insufficient.                                                        |
 
@@ -101,6 +101,13 @@ This interpretation must be reviewed by the proposal/privacy owners and is
 tracked as an open decision, not presented as a formal UU PDP compliance
 opinion.
 
+Recovery practice completion and weekly-review records use a rolling 12-month
+product retention window. Deterministic recovery-room unlock and placement
+state remains for the account lifetime because it is user-visible workspace
+configuration. Both are included in account export and account deletion.
+Active timers and the current focus-sprint task label stay browser-local; the
+server receives a completed practice record only after the student finishes.
+
 ## Consent and control
 
 Provide distinct, understandable choices for:
@@ -125,6 +132,11 @@ withdrawal paths consistent with defined legal/academic obligations.
   where designed; tokens are high-entropy, short-lived, single-use, revocable,
   and excluded from logs/referrers/analytics.
 - Bind partner actions to the approved relationship/member and requested state.
+- Use the backend role as authority. Navigation visibility and local storage
+  labels never grant student, partner, support, or admin access.
+- Require verified email for student group entry; require verified email and
+  WhatsApp plus a recent (15-minute) authentication context for sensitive
+  partner group/decision actions.
 - Apply least privilege to content, support, release, and platform roles.
 - Emergency recovery starts from the protected user's owned device. One
   platform administrator reviews it and a distinct second platform
@@ -166,6 +178,10 @@ The protection must be resistant, not destructive:
   and safe emergency states.
 - A partner relationship includes an abuse/help path and recoverability when a
   partner is unavailable.
+- Sharing is category-specific and revocable. The only partner projections are
+  protection health, coarse protection activity, recovery engagement counts,
+  and education progress bands; disabled categories return no substitute
+  detail. Unsafe exit and partner removal stop sharing immediately.
 - Stress testing uses controlled devices/VMs and includes device recovery as a
   pass criterion.
 
@@ -210,6 +226,13 @@ text. Production fails closed when PostgreSQL or required JWT/AES configuration
 is unavailable. Empty memory and contextual demo records are non-production
 behaviors only. Secrets live outside source control; environment examples
 contain placeholders only.
+
+Threaded support stores message bodies with the same fail-closed AES-256-GCM
+boundary as other sensitive free text. Requesters can access only their own
+cases; `support_operator` and `platform_admin` are the only operational roles
+that can access the support queue. Status transitions are explicit
+(`waiting_support`, `waiting_user`, `resolved`, `closed`), and a requester may
+reopen a resolved case only within seven days.
 
 Daily mission completion rows may store the authenticated student's mission
 date, stable mission key, fixed EXP reward, status, and completion timestamp.

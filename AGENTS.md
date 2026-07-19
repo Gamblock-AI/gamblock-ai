@@ -1,6 +1,6 @@
 # Gamblock-AI Umbrella Agent Rules
 
-Context version: `2026-07-18.3`
+Context version: `2026-07-19.1`
 
 This workspace coordinates five independent Git repositories. The umbrella
 repository owns shared product context, cross-repository contracts, and

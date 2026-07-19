@@ -46,7 +46,7 @@ this file is the target product specification.
 | Missions, education, skill recommendations   |              Own journey | Support summary only if approved | Content management, not private answers |             Selected public education |
 | Protection aggregate/status                  |               Own device |         Consented aggregate only |           Aggregate support diagnostics |                                    No |
 | Removal approval                             |           Request/status |    Approve or deny linked member |        Audited emergency/support action | Token holder only for single-use flow |
-| Partner relationship                         | Invite/revoke per policy |         Accept/revoke per policy |              Limited support resolution |                                    No |
+| Partner relationship                         | Preview/join one group; leave or stop sharing | Own multiple groups; rotate codes; remove members | Limited safety/support resolution | No |
 | Content administration                       |                       No |                               No |            Least-privilege content role |                Published content only |
 | Model/release operations                     |       Version visibility |                               No |                        Release operator |      Public transparency summary only |
 
@@ -186,12 +186,18 @@ clinical risk score or share a detailed behavioral profile with the partner.
 
 ### `WEB-SUP-REC-001` — deeper recovery tools
 
-- Encrypted private journal/reflection.
+- Encrypted private journal/reflection is the only free-text recovery surface;
+  it can carry an optional next step and one current-focus marker.
 - Personal coping-plan builder: triggers selected by the user, warning signs,
   alternative actions, trusted contacts, and emergency resources.
 - “Urge surfing” timer and grounding exercise with reduced-motion mode.
-- Personal recovery calendar showing check-ins/missions without red failure
-  markers.
+- A calm, keyboard-accessible dorm-room workspace exposes urge surfing at the
+  window, 5-4-3-2-1 grounding at the rug, a focus sprint at the desk, journal
+  at the notebook, and support at the phone. Deterministic decor records
+  participation without chance, currency, leaderboards, or loss framing.
+- Personal 7/30/90-day recovery calendar combines check-ins, practices,
+  journal entries, missions, education, and weekly reviews without red failure
+  markers; each populated day can be inspected.
 - Flexible streaks (“days engaged”) and milestone reflections.
 - Weekly plan and printable/private offline plan.
 - Favorite/bookmarked modules and resources.
@@ -202,6 +208,11 @@ clinical risk score or share a detailed behavioral profile with the partner.
   uploading the visited URL by default.
 - Professional-help directory with campus, national, financial, and crisis
   resources maintained by an accountable content owner.
+
+Consolidating the supporting recovery-room UI does not remove
+`WEB-CORE-002`. Its focus-period, review, pause, and reminder semantics remain
+a PKM core requirement even when the student's optional next-step wording is
+captured inside the encrypted journal instead of a second generic text box.
 
 ### `WEB-SUP-PROG-001` — progress and reflection
 
@@ -221,10 +232,14 @@ streak resets, or variable-ratio engagement patterns.
 
 ### `WEB-SUP-ACC-001` — relationship lifecycle
 
-- Invite with expiration and clear parent/peer label.
-- Partner sees responsibilities before accepting.
-- Student and partner see active/pending/expired/revoked status.
-- Replacement, pause, and revocation rules are explicit.
+- A verified partner creates one or more named groups and receives a rotatable,
+  hashed-at-rest join code.
+- A verified student previews the group and partner identity, then explicitly
+  confirms one active membership.
+- Student and partner see active, leave-pending, support-review,
+  safety-suspended, left, removed, and archived states where relevant.
+- Normal exit, unsafe immediate stop-sharing, partner removal, and group
+  archive rules are explicit.
 - Relationship changes generate a minimal audit event.
 - Abuse/help pathway exists when the relationship is unsafe.
 
@@ -259,6 +274,21 @@ Forbidden examples:
 - raw mood, intention, journal, or reflection text;
 - a secret risk score inferred from private activity;
 - competitive ranking of members.
+
+Partner recovery guidance may include a reviewed, bilingual response simulator
+published through the psychoeducation CMS. It teaches supportive wording with
+answer rationale and retry, but reads no student journal, mood, practice,
+focus-task, room, or private progress record.
+
+### `WEB-SUP-SUPPORT-001` — threaded support
+
+- Student and partner accounts can create and read only their own support
+  cases, reply within one encrypted thread, close a resolved case, and reopen
+  it within seven days.
+- Support operators use a role-gated queue with explicit ownership and status
+  transitions; generic admin roles do not inherit access.
+- Attachments are not accepted. Redaction guidance forbids passwords, tokens,
+  URLs, domains, and browsing history.
 
 ## Public and dissemination features
 
@@ -314,7 +344,8 @@ Forbidden examples:
 
 ### `WEB-OPS-SUPPORT-001`
 
-- Support cases with category, severity, owner, status, and redaction guidance.
+- Encrypted threaded support cases with category, impact, priority, owner,
+  explicit status, reply history, and redaction guidance.
 - Data access/deletion requests and consent questions.
 - Emergency recovery workflow with least privilege and immutable audit.
 - Known-issue/status information without device-specific browsing telemetry.
@@ -414,7 +445,8 @@ Specific recovery states include:
 - check-in available / completed / skipped;
 - mission available / completed / replaced / skipped;
 - insufficient data for trend;
-- partner pending / active / paused / revoked;
+- group preview / active / leave pending / support review / sharing stopped /
+  left / removed / archived;
 - removal request pending / approved / denied / expired / cancelled;
 - content draft / published / archived / review overdue.
 
@@ -436,3 +468,26 @@ trackers on sensitive recovery/approval pages.
 4. Deepen recovery/support/public education.
 5. Add operational CMS/release/research features only as needed for prototype
    delivery and evidence collection.
+
+## Implemented operational workspace boundary
+
+The current operational workspace uses one shared visual shell with strictly
+separated server-authorized work areas:
+
+- content administrators author bilingual modules, upload/crop media, submit,
+  publish, archive, inspect revisions, and restore a historical version as a
+  new draft;
+- support operators claim cases from a shared queue, work the encrypted
+  thread, transition status, release ownership with a reason, and retry or
+  reject eligible failed data requests;
+- release operators upload model/ruleset/network artifacts, review their
+  computed checksum, create validated releases, and run manual cohort
+  rollouts;
+- platform administrators manage specialist invitations/accounts, public
+  social links, audit history, and dual-control emergency requests. They do
+  not inherit specialist content/support/release actions.
+
+The landing footer renders a social icon only when its administrator-managed
+record is enabled and has a validated URL. Empty/null records produce no
+placeholder. Research administration is intentionally outside this v1
+workspace pending governance approval.
