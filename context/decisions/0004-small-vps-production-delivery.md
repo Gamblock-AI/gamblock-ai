@@ -27,10 +27,11 @@ application deployment fails before remote mutation when the GHCR PAT or
 required SMTP settings are absent.
 
 Flutter CI keeps one mutable `latest` release per repository. Every successful
-`main` commit replaces fixed-name development Android and Windows assets.
-Production assets are created only when the production-release variable is
-enabled and both platform signing inputs are available; unsigned artifacts are
-never labeled production.
+`main` commit replaces fixed-name development assets and clearly labeled
+`production-debug` assets configured with the production API/site.
+Signed production assets are created only when the production-release variable
+is enabled and both platform signing inputs are available; unsigned artifacts
+are never presented as signed.
 
 ## Consequences
 
