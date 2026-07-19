@@ -1,5 +1,5 @@
 schema_version: 1
-context_version: 2026-07-20.3
+context_version: 2026-07-20.4
 topology: multi-repository-with-umbrella
 canonical_files:
   - context/README.md
@@ -17,6 +17,7 @@ canonical_files:
   - context/decisions/0001-multi-repo-context.md
   - context/decisions/0002-proposal-first-governance.md
   - context/decisions/0003-three-account-roles.md
+  - context/decisions/0004-small-vps-production-delivery.md
 component_snapshots:
   - browser_extension/docs/ai/manifest.yaml
   - gamblock-ai-backend/docs/ai/manifest.yaml

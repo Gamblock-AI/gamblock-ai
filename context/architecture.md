@@ -20,7 +20,7 @@ umbrella context repository:
 | `browser_extension/` | Chrome/Edge MV3 JavaScript | Passive Windows browser DOM/URL sensor over authenticated loopback IPC |
 | `gamblock-ai-website/` | Next.js 16, React 19, TypeScript | Web psychoeducation/self-regulation, accountability UI, public/ops surfaces |
 | `gamblock-ai-backend/` | Go + Gin + ent + PostgreSQL | Identity, relationships, approvals, recovery state/content, aggregate APIs, release metadata |
-| `gamblock-ai-infrastructure/` | Ansible + Docker + Nginx Proxy Manager | Backend/website delivery and database infrastructure |
+| `gamblock-ai-infrastructure/` | Ansible + Docker + Caddy | Backend/website delivery, automated TLS, and database infrastructure |
 | umbrella root | Context, composition, validators | Proposal-first shared governance and cross-repository contracts |
 
 Each component keeps a self-contained `AGENTS.md` and `docs/ai/` snapshot so a

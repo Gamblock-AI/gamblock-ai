@@ -1,6 +1,6 @@
 # Gamblock-AI Context Router
 
-Context version: `2026-07-20.3`
+Context version: `2026-07-20.4`
 
 This directory is the durable knowledge base for Gamblock-AI. It separates
 academic intent, derived product decisions, technical design, and current
