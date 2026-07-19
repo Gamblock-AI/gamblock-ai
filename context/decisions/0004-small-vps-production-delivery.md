@@ -23,8 +23,10 @@ Images are private GHCR packages. GitHub Actions builds them with its scoped
 repository token, while the VPS uses a read-packages PAT stored only in
 Ansible Vault. Backend and website workflows deploy over root/password SSH only
 after an explicit repository variable enables deployment. Production Ansible
-application deployment fails before remote mutation when the GHCR PAT or
-required SMTP settings are absent.
+application deployment fails before remote mutation when the GHCR PAT or core
+database/JWT/AES settings are absent. SMTP and WhatsApp are optional delivery
+adapters: missing credentials disable their workflows without enabling demo
+previews or blocking the rest of production startup.
 
 Flutter CI keeps one mutable `latest` release per repository. Every successful
 `main` commit replaces fixed-name development assets and clearly labeled
@@ -39,8 +41,9 @@ are never presented as signed.
   horizontal scaling or high availability.
 - The root/password choice increases credential impact. Host-key pinning and
   brute-force controls mitigate but do not remove that risk.
-- SMTP, Cloudflare API access, the GHCR pull PAT, and platform signing material
-  remain explicit external readiness gates.
+- Cloudflare API access, the GHCR pull PAT, and platform signing material
+  remain explicit external readiness gates. SMTP and WhatsApp provider setup
+  remain feature-readiness gaps rather than deployment gates.
 - Google web login needs the apex Authorized JavaScript Origin. The current GIS
   callback does not require a web redirect URI or client secret. Windows uses
   a Desktop OAuth client with PKCE and a dynamic loopback redirect; Android
