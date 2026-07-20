@@ -423,6 +423,22 @@ Default AI completion runs only the relevant linter/analyzer and context
 validator. Tests/builds do not become architecture evidence unless the user
 explicitly requested and they were actually run.
 
+## Small-VPS production delivery
+
+Production delivery is an operational supporting capability on one VPS, not a
+PKM core feature or a high-availability claim. The complete infrastructure
+entry point is `make deploy`: it reconciles the apex, `www`, and API Cloudflare
+records, provisions the Docker/PostgreSQL/Caddy stack, takes a pre-migration
+database snapshot, runs the backend image's idempotent migrate-up and
+production-safe baseline seeder, starts the applications, and waits for both
+public HTTPS endpoints. SMTP and WhatsApp remain optional adapters.
+
+The backend image also contains a guarded migrate-down tool for manual disaster
+recovery work. Automated deploy and CI update paths never invoke it. The safe
+seeder may install missing public education/social defaults, but it never
+creates demo accounts/activity or replaces collections that administrators
+already manage.
+
 ## Operational control-plane v1
 
 The website/backend operational control plane is an operational supporting
