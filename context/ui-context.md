@@ -92,7 +92,7 @@ rewards, or “winning/losing” recovery language.
 | Sage success | `#2F9E6F` | Completion, recovery, safe status |
 | Amber | `#E0A516` | Needs attention, pending approval, permission warning |
 
-Website components use semantic CSS tokens in `globals.css`; Flutter uses
+Website components use semantic CSS tokens in `app/globals.css`; Flutter uses
 semantic values from `AppColors`. Do not hardcode raw hex inside feature
 components. Verify text/icon contrast in every semantic state.
 
@@ -145,12 +145,18 @@ views explain units and periods in text, not color alone.
   high-stakes icons with text.
 - **Mascot:** “Gami”, a chibi guardian robot with navy body, crimson emblem,
   and cyan LED face. Canonical tracked reference: `assets/gami-maskot.png`.
-  No canonical character-generation prompt is currently tracked; add one only
-  as a separately reviewed brand artifact and then inventory its real path.
+  A generated pose set (`gami-{meditate,thumbsup,peek,wave,celebrate,point}`)
+  ships in the website's `public/images/mascot/` (webp) with the four poses
+  the client needs copied into the Flutter `assets/images/`; regenerate poses
+  from the shared character description rather than editing them by hand.
 
 Use Gami as a guide/supporter in onboarding, education, encouragement, empty
-states, and public explanation. Do not use a cheerful mascot to soften consent,
-data deletion, denied approval, crisis/help, or destructive-action warnings.
+states, and public explanation. Positive-reinforcement moments — a supportive
+reply to the selected check-in mood and a participation-focused celebration on
+the progress page — are sanctioned Gami uses; keep them warm, brief, and free
+of clinical or perfection language. Do not use a cheerful mascot to soften
+consent, data deletion, denied approval, crisis/help, or destructive-action
+warnings.
 
 ## Pattern Interrupt UX
 
@@ -169,6 +175,14 @@ Pattern Interrupt is native client behavior, not a website redirect page.
 - ends with clear options: recovery check-in, grounding/help, or later according
   to the approved behavior;
 - hands off to web without browsing parameters.
+
+Approved in-pause presentation: a synced breath-phase cue (inhale/exhale text
+with a static combined cue under reduced motion), a thin digit-free ring that
+visualises the sanctioned pause filling up (never urgency styling), stable
+height-reserved layout so nothing jumps when the pause ends, and gentle
+haptics. The grounding option is an interactive 5-4-3-2-1 stepper — one sense
+per step with progress dots and a calm completion state — and an exit back to
+protection stays visible on every step.
 
 ### Psychological safety
 
@@ -198,7 +212,13 @@ and device-performance review before release.
 
 ### Mood and urge check-in
 
-- Use labeled scales with text/icons and a “prefer not to say” option.
+- Use labeled scales with text/icons. The urge question names the behavior
+  plainly (“Seberapa kuat dorongan untuk berjudi hari ini?”) and its scale
+  starts at an explicit “Tidak ada dorongan” (none) point rather than an
+  appended opt-out, so a calm day is a real answer instead of a refusal.
+- Selecting a mood may show a short supportive Gami response (warm, first
+  person, never clinical); the mascot reinforces honesty, it never gates or
+  judges the answer.
 - Ask no more than necessary on the quick path.
 - Trigger category is user-selected, never inferred from browsing.
 - Show privacy audience before optional free text.
@@ -226,7 +246,11 @@ and device-performance review before release.
 - A supporting FAB may also show two clearly optional bonus tasks and personal
   EXP progress. Keep the main task visually dominant and bonuses compact.
 - Show each fixed EXP value before action and distinguish “not verified”,
-  “ready to claim”, and “claimed” with text plus iconography. The claim control
+  “ready to claim”, and “claimed” with text plus iconography. Level progress
+  may carry deterministic, forward-only journey titles (shared verbatim
+  between website and client), and participation may unlock additive-only
+  journey badges whose criteria are always visible — never mystery boxes,
+  never rankings, never losable. The claim control
   is enabled only from server-derived eligibility; the task card itself is not
   a completion toggle. Never use random rewards, spins, loot, loss-framed
   streaks, countdown pressure, or casino celebration language.
@@ -241,6 +265,10 @@ and device-performance review before release.
 - Never imply personalization from browsing history.
 - Offer diverse low-cost and accessible alternatives.
 - Avoid recommendation loops optimized only for engagement time.
+- A supporting student-only skills page pairs short internal practices with a
+  curated list of free external course/certification platforms. External
+  entries are plain outbound links (new tab, no account or browsing data);
+  label costs honestly and prefer free or audit-mode options.
 
 ### Weekly review
 
@@ -252,7 +280,11 @@ and device-performance review before release.
 
 ### Recovery room and calendar
 
-- The student recovery hub may use a calm 2.5D dorm-room scene, but every
+- The student recovery hub is framed as daily self-control missions: the
+  server-verified daily mission card leads the page, and the practice
+  activities use mission-oriented, positive-action copy. The reflective
+  journal and support routes stay clearly available beside the missions.
+- The hub may use a calm 2.5D dorm-room scene, but every
   hotspot also has a 44px semantic button and an equivalent labeled mobile
   dock action. The scene is orientation, not the only navigation mechanism.
 - Window starts a three-minute urge-surfing sequence, rug guides 5-4-3-2-1

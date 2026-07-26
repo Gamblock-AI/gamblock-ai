@@ -419,7 +419,11 @@ Current locale-aware Next.js routes already cover landing/legal pages, auth,
 dashboard, recovery, progress, education, accountability, partner invitation,
 quick approval, settings/profile/support, data requests, and an admin surface.
 The current prototype also includes a public `/post-intervention` route with a
-local grounding exercise and no browsing-context parameters.
+local grounding exercise and no browsing-context parameters, plus a
+student-only `/skills` page (supporting feature around `WEB-CORE-006`) that
+combines short internal skill practices with curated outbound links to free
+course/certification platforms; those links open externally and carry no
+account or browsing data.
 
 When adding target features:
 
