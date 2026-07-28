@@ -253,7 +253,8 @@ streak resets, or variable-ratio engagement patterns.
 - Provide pending/approved/denied/expired/cancelled/emergency states.
 - Batch notifications where practical and allow quiet hours.
 
-WhatsApp is a supporting notification channel, not the approval authority.
+WhatsApp is the supporting transactional notification channel, not the
+approval authority.
 The backend state transition is authoritative.
 
 ### `WEB-SUP-ACC-003` — aggregate supervision dashboard

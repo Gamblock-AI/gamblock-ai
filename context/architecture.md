@@ -431,7 +431,8 @@ entry point is `make deploy`: it reconciles the apex, `www`, and API Cloudflare
 records, provisions the Docker/PostgreSQL/Caddy stack, takes a pre-migration
 database snapshot, runs the backend image's idempotent migrate-up and
 production-safe baseline seeder, starts the applications, and waits for both
-public HTTPS endpoints. SMTP and WhatsApp remain optional adapters.
+public HTTPS endpoints. Fonnte-backed WhatsApp is the transactional delivery
+adapter and production requires its token.
 
 The backend image also contains a guarded migrate-down tool for manual disaster
 recovery work. Automated deploy and CI update paths never invoke it. The safe
@@ -474,7 +475,7 @@ feature, not a PKM core replacement. Its implemented contract is:
   the fixed platform list, exact HTTPS host allowlists, and no query,
   fragment, user-info, or non-standard port.
 
-These flows are locally wired and linted. External SMTP delivery, production
+These flows are locally wired and linted. External Fonnte delivery, production
 storage lifecycle jobs, automated rollout health decisions, artifact signing,
 and production deployment remain environment/operations responsibilities and
 must not be inferred from route presence.
