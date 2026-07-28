@@ -151,7 +151,17 @@ views explain units and periods in text, not color alone.
   from the shared character description rather than editing them by hand.
 
 Use Gami as a guide/supporter in onboarding, education, encouragement, empty
-states, and public explanation. Positive-reinforcement moments — a supportive
+states, and public explanation. Sanctioned calm-engagement mechanics (all
+additive, deterministic, criteria always readable, never punitive): cosmetic
+level rewards (decor items, mascot poses, hero accents, a second room theme),
+a tiered recovery-room decor economy with placement slots, capped daily EXP
+for completed practices, a single calm level-up dialog (no confetti/sound), a
+non-punitive presence-rhythm line ("hadir N hari" — never a breakable
+streak), a curated mood-by-urge Gami dialog bank with deterministic daily
+variants, daily myth-vs-fact and quick-quiz retrieval practice, fictional
+response-practice scenarios, a private device-local "what you kept"
+estimator (baseline never sent), a private weekly recap, and an opt-in daily
+check-in reminder with neutral lock-screen copy. Positive-reinforcement moments — a supportive
 reply to the selected check-in mood and a participation-focused celebration on
 the progress page — are sanctioned Gami uses; keep them warm, brief, and free
 of clinical or perfection language. Do not use a cheerful mascot to soften
