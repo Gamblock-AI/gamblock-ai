@@ -1,6 +1,6 @@
 # Gamblock-AI Context Router
 
-Context version: `2026-07-29.1`
+Context version: `2026-07-31.15`
 
 This directory is the durable knowledge base for Gamblock-AI. It separates
 academic intent, derived product decisions, technical design, and current
@@ -56,6 +56,7 @@ request and a reliable source from the proposal owners.
 | Implementation status or next work | affected component `docs/ai/README.md` |
 | Multi-repository context tooling | `manifest.yaml`, `decisions/0001-multi-repo-context.md` |
 | Product-governance conflict | `decisions/0002-proposal-first-governance.md` |
+| Adoption-path, role-boundary, or web/native ownership decision | `decisions/0005-transparent-adoption-and-thin-client.md` |
 
 For a narrow task, read the proposal sections and requirement IDs that apply;
 loading the entire repository is not required. The non-negotiable privacy,

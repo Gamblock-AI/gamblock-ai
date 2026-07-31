@@ -10,6 +10,8 @@ documentation, and status reports.
 | Gamblock-AI | The complete PKM prototype ecosystem: Android/Windows protection, web recovery/accountability, model/research work, backend, and supporting delivery components. |
 | Protected Student / Mahasiswa Terlindungi | Primary proposal user. Existing API role code is `user`; “Member” is acceptable in group/account contexts. Avoid “target” or stigmatizing labels in UI. |
 | Accountability Partner / Pendamping | Parent or peer who mutually accepts responsibility for removal approval and supportive accountability. Existing code/UI may use `partner` or “Kepala”; proposal-facing copy should explain the equivalence. |
+| Self-directed recovery | A student-initiated adoption path where the student chooses protection and uses the private web recovery journey. It is not a separate role. |
+| Partner/institution-directed installation | Supporting adoption path `PROD-SUP-ADOPT-001` where an external lecturer/campus policy may require installation transparently. It never auto-enrolls a student or bundles consent to monitoring, sharing, recovery sync, or research. |
 | Admin | The single operational account role (`admin`) for content, release, support queue, research, platform, audit, and emergency work. It never grants raw browsing or private recovery access. |
 | Organization membership role | Relation-level `owner`, `admin`, `member`, or `viewer` inside an organization. It is not an account role. |
 | PKM Team | Researchers/developers responsible for prototype, evidence, content governance, and deliverables. Not automatically an application role. |

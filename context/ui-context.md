@@ -133,6 +133,11 @@ views explain units and periods in text, not color alone.
   with compact status or actions at the end. Supporting descriptions use the
   available width below that row instead of remaining squeezed beside the
   icon.
+- When a learning card is paired with an immediate-support card, use matching
+  header, supporting-content, and bottom-action regions. The support card may
+  state its privacy boundary in the middle region, but must not simulate a
+  hotline or add nested cards. A full-width learning action balances two
+  equal-width support actions on the adjacent card.
 
 ## Component systems
 
@@ -158,8 +163,7 @@ a tiered recovery-room decor economy with placement slots, capped daily EXP
 for completed practices, a single calm level-up dialog (no confetti/sound), a
 non-punitive presence-rhythm line ("hadir N hari" — never a breakable
 streak), a curated mood-by-urge Gami dialog bank with deterministic daily
-variants, daily myth-vs-fact and quick-quiz retrieval practice, fictional
-response-practice scenarios, a private device-local "what you kept"
+variants, daily myth-vs-fact, a private device-local "what you kept"
 estimator (baseline never sent), a private weekly recap, and an opt-in daily
 check-in reminder with neutral lock-screen copy. Positive-reinforcement moments — a supportive
 reply to the selected check-in mood and a participation-focused celebration on
@@ -219,6 +223,9 @@ and device-performance review before release.
 - Optional reminder and review date.
 - Empty state explains why an intention helps and offers an example without
   pre-filling sensitive content.
+- The dedicated student intention page presents this form inline; do not place
+  the primary create/edit interaction behind a modal on that route. Modal
+  triggers may remain for compact dashboard contexts.
 
 ### Mood and urge check-in
 
@@ -250,24 +257,35 @@ and device-performance review before release.
   workspace, uses a structured WYSIWYG document, and crops thumbnails to 16:9
   before upload.
 
-### Daily missions
+### Daily missions (website-owned)
 
-- Present one primary mission and a way to choose an alternative.
-- A supporting FAB may also show two clearly optional bonus tasks and personal
-  EXP progress. Keep the main task visually dominant and bonuses compact.
-- Show each fixed EXP value before action and distinguish “not verified”,
-  “ready to claim”, and “claimed” with text plus iconography. Level progress
-  may carry deterministic, forward-only journey titles (shared verbatim
-  between website and client), and participation may unlock additive-only
-  journey badges whose criteria are always visible — never mystery boxes,
-  never rankings, never losable. The claim control
-  is enabled only from server-derived eligibility; the task card itself is not
-  a completion toggle. Never use random rewards, spins, loot, loss-framed
+- Present exactly five equally weighted daily slots and personal EXP progress;
+  do not designate a primary or bonus task.
+- Each task visibly states its 10 EXP value and one of only two sources:
+  default or custom. Default tasks distinguish “not verified”, “ready to
+  claim”, and “claimed”; their claim control is enabled only after server
+  verification, without presenting a separate locked mission type. Custom
+  tasks clearly state that completion is a private self-attestation, then use
+  pending or completed states. Every available claim control uses the same
+  “Klaim EXP” action.
+- Let the student create up to five custom daily missions. Show remaining
+  capacity, a 160-character title limit, and that each custom mission replaces
+  one system slot. Pending custom missions have edit/delete controls; deleting
+  one restores a system task. Custom titles and self-attestations must never
+  appear in partner or admin surfaces.
+- The daily boundary uses `Asia/Jakarta`. Level progress may carry
+  deterministic, forward-only journey titles and visible additive-only badges,
+  but never mystery boxes, rankings, random rewards, spins, loot, loss-framed
   streaks, countdown pressure, or casino celebration language.
-- The daily task boundary and deterministic rotation use `Asia/Jakarta`.
-- States: available, in progress, completed, skipped, replaced.
-- Skipping never becomes a public failure or breaks all progress.
+- The API retains historical skipped records only for safe read compatibility;
+  new missions cannot be skipped. It must not expose a skip control or a third
+  visual mission category.
 - End with a short optional reflection and next-step suggestion.
+
+The Android/Windows protection client does not render these missions, EXP/level
+progress, journey badges, or independent recovery exercises. It may hand the
+student to the website and retain only local protection/Pattern Interrupt
+states.
 
 ### Skill recommendations
 
@@ -290,13 +308,28 @@ and device-performance review before release.
 
 ### Recovery room and calendar
 
-- The student recovery hub is framed as daily self-control missions: the
-  server-verified daily mission card leads the page, and the practice
-  activities use mission-oriented, positive-action copy. The reflective
+- The student recovery hub keeps recovery practices in the page; the private
+  intention manager and daily journal each have their own student-only sidebar
+  destination. The recovery-room notebook opens that journal route rather than
+  presenting a competing text composer.
+  the five-slot daily mission manager is opened from the persistent adaptive
+  FAB instead of being duplicated as a full page card. Each system task shows
+  whether it is server-verified and each custom task is clearly self-attested.
+  Practice activities use mission-oriented, positive-action copy. The reflective
   journal and support routes stay clearly available beside the missions.
 - The hub may use a calm 2.5D dorm-room scene, but every
   hotspot also has a 44px semantic button and an equivalent labeled mobile
   dock action. The scene is orientation, not the only navigation mechanism.
+- The personal progress calendar uses a broad, compact date grid beside a
+  fixed-width private rail for the local estimator and weekly review. At
+  desktop widths the two columns share one height for the selected 7/30/90-day
+  range; the 7-day view is extra-short, the 30-day default reduces unused cell
+  height, while the 90-day range may grow to keep date targets readable. On
+  narrow screens, the rail stacks below the calendar instead of clipping its
+  content.
+- Compact segmented navigation uses one flat, reusable component: a thin
+  border and small inset gap around a navy active item, muted inactive items,
+  and a keyboard-visible focus ring. Never add shadows, bevels, or 3D depth.
 - Window starts a three-minute urge-surfing sequence, rug guides 5-4-3-2-1
   grounding, desk starts a ten-minute focus sprint, notebook opens the
   encrypted reflection journal, and phone opens partner/support choices.
@@ -351,8 +384,24 @@ detail view is understood as intentional protection, not missing data.
 
 - Support uses one readable thread per case with author, timestamp, status,
   reply field, and close/reopen actions; badge copy accompanies every color.
+- In the student accountability two-column workspace, the aggregate-sharing
+  panel matches the total height of the adjacent device-request and leave
+  panels. The right stack uses compact, intrinsic-height cards; the left panel
+  then distributes its four category rows evenly with 8px inter-row gaps and
+  tight horizontal/vertical padding, followed directly by the action row. Do
+  not introduce empty filler space, oversized row padding, or large inter-card
+  gaps merely to force equal heights. At desktop widths, the normal-exit
+  action may share its row with the reason field, and the safety action may
+  share its compact callout row with its supporting copy.
+- In the team ticket form, category and priority may share a row, while the
+  impact selector spans the full form width on its own row for easier scanning.
 - Student progress offers 7/30/90-day ranges, an insufficient-data state below
   three check-ins, and a privacy warning before client-side CSV/PDF export.
+- The private local-only estimator uses one unified hours stepper with explicit
+  decrement/increment controls, a prefixed `Rp` money field, and a full-width
+  save action. Preserve direct keyboard entry and visible focus treatment.
+- The fixed daily-mission FAB uses a thin sky border plus functional shadow so
+  it remains distinct over either pale or navy adjacent surfaces.
 - Partner progress never reuses the student trend response; it renders only
   per-category aggregates or an explicit “not shared” state.
 - Recovery drafts are labeled local and unsent. Account-saved records are
@@ -368,7 +417,9 @@ detail view is understood as intentional protection, not missing data.
   explanations before aggressive download CTAs.
 - **Auth:** split layout may use brand art, but forms remain the visual focus.
 - **Student dashboard:** “Today” first—intention, quick check-in, daily mission,
-  next skill—then recovery library and progress.
+  next skill—then recovery library and progress. The intention manager shows
+  the title, next action, focus period, local/private status, and reversible
+  pause/archive controls before the mission card.
 - **Partner dashboard:** linked-member status, approval queue, privacy-safe
   aggregate, support guidance.
 - **Admin dashboard:** attention counts and concise links to each operational

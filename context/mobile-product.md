@@ -59,6 +59,17 @@ Pattern Interrupt is a native/full-screen state outside ordinary navigation.
 The detailed intention, check-in, mission, education, skill, and weekly-review
 journey remains on the website.
 
+The client is intentionally a thin protection surface. It does not duplicate
+the website's missions, EXP/level, journey badges, independent breathing
+exercise, pause acknowledgements, or recovery-practice bookkeeping. The
+Pattern Interrupt breathing cue and 5-4-3-2-1 grounding remain local safety
+intervention steps. Android may provide an opt-in, local daily check-in
+reminder; Windows treats that notification service as a no-op.
+
+`MOB-SUP-004` records this boundary: the client may show aggregate protection
+health and the consented partner workflow, but detailed rehabilitation belongs
+to the website.
+
 ## Core protection features
 
 ### `MOB-CORE-001` — multi-platform background protection

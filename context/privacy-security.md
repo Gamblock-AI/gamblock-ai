@@ -32,7 +32,7 @@ message validation are required.
 | `D0 Local detection secret`        | URL/domain, DOM text, title/headings/anchor text, history, screenshot, search query, app/window identifier, rule hits, feature vector, per-page score | Device only; never sent to backend, analytics, crash reporting, partner, or admin. Shortest practical local lifetime.                     |
 | `D1 Local protection state`        | model/rules versions, pairing token, offline queue, current block/intervention state                                                                  | Device only except explicitly allowed non-browsing version/health aggregates; pairing token never leaves paired local processes.          |
 | `D2 Account and relationship`      | identity, role, contact, partner relationship, consent, approval status                                                                               | Backend allowed for defined purpose; least privilege, retention, audit, export/delete rules.                                              |
-| `D3 Recovery sensitive`            | intention/next step, mood/urge check-in, private reflection/journal, focus-practice task label, weekly review                                          | Backend only when voluntarily entered for web recovery; private by default; encrypt sensitive text; never partner-visible by implication. |
+| `D3 Recovery sensitive`            | intention/next step, mood/urge check-in, private reflection/journal text and images, focus-practice task label, custom daily-mission title, weekly review              | Backend only when voluntarily entered for web recovery; private by default; encrypt sensitive recovery content; never partner-visible by implication. |
 | `D4 Aggregate protection/recovery` | broad-period block count, privacy-safe heartbeat, mission/education/practice completion, deterministic room unlock                                    | Backend allowed only if non-reconstructive, purpose-limited, and disclosed; apply cohort/time granularity.                                |
 | `D5 Public/operational`            | published modules, app versions, model card, help resources, support status                                                                           | Backend/public as appropriate; still protect credentials, audit detail, and internal security metadata.                                   |
 | `D6 Research`                      | approved pseudonymous study events and outcomes                                                                                                       | Separate purpose/consent/schema/access/retention; product consent is insufficient.                                                        |
@@ -52,13 +52,25 @@ owner before widening collection or access.
    precise enough to reconstruct it.
 5. A backend field capable of carrying `D0` data is rejected or redesigned,
    even if a current client promises not to fill it.
-6. Journal/reflection text is encrypted with AES-256-GCM before persistence;
+6. Journal/reflection text and private embedded images are encrypted with
+   AES-256-GCM before persistence;
    plaintext is not logged or included in telemetry.
 7. No third-party analytics/session replay runs on sensitive recovery,
    approval, auth, or administration pages without a separately approved
    privacy review; session replay of these surfaces is prohibited by default.
 8. Research collection requires separate informed consent and an approved
    protocol.
+
+### Transparent required installation
+
+An external lecturer/campus policy may require installation as the supporting
+adoption path `PROD-SUP-ADOPT-001`, but the application must not turn that
+policy into surveillance. Required installation cannot silently grant a
+partner relationship, aggregate-sharing category, recovery-data sync, or
+research consent. No roster or compliance state is created for people who
+have not installed, declined, or not yet joined. A partner receives data only
+after the student explicitly previews/confirms the relationship and enables
+the relevant aggregate categories.
 
 ## Allowed aggregate contract
 
@@ -245,14 +257,18 @@ Status transitions are explicit
 (`waiting_support`, `waiting_user`, `resolved`, `closed`), and a requester may
 reopen a resolved case only within seven days.
 
-Daily mission completion rows may store the authenticated student's mission
-date, stable mission key, fixed EXP reward, status, and completion timestamp.
-The user record may store a non-negative cumulative EXP total used only for the
-student's own level display. Claim eligibility is derived from existing
-purpose-bound records and is not a new analytics event or duplicated sensitive
-payload. Claims are idempotent and cannot be undone by the student. These
-fields contain no browsing context and are not part of partner/admin projections
-or research exports by default.
+Daily mission rows may store the authenticated student's mission date, source,
+stable system/custom key, fixed 10-EXP reward, status, bounded skip reason, and
+completion timestamp. A custom title is voluntary `D3` recovery text and is
+stored only as AES-256-GCM ciphertext; it is decrypted only for its owning
+student's daily mission response. The user record may store a non-negative
+cumulative EXP total used only for the student's own level display. System
+claim eligibility is derived from existing purpose-bound records and is not a
+new analytics event or duplicated sensitive payload. Custom completion is an
+explicit private student attestation. Claims are idempotent and cannot be
+undone by the student. These fields contain no browsing context; custom titles
+and custom self-attestations are not part of partner/admin projections or
+research exports by default.
 
 ## Security/privacy review triggers
 

@@ -256,14 +256,17 @@ Website recovery state uses deliberately separated paths:
 
 - mission completion, protection status, profile, partner approvals, and
   support cases use authenticated APIs;
-- `GET /v1/missions/today` derives a deterministic one-primary/two-bonus task
-  set from the `Asia/Jakarta` date and returns the student's account-private EXP
-  level plus server-derived claim eligibility; `POST /v1/missions/claim`
-  rechecks that eligibility and atomically grants the disclosed fixed EXP once.
-  `POST /v1/missions/adjust` lets the student replace the unresolved primary
-  task once with one of the two non-assigned catalog tasks, then optionally
-  skip that effective primary with a bounded reason. Adjustment never changes
-  EXP. Legacy `PATCH /v1/missions` is claim-only compatibility and rejects undo;
+- `GET /v1/missions/today` returns exactly five `Asia/Jakarta` daily slots and
+  the student's account-private EXP level. System slots come from a fixed
+  self-directed catalog and expose server-derived claim eligibility; each
+  completed system or custom mission grants 10 EXP once. The user may create,
+  edit, or delete pending custom slots through `POST/PATCH/DELETE
+  /v1/missions/custom`; at most five custom slots are allowed and they replace
+  system slots one-for-one. `POST /v1/missions/claim` rechecks system
+  eligibility or records a custom self-attestation. There is no skip mutation:
+  the UI presents only default and custom sources, and both use the same claim
+  action. Custom titles are AES-256-GCM encrypted before persistence and only
+  decrypted in the authenticated owner's response;
 - structured mood/urge check-ins remain local-first in
   `gamblock:recovery:v1`; submitted account records are separate from drafts;
 - the student recovery room is an account-backed workspace. Completed urge
@@ -278,9 +281,10 @@ Website recovery state uses deliberately separated paths:
   partner. Legacy browser-local intention text is imported only after an
   explicit one-time student action;
 - `GET/PUT /v1/weekly-reviews/current` stores the current structured weekly
-  review in the encrypted recovery-record workflow. The full focus-period and
-  reminder lifecycle required by `PKM-WEB-002` remains a tracked core gap; the
-  supporting room does not redefine that proposal requirement;
+  review in the encrypted recovery-record workflow. The website intention
+  manager owns the local-first title, next-action, focus-period, and
+  pause/resume/archive lifecycle for `PKM-WEB-002`; optional reminder delivery
+  remains Android-local and opt-in rather than a browser notification claim;
 - daily check-ins use the `Asia/Jakarta` day, update that day's entry, and do
   not accept user-selected backfill dates;
 - progress supports 7/30/90-day private views and requires three check-ins
@@ -340,7 +344,7 @@ does not replace, allowlisted request schemas and code review.
 | Device local | model/vectorizer/rules/media, pairing token, protection state, offline aggregate queue | Detection data stays here; encrypt/protect credentials; bounded retention. |
 | PostgreSQL | accounts, consent/relationships, approvals, recovery content/state, encrypted text, aggregate events, release/support/audit data | No browsing schema; field-level purpose/retention/access documented. |
 | `chrome.storage.local` | local pairing token and connection configuration | No remote sync/telemetry; token not logged. |
-| Website `localStorage` (`gamblock:recovery:v1`) | local-first intention lifecycle, structured mood/urge check-ins, selected mission alternative, weekly plan, and unsent recovery-record draft | No browsing fields; bounded records and explicit clear action. A draft is not account data until explicit submission. |
+| Website `localStorage` (`gamblock:recovery:v1`) | local-first intention lifecycle, structured mood/urge check-ins, weekly plan, and unsent recovery-record draft | No browsing fields; bounded records and explicit clear action. A draft is not account data until explicit submission. |
 | Research storage (future/approved) | governed labeled dataset and pseudonymous study data | Separate access, consent, retention, license, and publication policy. |
 
 Non-production can use an empty in-memory store and may explicitly enable

@@ -67,11 +67,30 @@ and `partner`. Admins support content, releases, support, research, audit, and
 platform operations and are not proposal actors. They never gain access to raw
 browsing signals or unnecessary private recovery content.
 
+### Adoption paths
+
+The same `user` student experience supports two clearly labeled entry paths:
+
+- **Self-directed recovery** — a student installs protection because they want
+  to reduce gambling access and use the private web recovery journey.
+- **Partner/institution-directed installation** (`PROD-SUP-ADOPT-001`) — a
+  lecturer, campus program, or other partner may require installation through
+  an external, transparent policy. This supporting adoption context does not
+  create a fourth role, automatically create a relationship, or disclose
+  whether someone has installed, declined, or not yet joined.
+
+In both paths, the student reviews privacy boundaries, activates protection,
+and explicitly previews/confirms any partner relationship and aggregate
+sharing categories. Installation does not imply consent to monitoring,
+recovery sync, or research participation. The proposal's core accountability
+actor remains a parent or peer; lecturer/institution use is an adoption
+extension and must not be presented as a PKM core actor.
+
 ## Core protection-to-recovery journey
 
-1. **Transparent setup** — the student installs the Android or Windows client,
-   reviews permissions and privacy boundaries, and links an Accountability
-   Partner with mutual consent.
+1. **Transparent setup** — through either adoption path, the student installs
+   the Android or Windows client, reviews permissions and privacy boundaries,
+   and optionally links an Accountability Partner with mutual consent.
 2. **Local sensing** — supported local interfaces obtain URL characteristics
    and/or page text. On Windows, the browser extension is a passive local DOM
    sensor for the service; it is a supporting implementation choice.

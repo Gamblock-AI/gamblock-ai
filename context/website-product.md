@@ -73,7 +73,9 @@ The student can:
 - write a short personal reason for change;
 - choose an achievable focus period and one next action;
 - review, revise, pause, or archive an intention;
-- choose private reminders;
+- see where private reminders are configured without exposing the intention to
+  the partner. Delivery remains an opt-in Android-local utility; the website
+  does not claim browser notification delivery.
 - see the intention at relevant recovery moments without exposing it to the
   partner.
 
@@ -128,21 +130,25 @@ Missions are small, achievable, and adaptable, for example:
 - complete a short grounding or budgeting exercise;
 - plan a study, sport, creative, or social alternative.
 
-The student can complete, skip with a reason, replace with an accessible
+The student can complete, skip with a reason, choose an accessible
 alternative, and reflect briefly. Missing a day never resets all progress.
 
-The website may add a supporting, account-private progression layer around
-these missions. The current contract assigns one primary task and two optional
-bonus tasks per `Asia/Jakarta` calendar day, using a deterministic rotation
-rather than user-behavior targeting. Each task discloses a fixed effort-based
-EXP value before action. The backend derives claim eligibility from existing,
-purpose-bound account state such as a saved daily check-in, active protection
-heartbeat, education progress, or active partner relationship. Only a
-server-authorized claim adds EXP; the student cannot self-mark completion or
-reverse a claimed reward. Claims are idempotent. EXP has no chance-based
-outcome, purchasable currency, public leaderboard, punitive streak reset, or
-partner/admin projection. This supporting layer does not replace the core skip,
-replace, reflection, and next-step requirements above.
+The website adds a supporting, account-private progression layer around these
+missions. Every `Asia/Jakarta` day has exactly five slots, each worth 10 EXP.
+The student may create up to five private custom missions for the day; every
+custom mission replaces one system slot, so three custom missions leave two
+system missions. Pending custom missions may be edited or deleted, and delete
+immediately restores a system slot. The fixed, self-directed system catalog is
+active protection, daily check-in, education section, education module, and a
+recovery practice. System claims are server-verified from existing
+purpose-bound account state. A custom mission is a student self-attestation;
+the backend records the completion idempotently but cannot verify the private
+activity itself. Custom titles are encrypted sensitive recovery text, and the
+custom mission/self-attestation is never projected to partners or admins. EXP has no chance-based outcome,
+purchasable currency, public leaderboard, punitive streak reset, or
+partner/admin projection. This supporting layer implements `PKM-WEB-005`; it
+does not replace the core completion, accessible-alternative, reflection, and
+next-step requirements above.
 
 ### `WEB-CORE-006` — skill-development recommendations
 
@@ -186,8 +192,10 @@ clinical risk score or share a detailed behavioral profile with the partner.
 
 ### `WEB-SUP-REC-001` — deeper recovery tools
 
-- Encrypted private journal/reflection is the only free-text recovery surface;
-  it can carry an optional next step and one current-focus marker.
+- Encrypted private journal/reflection is the only free-text recovery surface.
+  The student daily journal supports a bounded private rich-text document
+  (headings, emphasis, lists, quotations, and up to five embedded private
+  images) and exactly one editable entry per `Asia/Jakarta` day.
 - Personal coping-plan builder: triggers selected by the user, warning signs,
   alternative actions, trusted contacts, and emergency resources.
 - “Urge surfing” timer and grounding exercise with reduced-motion mode.
@@ -209,10 +217,11 @@ clinical risk score or share a detailed behavioral profile with the partner.
 - Professional-help directory with campus, national, financial, and crisis
   resources maintained by an accountable content owner.
 
-Consolidating the supporting recovery-room UI does not remove
-`WEB-CORE-002`. Its focus-period, review, pause, and reminder semantics remain
-a PKM core requirement even when the student's optional next-step wording is
-captured inside the encrypted journal instead of a second generic text box.
+The intention manager is the authoritative web recovery surface for
+`WEB-CORE-002`. It stores the full title, next action, focus period, and
+pause/resume/archive lifecycle local-first, and connects the current intention
+to weekly review. Android's optional local reminder is a delivery utility,
+not partner-visible recovery data or a second native recovery journey.
 
 ### `WEB-SUP-PROG-001` — progress and reflection
 
@@ -450,7 +459,8 @@ Specific recovery states include:
 
 - no intention yet / active / paused / archived;
 - check-in available / completed / skipped;
-- mission available / completed / replaced / skipped;
+- mission available / completed / skipped; custom mission pending / edited /
+  deleted;
 - insufficient data for trend;
 - group preview / active / leave pending / support review / sharing stopped /
   left / removed / archived;
