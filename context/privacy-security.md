@@ -27,15 +27,15 @@ message validation are required.
 
 ## Data classification
 
-| Class                              | Examples                                                                                                                                              | Location and policy                                                                                                                       |
-| ---------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
-| `D0 Local detection secret`        | URL/domain, DOM text, title/headings/anchor text, history, screenshot, search query, app/window identifier, rule hits, feature vector, per-page score | Device only; never sent to backend, analytics, crash reporting, partner, or admin. Shortest practical local lifetime.                     |
-| `D1 Local protection state`        | model/rules versions, pairing token, offline queue, current block/intervention state                                                                  | Device only except explicitly allowed non-browsing version/health aggregates; pairing token never leaves paired local processes.          |
-| `D2 Account and relationship`      | identity, role, contact, partner relationship, consent, approval status                                                                               | Backend allowed for defined purpose; least privilege, retention, audit, export/delete rules.                                              |
-| `D3 Recovery sensitive`            | intention/next step, mood/urge check-in, private reflection/journal text and images, focus-practice task label, custom daily-mission title, weekly review              | Backend only when voluntarily entered for web recovery; private by default; encrypt sensitive recovery content; never partner-visible by implication. |
-| `D4 Aggregate protection/recovery` | broad-period block count, privacy-safe heartbeat, mission/education/practice completion, deterministic room unlock                                    | Backend allowed only if non-reconstructive, purpose-limited, and disclosed; apply cohort/time granularity.                                |
-| `D5 Public/operational`            | published modules, app versions, model card, help resources, support status                                                                           | Backend/public as appropriate; still protect credentials, audit detail, and internal security metadata.                                   |
-| `D6 Research`                      | approved pseudonymous study events and outcomes                                                                                                       | Separate purpose/consent/schema/access/retention; product consent is insufficient.                                                        |
+| Class                              | Examples                                                                                                                                                  | Location and policy                                                                                                                                   |
+| ---------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `D0 Local detection secret`        | URL/domain, DOM text, title/headings/anchor text, history, screenshot, search query, app/window identifier, rule hits, feature vector, per-page score     | Device only; never sent to backend, analytics, crash reporting, partner, or admin. Shortest practical local lifetime.                                 |
+| `D1 Local protection state`        | model/rules versions, pairing token, offline queue, current block/intervention state                                                                      | Device only except explicitly allowed non-browsing version/health aggregates; pairing token never leaves paired local processes.                      |
+| `D2 Account and relationship`      | identity, role, contact, partner relationship, consent, approval status                                                                                   | Backend allowed for defined purpose; least privilege, retention, audit, export/delete rules.                                                          |
+| `D3 Recovery sensitive`            | intention/next step, mood/urge check-in, private reflection/journal text and images, focus-practice task label, custom daily-mission title, weekly review | Backend only when voluntarily entered for web recovery; private by default; encrypt sensitive recovery content; never partner-visible by implication. |
+| `D4 Aggregate protection/recovery` | broad-period block count, privacy-safe heartbeat, mission/education/practice completion, deterministic room unlock                                        | Backend allowed only if non-reconstructive, purpose-limited, and disclosed; apply cohort/time granularity.                                            |
+| `D5 Public/operational`            | published modules, app versions, model card, help resources, support status                                                                               | Backend/public as appropriate; still protect credentials, audit detail, and internal security metadata.                                               |
+| `D6 Research`                      | approved pseudonymous study events and outcomes                                                                                                           | Separate purpose/consent/schema/access/retention; product consent is insufficient.                                                                    |
 
 When uncertain, assign the more sensitive class and ask the product/privacy
 owner before widening collection or access.
@@ -182,6 +182,9 @@ For the Windows extension/service WebSocket:
 - document origin assumptions and defend against another local process sending
   malformed messages;
 - version protocol changes across both repositories.
+- keep Phase 4 timing mode opt-in and local-only; persisted evidence may contain
+  opaque scenario labels, artifact versions, and durations, but never the
+  transient scan-start clock value or browsing content.
 
 ## Safe anti-tamper and accountability
 

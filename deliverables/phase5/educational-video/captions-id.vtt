@@ -1,0 +1,48 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:12.000
+Di sela kuliah dan tugas, satu dorongan bisa terasa harus diikuti sekarang juga.
+Tetapi rasa mendesak bukan perintah.
+
+00:00:12.000 --> 00:00:28.000
+Berhenti. Tarik napas empat hitungan, tahan dua, hembuskan enam.
+Jeda singkat memberi ruang untuk memilih tindakan yang sesuai tujuanmu.
+
+00:00:28.000 --> 00:00:43.000
+Sebutkan tujuanmu hari ini. Tutup akses, pindah ke aktivitas aman,
+atau hubungi orang yang kamu percaya. Kamu tidak harus menghadapinya sendirian.
+
+00:00:43.000 --> 00:00:57.000
+Gamblock-AI dirancang sebagai alat bantu mahasiswa: deteksi lokal,
+Pattern Interrupt, pendampingan berbasis persetujuan, dan web regulasi diri.
+
+00:00:57.000 --> 00:01:15.000
+Pada browser yang didukung, aturan URL dan teks terbatas dari title, heading,
+serta anchor diproses bersama Bag-of-Words dan Logistic Regression.
+Keputusan tetap dibuat di perangkat.
+
+00:01:15.000 --> 00:01:31.000
+URL, domain, isi DOM, riwayat, screenshot, dan skor halaman tidak dikirim ke server.
+Fitur akun dan pemulihan sukarela memiliki tujuan dan kontrol yang terpisah.
+
+00:01:31.000 --> 00:01:47.000
+Ketika indikasi terdeteksi, aplikasi native menjalankan blok dan jeda visual tujuh detik.
+Setelahnya, pengguna dapat memilih grounding atau menuju web pemulihan tanpa membawa alamat halaman.
+
+00:01:47.000 --> 00:02:04.000
+Pendamping adalah orang tua atau rekan yang dipilih melalui persetujuan.
+Mereka membantu meninjau permintaan pelepasan, tetapi tidak melihat riwayat,
+jurnal, mood, atau detail pribadi.
+
+00:02:04.000 --> 00:02:20.000
+Web membantu menetapkan niat, check-in, belajar tentang impuls, menjalankan misi kecil,
+memilih keterampilan lintas program studi, lalu mengevaluasi langkah berikutnya.
+
+00:02:20.000 --> 00:02:35.000
+Gamblock-AI saat ini adalah prototipe code-complete.
+Pengujian model, perangkat, ketahanan, retensi, dan dampak psikologis
+masih harus dijalankan serta ditinjau.
+
+00:02:35.000 --> 00:02:45.000
+Mulai dari satu jeda dan satu pilihan aman.
+Buka Gamblock-AI untuk belajar, mengatur dukungan, atau mencari bantuan.

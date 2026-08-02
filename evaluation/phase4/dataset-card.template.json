@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "dataset_id": "REQUIRED_OPAQUE_ID",
+  "owner": "REQUIRED",
+  "approved_at": "REQUIRED",
+  "objective": "Evaluate Hybrid-v2 gambling/non-gambling classification",
+  "classes": ["gambling", "benign"],
+  "unit_of_observation": "REQUIRED",
+  "sources_and_date_range": "REQUIRED",
+  "legal_ethics_basis": "REQUIRED",
+  "license_and_access": "REQUIRED",
+  "labeling_guide": "REQUIRED",
+  "annotators_and_escalation": "REQUIRED",
+  "agreement_measure": "REQUIRED",
+  "class_and_slice_counts": "REQUIRED",
+  "deduplication": "REQUIRED",
+  "government_education_controls": "REQUIRED",
+  "researcher_safety": "REQUIRED",
+  "retention_and_deletion": "REQUIRED",
+  "publication_policy": "REQUIRED",
+  "known_limitations": "REQUIRED"
+}

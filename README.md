@@ -9,18 +9,26 @@ cross-repository contracts.
 
 The five components remain independently clonable and releasable:
 
-| Directory | Repository | Purpose |
-|---|---|---|
-| `gamblock-ai-backend/` | `Gamblock-AI-Backend` | Go API and PostgreSQL persistence |
-| `gamblock-ai-website/` | `Gamblock-AI-Website` | Next.js recovery and supervision web app |
-| `gamblock_ai_apps/` | `Gamblock-AI-Apps` | Flutter Android/Windows protection client |
-| `browser_extension/` | `Gamblock-AI-Browser-Extention` | Passive Chrome/Edge DOM sensor |
-| `gamblock-ai-infrastructure/` | `Gamblock-AI-Infrastructure` | Ansible deployment automation |
+| Directory                     | Repository                      | Purpose                                   |
+| ----------------------------- | ------------------------------- | ----------------------------------------- |
+| `gamblock-ai-backend/`        | `Gamblock-AI-Backend`           | Go API and PostgreSQL persistence         |
+| `gamblock-ai-website/`        | `Gamblock-AI-Website`           | Next.js recovery and supervision web app  |
+| `gamblock_ai_apps/`           | `Gamblock-AI-Apps`              | Flutter Android/Windows protection client |
+| `browser_extension/`          | `Gamblock-AI-Browser-Extention` | Passive Chrome/Edge DOM sensor            |
+| `gamblock-ai-infrastructure/` | `Gamblock-AI-Infrastructure`    | Ansible deployment automation             |
 
 The umbrella repository owns `context/`, `AGENTS.md`, workspace scripts, and
 the pinned component composition in `.gitmodules`. Every component duplicates
 the minimum safety and architecture context it needs under `docs/ai/`, so its
 context does not disappear in a standalone clone.
+
+Phase 5 reporting and dissemination artifacts live under
+`deliverables/phase5/`. The package includes report drafts, the Android/Windows
+user guide and traceability report, social-media governance, an accessible
+educational-video production package, a scientific manuscript, and a
+fail-closed evidence manifest. Repository preparation is implemented, while
+approval, submission, evaluated release, account ownership, and publication
+remain external evidence gates.
 
 ## Clone the full workspace
 
@@ -48,13 +56,13 @@ remote systems.
 
 ## AI context entry points
 
-| Agent | Version-controlled entry point |
-|---|---|
-| Codex and AGENTS-compatible agents | `AGENTS.md` |
-| Claude Code | `CLAUDE.md` importing `AGENTS.md` |
-| Gemini CLI | `GEMINI.md` importing `AGENTS.md` |
-| GitHub Copilot | `.github/copilot-instructions.md` |
-| Cursor | `.cursor/rules/gamblock-ai.mdc` |
+| Agent                              | Version-controlled entry point    |
+| ---------------------------------- | --------------------------------- |
+| Codex and AGENTS-compatible agents | `AGENTS.md`                       |
+| Claude Code                        | `CLAUDE.md` importing `AGENTS.md` |
+| Gemini CLI                         | `GEMINI.md` importing `AGENTS.md` |
+| GitHub Copilot                     | `.github/copilot-instructions.md` |
+| Cursor                             | `.cursor/rules/gamblock-ai.mdc`   |
 
 Start with `context/README.md`; it defines the proposal-first authority order
 and routes each task to only the context that is needed. The PKM proposal is
@@ -85,12 +93,8 @@ validator checks context presence, provider adapters, shared version markers,
 error-catalog parity, and obvious machine-specific paths; it is a static
 context check, not a test/build trigger.
 
-## First umbrella publication
+## Commit and publication boundary
 
-This workspace has been initialized as a local umbrella Git repository, but no
-files have been staged/committed and no umbrella remote has been created or
-pushed by this workflow. The repository owner should review all component
-worktrees, create the initial umbrella commit, ensure component directories are
-recorded as submodule gitlinks, create the intended remote, and push it when
-ready. No AI context depends on an uncommitted chat session, but a fresh clone
-will receive it only after the relevant repositories are committed/published.
+Commit component repositories before recording their updated gitlinks in the
+umbrella repository. A commit does not authorize a push, release, deployment,
+submission, or publication; those remain explicit owner actions.

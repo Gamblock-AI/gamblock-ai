@@ -1,0 +1,13 @@
+{
+  "schema_version": 1,
+  "record_kind": "phase5_artifact_approval",
+  "artifact": "REQUIRED",
+  "artifact_sha256": "REQUIRED",
+  "approved": false,
+  "reviewer": "REQUIRED",
+  "reviewer_role": "REQUIRED",
+  "reviewed_at": "REQUIRED",
+  "scope": ["academic", "technical", "privacy", "psychology", "accessibility"],
+  "publication_restriction": "REQUIRED",
+  "notes": "REQUIRED"
+}

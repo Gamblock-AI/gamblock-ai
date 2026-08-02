@@ -1,6 +1,6 @@
 # Gamblock-AI Umbrella Agent Rules
 
-Context version: `2026-07-31.15`
+Context version: `2026-08-02.23`
 
 This workspace coordinates five independent Git repositories. The umbrella
 repository owns shared product context, cross-repository contracts, and
@@ -34,13 +34,13 @@ does not override a PKM core requirement.
 
 ## Repository topology
 
-| Component | Directory | Default AI lint/static check |
-|---|---|---|
-| Backend | `gamblock-ai-backend/` | `make lint` |
-| Website | `gamblock-ai-website/` | `npm run lint -- <changed-source-files>` |
-| Flutter client | `gamblock_ai_apps/` | `flutter analyze` |
-| Browser extension | `browser_extension/` | `npm run lint` |
-| Infrastructure | `gamblock-ai-infrastructure/` | `make lint` |
+| Component         | Directory                     | Default AI lint/static check             |
+| ----------------- | ----------------------------- | ---------------------------------------- |
+| Backend           | `gamblock-ai-backend/`        | `make lint`                              |
+| Website           | `gamblock-ai-website/`        | `npm run lint -- <changed-source-files>` |
+| Flutter client    | `gamblock_ai_apps/`           | `flutter analyze`                        |
+| Browser extension | `browser_extension/`          | `npm run lint`                           |
+| Infrastructure    | `gamblock-ai-infrastructure/` | `make lint`                              |
 
 Use `repos.yaml` for repository URLs and `context/manifest.yaml` for the
 versioned context contract. A component may be cloned alone; never assume a

@@ -78,19 +78,19 @@ rewards, or “winning/losing” recovery language.
 
 ### Brand palette
 
-| Token | Hex | Use |
-|---|---|---|
-| Navy primary | `#16294C` | Primary action, headings, body emphasis |
-| Navy light | `#24487F` | Hover/focus-supporting state |
-| Navy dark | `#0D1B35` | Deep text/surface contrast, footer |
+| Token          | Hex       | Use                                                      |
+| -------------- | --------- | -------------------------------------------------------- |
+| Navy primary   | `#16294C` | Primary action, headings, body emphasis                  |
+| Navy light     | `#24487F` | Hover/focus-supporting state                             |
+| Navy dark      | `#0D1B35` | Deep text/surface contrast, footer                       |
 | Crimson accent | `#C8102E` | Destructive/critical action only; never routine progress |
-| Crimson light | `#E63B51` | Hover/active destructive state |
-| Crimson dark | `#9D0C24` | High-contrast critical text/border |
-| Sky cyan | `#3DD6F5` | Protection/technology accent and Gami LED |
-| Sky light | `#BFE9F5` | Soft decorative/protection surface |
-| Azure | `#DCEBFB` | Background wash/container fill |
-| Sage success | `#2F9E6F` | Completion, recovery, safe status |
-| Amber | `#E0A516` | Needs attention, pending approval, permission warning |
+| Crimson light  | `#E63B51` | Hover/active destructive state                           |
+| Crimson dark   | `#9D0C24` | High-contrast critical text/border                       |
+| Sky cyan       | `#3DD6F5` | Protection/technology accent and Gami LED                |
+| Sky light      | `#BFE9F5` | Soft decorative/protection surface                       |
+| Azure          | `#DCEBFB` | Background wash/container fill                           |
+| Sage success   | `#2F9E6F` | Completion, recovery, safe status                        |
+| Amber          | `#E0A516` | Needs attention, pending approval, permission warning    |
 
 Website components use semantic CSS tokens in `app/globals.css`; Flutter uses
 semantic values from `AppColors`. Do not hardcode raw hex inside feature
@@ -98,20 +98,20 @@ components. Verify text/icon contrast in every semantic state.
 
 ### Surface tokens
 
-| Surface | Web | Flutter | Approximate hex |
-|---|---|---|---|
-| Background | `--background` | `AppColors.background` | `#F4F9FE` |
-| Card | `--card` | `AppColors.surface` | `#FFFFFF` |
-| Muted | `--muted` | `AppColors.muted` | `#EAF0F6` |
-| Border | `--border` | `AppColors.border` | `#E3ECF5` |
+| Surface    | Web            | Flutter                | Approximate hex |
+| ---------- | -------------- | ---------------------- | --------------- |
+| Background | `--background` | `AppColors.background` | `#F4F9FE`       |
+| Card       | `--card`       | `AppColors.surface`    | `#FFFFFF`       |
+| Muted      | `--muted`      | `AppColors.muted`      | `#EAF0F6`       |
+| Border     | `--border`     | `AppColors.border`     | `#E3ECF5`       |
 
 ### Typography
 
-| Role | Font |
-|---|---|
-| Web UI/display | Plus Jakarta Sans, Inter fallback |
-| Web mono | Geist Mono |
-| Flutter UI | Plus Jakarta Sans with safe platform fallback |
+| Role           | Font                                          |
+| -------------- | --------------------------------------------- |
+| Web UI/display | Plus Jakarta Sans, Inter fallback             |
+| Web mono       | Geist Mono                                    |
+| Flutter UI     | Plus Jakarta Sans with safe platform fallback |
 
 Prefer sentence case, short paragraphs, descriptive buttons, and direct
 Indonesian. Avoid all-caps warnings except compact status labels. Numeric trend
@@ -405,11 +405,16 @@ detail view is understood as intentional protection, not missing data.
 - Partner progress never reuses the student trend response; it renders only
   per-category aggregates or an explicit “not shared” state.
 - Recovery drafts are labeled local and unsent. Account-saved records are
-  labeled encrypted, reminders are off by default, and partner recovery pages
-  are guidance—not a hidden route into student records.
-- Partner recovery guidance may use a CMS-authored response simulator with
-  reviewed scenarios, visible rationale, retry, and completion progress. It
-  must never load student practice, journal, mood, focus-task, or room state.
+  labeled encrypted, and reminders are off by default.
+- `/recovery` is a student-only recovery workspace. Partner guidance is a
+  CMS-authored response-practice dialog launched from partner `/progress`,
+  with reviewed fictional scenarios, visible rationale, retry, and completion
+  progress. It must never load student practice, journal, mood, focus-task, or
+  room state.
+- The shared support route has role-sensitive labels: students use the partner
+  channel to send a contact request, while partners see the same channel as a
+  student-request inbox. Tab, heading, history, empty, and privacy-boundary
+  copy must name the current viewer's role.
 
 ## Information architecture patterns
 

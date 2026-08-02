@@ -34,6 +34,7 @@ COMPONENT_CONTRACTS = {
         "local_ai_lint_policy",
         "privacy_boundary",
         "api_error_catalog",
+        "phase5_evidence",
     ),
     "flutter": (
         "proposal_authority",
@@ -81,6 +82,15 @@ ROOT_REQUIRED = (
     "context/research-evaluation.md",
     "context/glossary.md",
     "context/ai-workflow-rules.md",
+    "context/features/learning-hub/README.md",
+    "context/features/learning-hub/api.md",
+    "context/features/learning-hub/catalog.md",
+    "context/features/learning-hub/seeding.md",
+    "context/features/learning-hub/assets.md",
+    "context/phases/README.md",
+    "context/phases/03-self-regulation-loop.md",
+    "context/phases/04-system-hardening.md",
+    "context/phases/05-finalization-reporting.md",
     "context/decisions/0001-multi-repo-context.md",
     "context/decisions/0002-proposal-first-governance.md",
     "repos.yaml",
@@ -89,6 +99,19 @@ ROOT_REQUIRED = (
     "scripts/bootstrap.sh",
     "scripts/verify-ai-context.sh",
     "scripts/verify_ai_context.py",
+    "deliverables/phase5/README.md",
+    "deliverables/phase5/evidence-manifest.example.json",
+    "deliverables/phase5/verify_evidence.py",
+    "deliverables/phase5/reports/progress-report.md",
+    "deliverables/phase5/reports/final-report.md",
+    "deliverables/phase5/prototype/installation-and-use-guide.md",
+    "deliverables/phase5/prototype/limitations.md",
+    "deliverables/phase5/prototype/traceability-report.md",
+    "deliverables/phase5/social-media/content-plan.md",
+    "deliverables/phase5/educational-video/script-and-storyboard.md",
+    "deliverables/phase5/educational-video/captions-id.vtt",
+    "deliverables/phase5/educational-video/transcript-id.md",
+    "deliverables/phase5/scientific-article/manuscript.md",
     "templates/global/README.md",
     "templates/global/codex-AGENTS.md",
     "templates/global/claude-CLAUDE.md",
@@ -135,6 +158,14 @@ def tracked(path: Path, relative: str) -> bool:
 def manifest_value(path: Path, key: str) -> str | None:
     match = re.search(rf"(?m)^{re.escape(key)}:\s*([^#\s]+)", path.read_text())
     return match.group(1).strip("'\"") if match else None
+
+
+def contract_version(path: Path, key: str) -> str | None:
+    match = re.search(
+        rf"(?m)^\s+{re.escape(key)}:\s*([1-9][0-9]*)\s*$",
+        path.read_text(),
+    )
+    return match.group(1) if match else None
 
 
 def backend_codes(path: Path) -> set[str]:
@@ -212,12 +243,16 @@ def main() -> int:
                 )
             if manifest_value(local_manifest, "schema_version") != "1":
                 errors.append(f"{name}: docs/ai manifest schema_version must be 1")
-            manifest_text = local_manifest.read_text()
             for contract in COMPONENT_CONTRACTS[name]:
-                if not re.search(
-                    rf"(?m)^\s+{re.escape(contract)}:\s*1\s*$", manifest_text
-                ):
-                    errors.append(f"{name}: manifest lacks contract {contract}: 1")
+                expected_version = contract_version(root_manifest, contract)
+                local_contract_version = contract_version(local_manifest, contract)
+                if expected_version is None:
+                    errors.append(f"umbrella manifest lacks contract {contract}")
+                elif local_contract_version != expected_version:
+                    errors.append(
+                        f"{name}: contract {contract} version "
+                        f"{local_contract_version!r} != umbrella {expected_version!r}"
+                    )
 
         claude = component / "CLAUDE.md"
         if claude.is_file() and "@./AGENTS.md" not in claude.read_text():

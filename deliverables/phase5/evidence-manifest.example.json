@@ -1,0 +1,120 @@
+{
+  "schema_version": 1,
+  "phase": "phase_5_finalization_reporting",
+  "status": "blocked",
+  "owner": "REQUIRED",
+  "reviewer": "REQUIRED",
+  "reviewed_at": "REQUIRED",
+  "phase4_evidence": {
+    "path": "REQUIRED",
+    "sha256": "REQUIRED",
+    "status": "REQUIRED"
+  },
+  "artifacts": {
+    "progress_report": {
+      "path": "reports/progress-report.md",
+      "sha256": "REQUIRED",
+      "approved": false
+    },
+    "progress_report_approval": {
+      "path": "REQUIRED",
+      "sha256": "REQUIRED",
+      "approved": false
+    },
+    "progress_report_submission": {
+      "path": "REQUIRED",
+      "sha256": "REQUIRED",
+      "approved": false
+    },
+    "final_report": {
+      "path": "reports/final-report.md",
+      "sha256": "REQUIRED",
+      "approved": false
+    },
+    "final_report_approval": {
+      "path": "REQUIRED",
+      "sha256": "REQUIRED",
+      "approved": false
+    },
+    "final_report_submission": {
+      "path": "REQUIRED",
+      "sha256": "REQUIRED",
+      "approved": false
+    },
+    "prototype_release": {
+      "path": "REQUIRED",
+      "sha256": "REQUIRED",
+      "approved": false
+    },
+    "usage_guide": {
+      "path": "prototype/installation-and-use-guide.md",
+      "sha256": "REQUIRED",
+      "approved": false
+    },
+    "limitations": {
+      "path": "prototype/limitations.md",
+      "sha256": "REQUIRED",
+      "approved": false
+    },
+    "traceability_report": {
+      "path": "prototype/traceability-report.md",
+      "sha256": "REQUIRED",
+      "approved": false
+    },
+    "social_account_ownership": {
+      "path": "REQUIRED",
+      "sha256": "REQUIRED",
+      "approved": false
+    },
+    "social_content_plan": {
+      "path": "social-media/content-plan.md",
+      "sha256": "REQUIRED",
+      "approved": false
+    },
+    "social_publication_archive": {
+      "path": "REQUIRED",
+      "sha256": "REQUIRED",
+      "approved": false
+    },
+    "social_access_continuity": {
+      "path": "social-media/access-continuity.md",
+      "sha256": "REQUIRED",
+      "approved": false
+    },
+    "educational_video": {
+      "path": "REQUIRED",
+      "sha256": "REQUIRED",
+      "approved": false
+    },
+    "video_sources": {
+      "path": "educational-video/source-register.md",
+      "sha256": "REQUIRED",
+      "approved": false
+    },
+    "video_captions": {
+      "path": "educational-video/captions-id.vtt",
+      "sha256": "REQUIRED",
+      "approved": false
+    },
+    "video_transcript": {
+      "path": "educational-video/transcript-id.md",
+      "sha256": "REQUIRED",
+      "approved": false
+    },
+    "video_review": {
+      "path": "REQUIRED",
+      "sha256": "REQUIRED",
+      "approved": false
+    },
+    "video_publication": {
+      "path": "REQUIRED",
+      "sha256": "REQUIRED",
+      "approved": false
+    },
+    "scientific_article": {
+      "path": "scientific-article/manuscript.md",
+      "sha256": "REQUIRED",
+      "approved": false
+    }
+  }
+}

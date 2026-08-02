@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "record_kind": "phase5_social_archive",
+  "generated_at": "REQUIRED",
+  "owner": "REQUIRED",
+  "publications": [
+    {
+      "id": "REQUIRED",
+      "platform": "REQUIRED",
+      "title": "REQUIRED",
+      "published_at": "REQUIRED",
+      "url": "REQUIRED",
+      "caption_sha256": "REQUIRED",
+      "asset_sha256": "REQUIRED",
+      "archive_sha256": "REQUIRED",
+      "reviewer": "REQUIRED",
+      "correction_of": null
+    }
+  ],
+  "approved": false,
+  "reviewer": "REQUIRED",
+  "reviewed_at": "REQUIRED"
+}

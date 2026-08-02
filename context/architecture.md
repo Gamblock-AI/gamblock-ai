@@ -14,14 +14,14 @@ evaluation details live in `research-evaluation.md`.
 Gamblock-AI uses five independently releasable component repositories plus an
 umbrella context repository:
 
-| Repository directory | Stack | Primary responsibility |
-|---|---|---|
-| `gamblock_ai_apps/` | Flutter + Android/Windows native code | Local protection authority, Pattern Interrupt, device/accountability integration |
-| `browser_extension/` | Chrome/Edge MV3 JavaScript | Passive Windows browser DOM/URL sensor over authenticated loopback IPC |
-| `gamblock-ai-website/` | Next.js 16, React 19, TypeScript | Web psychoeducation/self-regulation, accountability UI, public/ops surfaces |
-| `gamblock-ai-backend/` | Go + Gin + ent + PostgreSQL | Identity, relationships, approvals, recovery state/content, aggregate APIs, release metadata |
-| `gamblock-ai-infrastructure/` | Ansible + Docker + Caddy | Backend/website delivery, automated TLS, and database infrastructure |
-| umbrella root | Context, composition, validators | Proposal-first shared governance and cross-repository contracts |
+| Repository directory          | Stack                                 | Primary responsibility                                                                       |
+| ----------------------------- | ------------------------------------- | -------------------------------------------------------------------------------------------- |
+| `gamblock_ai_apps/`           | Flutter + Android/Windows native code | Local protection authority, Pattern Interrupt, device/accountability integration             |
+| `browser_extension/`          | Chrome/Edge MV3 JavaScript            | Passive Windows browser DOM/URL sensor over authenticated loopback IPC                       |
+| `gamblock-ai-website/`        | Next.js 16, React 19, TypeScript      | Web psychoeducation/self-regulation, accountability UI, public/ops surfaces                  |
+| `gamblock-ai-backend/`        | Go + Gin + ent + PostgreSQL           | Identity, relationships, approvals, recovery state/content, aggregate APIs, release metadata |
+| `gamblock-ai-infrastructure/` | Ansible + Docker + Caddy              | Backend/website delivery, automated TLS, and database infrastructure                         |
+| umbrella root                 | Context, composition, validators      | Proposal-first shared governance and cross-repository contracts                              |
 
 Each component keeps a self-contained `AGENTS.md` and `docs/ai/` snapshot so a
 standalone clone retains its safety boundaries. See ADR-0001.
@@ -160,6 +160,13 @@ This flow maps `PKM-PLAT-001`, `PKM-PLAT-002`, and `PKM-PLAT-003`.
 5. Service state is surfaced to Flutter without giving Flutter web content.
 6. Removal/stop requests use the accountability workflow and safe recovery.
 
+The loopback `dom_scan` contract may carry bounded extraction duration and a
+transient scan-start clock value for opt-in Phase 4 profiling. The service may
+use those numeric fields to decompose local latency, but it never persists the
+clock value or sends timing evidence to the backend. The user-session agent
+acknowledges the first completed Pattern Interrupt frame with an opaque local
+evidence ID only when evidence mode is active.
+
 The extension never receives block commands and never closes/redirects tabs.
 The Windows implementation separates the LocalSystem authority from the
 interactive user-session agent. The service owns loopback validation,
@@ -252,6 +259,14 @@ stores only an allowlisted HTTPS URL. Student progress is keyed by user,
 module, and published revision. The website renders validated document JSON
 without raw HTML, while the admin WYSIWYG emits the same schema.
 
+Learning Hub uses the same draft/snapshot separation for its supporting
+`PKM-WEB-006` catalog: editor drafts remain private to verified admins, while a
+publish operation writes an immutable `LearningRevision`. Student catalog and
+detail reads resolve only that published snapshot, so an editor's next draft
+cannot leak before review. The admin CMS manages UTY clusters/program mappings,
+item lifecycle, revisions, and reasoned rollback; it never reads or returns
+student progress, encrypted checkpoint text, or browsing data.
+
 Website recovery state uses deliberately separated paths:
 
 - mission completion, protection status, profile, partner approvals, and
@@ -261,7 +276,7 @@ Website recovery state uses deliberately separated paths:
   self-directed catalog and expose server-derived claim eligibility; each
   completed system or custom mission grants 10 EXP once. The user may create,
   edit, or delete pending custom slots through `POST/PATCH/DELETE
-  /v1/missions/custom`; at most five custom slots are allowed and they replace
+/v1/missions/custom`; at most five custom slots are allowed and they replace
   system slots one-for-one. `POST /v1/missions/claim` rechecks system
   eligibility or records a custom self-attestation. There is no skip mutation:
   the UI presents only default and custom sources, and both use the same claim
@@ -281,7 +296,11 @@ Website recovery state uses deliberately separated paths:
   partner. Legacy browser-local intention text is imported only after an
   explicit one-time student action;
 - `GET/PUT /v1/weekly-reviews/current` stores the current structured weekly
-  review in the encrypted recovery-record workflow. The website intention
+  review in the encrypted recovery-record workflow. The account-backed progress
+  sheet reads it directly and publishes the write response's experience
+  snapshot to the shared level store. The write upserts
+  one record for the current Jakarta week and awards at most one idempotent
+  10-EXP grant under the shared 50-EXP daily cap. The website intention
   manager owns the local-first title, next-action, focus-period, and
   pause/resume/archive lifecycle for `PKM-WEB-002`; optional reminder delivery
   remains Android-local and opt-in rather than a browser notification claim;
@@ -295,8 +314,9 @@ Website recovery state uses deliberately separated paths:
 Published education documents carry an explicit audience (`student`,
 `partner`, or `all`) and experience type (`article` or
 `response_simulator`). Both list and direct-slug reads enforce the caller's
-role. The partner recovery simulator is therefore CMS-authored guidance, not a
-client-only gate and never a projection of student recovery data.
+role. A partner response simulator is therefore CMS-authored guidance rendered
+in a partner `/progress` dialog—not a `/recovery` surface or a client-only
+gate—and never a projection of student recovery data.
 
 The browser-local schema has no URL, domain, DOM, browsing-history, device,
 partner, or detected-page field. Optional synchronization is a per-category
@@ -339,13 +359,13 @@ does not replace, allowlisted request schemas and code review.
 
 ## Storage model
 
-| Store | Target data | Important boundary |
-|---|---|---|
-| Device local | model/vectorizer/rules/media, pairing token, protection state, offline aggregate queue | Detection data stays here; encrypt/protect credentials; bounded retention. |
-| PostgreSQL | accounts, consent/relationships, approvals, recovery content/state, encrypted text, aggregate events, release/support/audit data | No browsing schema; field-level purpose/retention/access documented. |
-| `chrome.storage.local` | local pairing token and connection configuration | No remote sync/telemetry; token not logged. |
-| Website `localStorage` (`gamblock:recovery:v1`) | local-first intention lifecycle, structured mood/urge check-ins, weekly plan, and unsent recovery-record draft | No browsing fields; bounded records and explicit clear action. A draft is not account data until explicit submission. |
-| Research storage (future/approved) | governed labeled dataset and pseudonymous study data | Separate access, consent, retention, license, and publication policy. |
+| Store                                           | Target data                                                                                                                      | Important boundary                                                                                                    |
+| ----------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------- |
+| Device local                                    | model/vectorizer/rules/media, pairing token, protection state, offline aggregate queue                                           | Detection data stays here; encrypt/protect credentials; bounded retention.                                            |
+| PostgreSQL                                      | accounts, consent/relationships, approvals, recovery content/state, encrypted text, aggregate events, release/support/audit data | No browsing schema; field-level purpose/retention/access documented.                                                  |
+| `chrome.storage.local`                          | local pairing token and connection configuration                                                                                 | No remote sync/telemetry; token not logged.                                                                           |
+| Website `localStorage` (`gamblock:recovery:v1`) | local-first intention lifecycle, structured mood/urge check-ins, weekly plan, and unsent recovery-record draft                   | No browsing fields; bounded records and explicit clear action. A draft is not account data until explicit submission. |
+| Research storage (future/approved)              | governed labeled dataset and pseudonymous study data                                                                             | Separate access, consent, retention, license, and publication policy.                                                 |
 
 Non-production can use an empty in-memory store and may explicitly enable
 contextual demo records. Production rejects demo/dev modes and fails closed if

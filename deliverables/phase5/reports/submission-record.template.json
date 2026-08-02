@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "record_kind": "phase5_submission_record",
+  "artifact": "REQUIRED",
+  "artifact_sha256": "REQUIRED",
+  "channel": "REQUIRED",
+  "submitted_by": "REQUIRED",
+  "submitted_at": "REQUIRED",
+  "receipt_or_url": "REQUIRED",
+  "receipt_sha256": "REQUIRED",
+  "status": "REQUIRED"
+}

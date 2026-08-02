@@ -1,0 +1,29 @@
+{
+  "schema_version": 1,
+  "approved_by": "REQUIRED",
+  "approved_at": "REQUIRED",
+  "environment": "Disposable devices/VMs only",
+  "devices": [
+    { "alias": "REQUIRED_OPAQUE_ALIAS", "platform": "android_or_windows" }
+  ],
+  "pass_criteria": {
+    "device_recoverable": true,
+    "no_critical_process_api": true,
+    "no_boot_loop": true,
+    "no_destructive_lockout": true,
+    "protection_recovers_within_seconds": "REQUIRED"
+  },
+  "scenarios": [
+    "browser_and_client_restart",
+    "offline_and_reconnect",
+    "device_reboot",
+    "ordinary_process_kill",
+    "service_stop_without_grant",
+    "settings_or_uninstall_interaction",
+    "approval_expired_reused_revoked_malformed",
+    "partner_unavailable_and_emergency_recovery",
+    "artifact_update_and_rollback",
+    "false_positive_recovery",
+    "reduced_motion_and_accessibility"
+  ]
+}

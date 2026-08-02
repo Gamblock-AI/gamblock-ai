@@ -1,5 +1,5 @@
 schema_version: 1
-context_version: 2026-07-31.15
+context_version: 2026-08-02.23
 topology: multi-repository-with-umbrella
 canonical_files:
   - context/README.md
@@ -13,6 +13,15 @@ canonical_files:
   - context/research-evaluation.md
   - context/glossary.md
   - context/ai-workflow-rules.md
+  - context/features/learning-hub/README.md
+  - context/features/learning-hub/api.md
+  - context/features/learning-hub/catalog.md
+  - context/features/learning-hub/seeding.md
+  - context/features/learning-hub/assets.md
+  - context/phases/README.md
+  - context/phases/03-self-regulation-loop.md
+  - context/phases/04-system-hardening.md
+  - context/phases/05-finalization-reporting.md
   - context/pkm_proposal.md
   - context/decisions/0001-multi-repo-context.md
   - context/decisions/0002-proposal-first-governance.md
@@ -31,7 +40,9 @@ contracts:
   local_ai_lint_policy: 1
   privacy_boundary: 1
   hybrid_artifact: 2
-  websocket_loopback: 1
+  websocket_loopback: 2
+  phase4_evidence: 1
+  phase5_evidence: 1
   api_error_catalog: 1
   account_recovery: 1
   account_roles: 1
@@ -40,6 +51,7 @@ contracts:
   emergency_two_operator: 1
   education_revisioned_content: 1
   daily_mission_experience: 3
+  weekly_review_experience: 1
 required_providers:
   - agents
   - claude

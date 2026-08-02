@@ -40,15 +40,15 @@ this file is the target product specification.
 
 ## Actors and access
 
-| Surface                                      |        Protected Student |           Accountability Partner |                        Operational role |                                Public |
-| -------------------------------------------- | -----------------------: | -------------------------------: | --------------------------------------: | ------------------------------------: |
-| Personal intention, mood, private reflection |            Own data only |                               No |                           No by default |                                    No |
-| Missions, education, skill recommendations   |              Own journey | Support summary only if approved | Content management, not private answers |             Selected public education |
-| Protection aggregate/status                  |               Own device |         Consented aggregate only |           Aggregate support diagnostics |                                    No |
-| Removal approval                             |           Request/status |    Approve or deny linked member |        Audited emergency/support action | Token holder only for single-use flow |
-| Partner relationship                         | Preview/join one group; leave or stop sharing | Own multiple groups; rotate codes; remove members | Limited safety/support resolution | No |
-| Content administration                       |                       No |                               No |                                   Admin |                Published content only |
-| Model/release operations                     |       Version visibility |                               No |                                   Admin |      Public transparency summary only |
+| Surface                                      |                             Protected Student |                            Accountability Partner |                        Operational role |                                Public |
+| -------------------------------------------- | --------------------------------------------: | ------------------------------------------------: | --------------------------------------: | ------------------------------------: |
+| Personal intention, mood, private reflection |                                 Own data only |                                                No |                           No by default |                                    No |
+| Missions, education, skill recommendations   |                                   Own journey |                  Support summary only if approved | Content management, not private answers |             Selected public education |
+| Protection aggregate/status                  |                                    Own device |                          Consented aggregate only |           Aggregate support diagnostics |                                    No |
+| Removal approval                             |                                Request/status |                     Approve or deny linked member |        Audited emergency/support action | Token holder only for single-use flow |
+| Partner relationship                         | Preview/join one group; leave or stop sharing | Own multiple groups; rotate codes; remove members |       Limited safety/support resolution |                                    No |
+| Content administration                       |                                            No |                                                No |                                   Admin |                Published content only |
+| Model/release operations                     |                            Version visibility |                                                No |                                   Admin |      Public transparency summary only |
 
 Possessing an operational role does not grant access to raw browsing data or
 private recovery text.
@@ -285,9 +285,10 @@ Forbidden examples:
 - a secret risk score inferred from private activity;
 - competitive ranking of members.
 
-Partner recovery guidance may include a reviewed, bilingual response simulator
-published through the psychoeducation CMS. It teaches supportive wording with
-answer rationale and retry, but reads no student journal, mood, practice,
+Partner guidance may include a reviewed, bilingual response simulator published
+through the psychoeducation CMS and launched as a dialog from partner
+`/progress`; `/recovery` remains student-only. It teaches supportive wording
+with answer rationale and retry, but reads no student journal, mood, practice,
 focus-task, room, or private progress record.
 
 ### `WEB-SUP-SUPPORT-001` — threaded support
@@ -298,6 +299,11 @@ focus-task, room, or private progress record.
 - Admins use a role-gated queue with explicit ownership and status transitions.
   They reply to student/partner reports from the operations ticket workspace
   and cannot use the requester support surface.
+- The partner contact channel is asymmetric by role: a student creates and
+  tracks a request to their connected partner, while a partner receives,
+  acknowledges, and closes member requests. Shared route labels must describe
+  the current role's action rather than calling an incoming student request
+  “my partner”.
 - Attachments are not accepted. Redaction guidance forbids passwords, tokens,
   URLs, domains, and browsing history.
 
@@ -316,6 +322,9 @@ focus-task, room, or private progress record.
 
 ### `WEB-SUP-PUB-002` — PKM transparency and outputs
 
+- The canonical public route is `/pkm`; it shows evidence maturity and keeps
+  download/publication links closed until the corresponding approval,
+  submission, or publication record exists.
 - PKM project page: title, theme fit, team, objectives, method, current phase,
   limitations, and ethical safeguards.
 - Public milestone timeline linked to evidence, not aspirational claims.

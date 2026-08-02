@@ -1,6 +1,6 @@
 # Gamblock-AI Context Router
 
-Context version: `2026-07-31.15`
+Context version: `2026-08-02.23`
 
 This directory is the durable knowledge base for Gamblock-AI. It separates
 academic intent, derived product decisions, technical design, and current
@@ -45,18 +45,22 @@ request and a reliable source from the proposal owners.
 
 ## Reading routes
 
-| Task | Required context |
-|---|---|
-| Any product or implementation change | `pkm_proposal.md` relevant section, `proposal-requirements.md`, `ai-workflow-rules.md`, affected component `docs/ai/README.md` |
-| Product scope, actors, journeys, or priorities | `project-overview.md`, `glossary.md` |
-| Detection, native client, API, storage, or cross-component design | `architecture.md`, `privacy-security.md`, `mobile-product.md` for client behavior |
-| Website feature or route | `website-product.md`, `ui-context.md`, relevant component `AGENTS.md` |
-| Visual or interaction design | `ui-context.md`, `website-product.md` when web-facing |
-| Dataset, model, metric, experiment, or academic claim | `research-evaluation.md`, `proposal-requirements.md` |
-| Implementation status or next work | affected component `docs/ai/README.md` |
-| Multi-repository context tooling | `manifest.yaml`, `decisions/0001-multi-repo-context.md` |
-| Product-governance conflict | `decisions/0002-proposal-first-governance.md` |
-| Adoption-path, role-boundary, or web/native ownership decision | `decisions/0005-transparent-adoption-and-thin-client.md` |
+| Task                                                              | Required context                                                                                                               |
+| ----------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------ |
+| Any product or implementation change                              | `pkm_proposal.md` relevant section, `proposal-requirements.md`, `ai-workflow-rules.md`, affected component `docs/ai/README.md` |
+| Product scope, actors, journeys, or priorities                    | `project-overview.md`, `glossary.md`                                                                                           |
+| Detection, native client, API, storage, or cross-component design | `architecture.md`, `privacy-security.md`, `mobile-product.md` for client behavior                                              |
+| Website feature or route                                          | `website-product.md`, `ui-context.md`, relevant component `AGENTS.md`                                                          |
+| Visual or interaction design                                      | `ui-context.md`, `website-product.md` when web-facing                                                                          |
+| Dataset, model, metric, experiment, or academic claim             | `research-evaluation.md`, `proposal-requirements.md`                                                                           |
+| Implementation status or next work                                | `phases/README.md`, then the affected component `docs/ai/README.md`                                                            |
+| Learning Hub, UTY catalog, or focused gamification                | `features/learning-hub/README.md`, then the relevant `api.md`, `catalog.md`, `seeding.md`, or `assets.md`                      |
+| Phase 3 self-regulation loop                                      | `phases/03-self-regulation-loop.md`, `website-product.md`, `architecture.md`                                                   |
+| Phase 4 hardening or external evaluation                          | `phases/04-system-hardening.md`, `research-evaluation.md`, `privacy-security.md`                                               |
+| Phase 5 reporting or dissemination                                | `phases/05-finalization-reporting.md`, `research-evaluation.md`, `website-product.md`                                          |
+| Multi-repository context tooling                                  | `manifest.yaml`, `decisions/0001-multi-repo-context.md`                                                                        |
+| Product-governance conflict                                       | `decisions/0002-proposal-first-governance.md`                                                                                  |
+| Adoption-path, role-boundary, or web/native ownership decision    | `decisions/0005-transparent-adoption-and-thin-client.md`                                                                       |
 
 For a narrow task, read the proposal sections and requirement IDs that apply;
 loading the entire repository is not required. The non-negotiable privacy,
@@ -68,15 +72,15 @@ evidence.
 
 ## Ownership and update rules
 
-| Change | Update first | Then update |
-|---|---|---|
-| Proposal requirement or academic claim | `pkm_proposal.md` only with owner/source authorization | `proposal-requirements.md`, affected domain docs, tracker |
-| Derived product scope or supporting feature | `project-overview.md` or `website-product.md` | architecture/UI/privacy docs and tracker |
-| Architecture or trust boundary | `architecture.md` / `privacy-security.md` | component snapshots and ADR when long-lived |
-| Visual or behavioral UX | `ui-context.md` | website/client docs and tracker |
-| Research method or metric definition | `research-evaluation.md` | traceability and tracker |
-| Workflow or validation policy | `ai-workflow-rules.md` | root/component `AGENTS.md`, skills, manifests, templates |
-| Current capability evidence | relevant component `docs/ai/README.md` | affected README or domain document when behavior/contract changed |
+| Change                                      | Update first                                           | Then update                                                       |
+| ------------------------------------------- | ------------------------------------------------------ | ----------------------------------------------------------------- |
+| Proposal requirement or academic claim      | `pkm_proposal.md` only with owner/source authorization | `proposal-requirements.md`, affected domain docs, tracker         |
+| Derived product scope or supporting feature | `project-overview.md` or `website-product.md`          | architecture/UI/privacy docs and tracker                          |
+| Architecture or trust boundary              | `architecture.md` / `privacy-security.md`              | component snapshots and ADR when long-lived                       |
+| Visual or behavioral UX                     | `ui-context.md`                                        | website/client docs and tracker                                   |
+| Research method or metric definition        | `research-evaluation.md`                               | traceability and tracker                                          |
+| Workflow or validation policy               | `ai-workflow-rules.md`                                 | root/component `AGENTS.md`, skills, manifests, templates          |
+| Current capability evidence                 | relevant component `docs/ai/README.md`                 | affected README or domain document when behavior/contract changed |
 
 Meaningful scope, architecture, workflow, or shared-contract changes require a
 `context_version` bump in `manifest.yaml` and every affected component

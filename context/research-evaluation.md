@@ -150,6 +150,11 @@ before reporting it:
 Do not claim the 200 ms target from a model-only microbenchmark if IPC and UI
 are excluded. Report any platform where the target is not met.
 
+Repository-controlled tooling and native capture contracts live in
+`evaluation/phase4/` and `phases/04-system-hardening.md`. They deliberately keep
+generated evidence unreviewed until a declared device matrix and reviewer
+approval exist.
+
 ## Functional and resilience evaluation (`PKM-EVAL-005`)
 
 Use a safe, platform-specific scenario matrix:
@@ -249,12 +254,16 @@ status document or approved PKM report: progress report, final report,
 prototype, social-media account, usage documentation, educational video, and
 scientific article.
 
+The repository-controlled Phase 5 drafts, production packages, and fail-closed
+acceptance manifest live under `deliverables/phase5/`; the governing status and
+external gate are defined in `phases/05-finalization-reporting.md`.
+
 ## Decisions still required
 
 - Original proposal restoration and complete phase plan.
 - Dataset governance owner and labeling protocol.
 - Numeric detection and FPR targets.
-- Final latency event definition/device matrix.
+- Final latency percentile gate and Android/Windows device matrix.
 - Retention definition.
 - Ethical review route and Pattern Interrupt study design.
 - Supported platform coverage and resilience pass criteria.
