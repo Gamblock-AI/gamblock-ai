@@ -252,6 +252,13 @@ These are student-private by default. Partner projections are separate,
 aggregate read models, not reuse of private student API responses. See
 `website-product.md` for surface behavior.
 
+The accountability workspace projection is also the source for partner
+dashboard analytics: it computes consented protection activity over the latest
+seven `Asia/Jakarta` calendar dates and returns only aggregate counts and
+coarse status bands. The website derives totals, filters, and relative bar
+lengths from that single response; it does not request event-level data or a
+second analytics endpoint.
+
 Psychoeducation is persisted as a mutable bilingual draft plus an immutable
 published document revision. Media metadata is stored separately from files;
 filesystem-backed uploads use configured persistent storage and external media

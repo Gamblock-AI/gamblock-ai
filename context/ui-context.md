@@ -380,6 +380,14 @@ titles, page timelines, raw mood/intention/journal, hidden risk scores, or
 member rankings. Make the privacy boundary visible in the interface so an empty
 detail view is understood as intentional protection, not missing data.
 
+The primary analytics panel uses a fixed seven-day `Asia/Jakarta` period,
+active-group filter, and student-name search. Desktop uses a responsive table;
+mobile uses equivalent cards. Show one total bar per student, scaled to the
+largest shared value in the selected group, alongside its exact aggregate
+count. Do not add rank numbers, count sorting, daily trend reconstruction, or
+week-over-week comparison. Render zero only for a shared category and use an
+explicit “not shared” state otherwise.
+
 ### Support, progress, and recovery
 
 - Support uses one readable thread per case with author, timestamp, status,

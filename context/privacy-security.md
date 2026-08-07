@@ -97,6 +97,13 @@ Prefer client-side aggregation over sending one event per page. Specify coarse
 time buckets, retention, and partner visibility before introducing a new
 aggregate.
 
+The adopted partner projection may sum consented `block_count_sync` aggregates
+across the latest seven `Asia/Jakarta` calendar dates and expose that total per
+authorized student. It must preserve the distinction between a shared zero and
+an unshared category. The projection and interface must describe the number as
+classified-and-held access, not proof of intent, ground truth, or a risk score;
+exact event times and daily browsing timelines remain unavailable.
+
 ## Server-side recovery data
 
 The proposal broadly says user information remains local while also requiring

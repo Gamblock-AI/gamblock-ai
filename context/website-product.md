@@ -277,6 +277,16 @@ Allowed examples:
 - approval requests and relationship status;
 - supportive conversation suggestions.
 
+The implemented seven-day dashboard view uses the latest seven
+`Asia/Jakarta` calendar dates. It shows the consented total across the selected
+active groups and the same aggregate per student, with group filtering and
+name search. A zero means the student shared the category and no event was
+counted; an unshared category is labeled separately. A single relative bar may
+support scanning within the selected group, but it is not a ranking, comparison
+of student worth, or risk score. Copy must say that a detection is a local
+classification followed by a held access and is not proof of intent or an
+infallible classification.
+
 Forbidden examples:
 
 - URLs, domains, titles, screenshots, DOM excerpts, search queries;
