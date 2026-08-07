@@ -1,99 +1,107 @@
 # Gamblock-AI Context Router
 
-Context version: `2026-08-02.24`
 
-This directory is the durable knowledge base for Gamblock-AI. It separates
-academic intent, derived product decisions, technical design, and current
-implementation evidence so a fresh developer or AI agent does not silently
-turn an implementation detail into a PKM requirement.
+Jika ada pertentangan antara dokumen konteks dengan `pkm_proposal.md`, proposal
+PKM adalah sumber mutlak.
 
 ## Source-of-truth hierarchy
 
-Use this order when documents disagree:
-
-1. `pkm_proposal.md` — primary authority for the problem, target users,
-   mandatory PKM features, scientific rationale, evaluation goals, and PKM
-   deliverables.
-2. `proposal-requirements.md` — normalized, traceable requirement IDs derived
-   only from text that is present in the proposal.
-3. `project-overview.md` — product specification derived from the proposal;
-   it may add supporting capabilities but may not remove or weaken a proposal
-   requirement.
-4. Domain documents (`architecture.md`, `website-product.md`,
-   `ui-context.md`, `privacy-security.md`, `research-evaluation.md`) — explain
-   how the product should satisfy the requirements.
-5. Component `docs/ai/README.md` files — describe current implementation truth
-   and evidence for each independently releasable repository.
-6. ADRs under `decisions/` — record long-lived engineering decisions. An ADR
-   may choose an implementation, but it may not rewrite the proposal's intent.
-
-Code is evidence of current behavior, not permission to redefine the target.
-When code and the proposal differ, record the gap in the affected component's
-`docs/ai/README.md`.
+1. `pkm_proposal.md` — otoritas utama: masalah, target pengguna, fitur PKM,
+   dasar ilmiah, tujuan evaluasi, deliverables PKM
+2. Domain documents (`architecture.md`, `privacy-security.md`,
+   `research-evaluation.md`) — menjelaskan bagaimana produk memenuhi
+   persyaratan teknis
+4. Component `docs/ai/README.md` — kebenaran implementasi saat ini per repositori
 
 ## Proposal integrity warning
 
-The current Markdown extraction of `pkm_proposal.md` is incomplete: content
-for Fase 1–3 in section 3.2 is missing, an OCR/image fragment remains, and the
-final Fase 5 paragraph is truncated. Do not invent the missing academic text.
-Restore it from the team's original PDF/DOC source when available, then review
-all derived documents and bump the context version if requirements change.
-
-The proposal itself is protected source material. Do not rewrite it merely to
-match current code or a new product idea. Academic edits require an explicit
-request and a reliable source from the proposal owners.
+Ekstraksi Markdown `pkm_proposal.md` tidak lengkap: konten Fase 1-3 di bagian
+3.2 hilang, fragmen OCR/gambar tersisa, paragraf Fase 5 terpotong. Jangan
+menciptakan teks akademik yang hilang. Pulihkan dari sumber PDF/DOC asli tim
+saat tersedia.
 
 ## Reading routes
 
-| Task                                                              | Required context                                                                                                               |
-| ----------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------ |
-| Any product or implementation change                              | `pkm_proposal.md` relevant section, `proposal-requirements.md`, `ai-workflow-rules.md`, affected component `docs/ai/README.md` |
-| Product scope, actors, journeys, or priorities                    | `project-overview.md`, `glossary.md`                                                                                           |
-| Detection, native client, API, storage, or cross-component design | `architecture.md`, `privacy-security.md`, `mobile-product.md` for client behavior                                              |
-| Website feature or route                                          | `website-product.md`, `ui-context.md`, relevant component `AGENTS.md`                                                          |
-| Visual or interaction design                                      | `ui-context.md`, `website-product.md` when web-facing                                                                          |
-| Dataset, model, metric, experiment, or academic claim             | `research-evaluation.md`, `proposal-requirements.md`                                                                           |
-| Implementation status or next work                                | `phases/README.md`, then the affected component `docs/ai/README.md`                                                            |
-| Learning Hub, UTY catalog, or focused gamification                | `features/learning-hub/README.md`, then the relevant `api.md`, `catalog.md`, `seeding.md`, or `assets.md`                      |
-| Phase 3 self-regulation loop                                      | `phases/03-self-regulation-loop.md`, `website-product.md`, `architecture.md`                                                   |
-| Phase 4 hardening or external evaluation                          | `phases/04-system-hardening.md`, `research-evaluation.md`, `privacy-security.md`                                               |
-| Phase 5 reporting or dissemination                                | `phases/05-finalization-reporting.md`, `research-evaluation.md`, `website-product.md`                                          |
-| Multi-repository context tooling                                  | `manifest.yaml`, `decisions/0001-multi-repo-context.md`                                                                        |
-| Product-governance conflict                                       | `decisions/0002-proposal-first-governance.md`                                                                                  |
-| Adoption-path, role-boundary, or web/native ownership decision    | `decisions/0005-transparent-adoption-and-thin-client.md`                                                                       |
+| Task | Required context |
+|---|---|
+| Product/implementation change | `pkm_proposal.md`, component `docs/ai/README.md` |
+| Detection, native client, API, storage | `architecture.md`, `privacy-security.md` |
+| Dataset, model, metric, experiment | `research-evaluation.md` |
+| Implementation status | affected component `docs/ai/README.md` |
+| Terminology | `glossary.md` |
 
-For a narrow task, read the proposal sections and requirement IDs that apply;
-loading the entire repository is not required. The non-negotiable privacy,
-passive-extension, and safe anti-tamper rules still apply to every task.
+## AI development workflow
 
-Capability and evidence labels are defined once in `glossary.md`. Use those
-terms in every status document; do not invent a stronger synonym for partial
-evidence.
+### 1. Load authority before implementation
+
+Baca `AGENTS.md` root dan komponen, `context/README.md`, bagian proposal yang
+relevan dan `docs/ai/README.md` komponen.
+Periksa `git status` — perubahan yang sudah ada milik user.
+`pkm_proposal.md` tidak boleh diedit untuk mencocokkan kode.
+
+### 2. Resolve conflicts by source
+
+Urutan otoritas: proposal → requirement IDs → domain context → component
+status/code → component instructions. Jika kode bertentangan dengan proposal,
+pertahankan requirement proposal, beri label status kode, catat kesenjangan.
+
+### 3. Respect non-negotiable boundaries
+
+- Sensing, inferensi, dan keputusan konten browsing tetap di perangkat
+- Data browsing mentah tidak pernah masuk backend/website/partner/admin
+- Extension tetap sensor pasif lokal
+- Blocking dan Pattern Interrupt di Android/Windows
+- Anti-uninstall menggunakan mekanisme OS yang aman
+- Jangan edit file yang dihasilkan/dilindungi
+- Jangan deploy, release, push, atau ubah sistem eksternal tanpa izin eksplisit
+
+### 4. Default verification: lint only
+
+| Component | Command |
+|---|---|
+| Umbrella/context-only | `./scripts/verify-ai-context.sh --allow-untracked` |
+| Backend | `make lint` |
+| Website | `npm run lint -- <changed-source-files>` |
+| Flutter | `flutter analyze` |
+| Browser extension | `npm run lint` |
+| Infrastructure | `make lint` |
+| Model          | *(no lint configured)* |
+
+Test, build, packaging, coverage, E2E hanya dijalankan jika user meminta
+eksplisit. Context validator wajib jika file instruksi, manifes, adapter,
+snapshot, atau kontrak berubah.
+
+### 5. Cross-repository coordination
+
+Urutan dependensi: proposal → backend → website/Flutter/extension →
+infrastructure → validasi. Contoh koordinasi wajib:
+- WebSocket shape: extension + Windows service
+- Kode error API: backend + website + Flutter
+- Client-facing endpoint: backend + konsumen
+
+### 6. Protected files
+
+- `context/pkm_proposal.md`
+- Website `components/ui/*`
+- Backend `ent/` yang dihasilkan
+- File lokalisasi/artifact yang dihasilkan
+- `.env`, kredensial, keystore, vault, token, database lokal
 
 ## Ownership and update rules
 
-| Change                                      | Update first                                           | Then update                                                       |
-| ------------------------------------------- | ------------------------------------------------------ | ----------------------------------------------------------------- |
-| Proposal requirement or academic claim      | `pkm_proposal.md` only with owner/source authorization | `proposal-requirements.md`, affected domain docs, tracker         |
-| Derived product scope or supporting feature | `project-overview.md` or `website-product.md`          | architecture/UI/privacy docs and tracker                          |
-| Architecture or trust boundary              | `architecture.md` / `privacy-security.md`              | component snapshots and ADR when long-lived                       |
-| Visual or behavioral UX                     | `ui-context.md`                                        | website/client docs and tracker                                   |
-| Research method or metric definition        | `research-evaluation.md`                               | traceability and tracker                                          |
-| Workflow or validation policy               | `ai-workflow-rules.md`                                 | root/component `AGENTS.md`, skills, manifests, templates          |
-| Current capability evidence                 | relevant component `docs/ai/README.md`                 | affected README or domain document when behavior/contract changed |
+| Change | Update first | Then update |
+|---|---|---|
+| Proposal requirement / academic claim | `pkm_proposal.md` (owner-authorized) | affected domain docs |
+| Architecture / trust boundary | `architecture.md` / `privacy-security.md` | component snapshots |
+| Research method / metric | `research-evaluation.md` | traceability |
+| Workflow / validation policy | `AGENTS.md` / `context/README.md` | component `AGENTS.md`, manifests |
+| Current capability evidence | component `docs/ai/README.md` | affected README |
 
-Meaningful scope, architecture, workflow, or shared-contract changes require a
-`context_version` bump in `manifest.yaml` and every affected component
-snapshot. Spelling-only changes do not.
-
-Keep component status documents limited to current status, evidence, gaps,
-blockers, and next work. Historical change and command logs belong in version
-control or CI records.
+Meaningful scope/architecture/workflow/contract changes require `context_version`
+bump di `manifest.yaml` dan setiap snapshot komponen yang terpengaruh.
 
 ## Default validation policy
 
-During normal AI-assisted development, run only the relevant linter/analyzer
-and, when context files changed, the context-integrity validator. Tests,
-builds, packaging, coverage, and end-to-end suites run only when the user asks
-for them explicitly in the current conversation. See
-`ai-workflow-rules.md` for the exact command matrix.
+Selama development AI normal, hanya jalankan linter/analyzer yang relevan dan
+context-integrity validator (jika file konteks berubah). Test, build, packaging,
+coverage, E2E hanya dijalankan jika user meminta secara eksplisit.

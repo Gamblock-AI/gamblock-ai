@@ -26,6 +26,7 @@ components=(
   "gamblock_ai_apps"
   "browser_extension"
   "gamblock-ai-infrastructure"
+  "gamblock-ai-model"
 )
 
 for component in "${components[@]}"; do
@@ -50,6 +51,10 @@ if [[ "$INSTALL" == true ]]; then
 
   if [[ -f gamblock-ai-infrastructure/requirements.yml ]]; then
     (cd gamblock-ai-infrastructure && ansible-galaxy collection install -r requirements.yml)
+  fi
+
+  if [[ -f gamblock-ai-model/requirements.txt ]]; then
+    (cd gamblock-ai-model && pip install -r requirements.txt)
   fi
 fi
 

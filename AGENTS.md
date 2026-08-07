@@ -1,6 +1,5 @@
 # Gamblock-AI Umbrella Agent Rules
 
-Context version: `2026-08-02.24`
 
 This workspace coordinates five independent Git repositories. The umbrella
 repository owns shared product context, cross-repository contracts, and
@@ -10,11 +9,10 @@ workspace validation. Every component repository also carries a self-contained
 ## Start here
 
 1. Read `context/README.md` and follow its proposal-first, task-based routing.
-2. Read the relevant section of `context/pkm_proposal.md`, then
-   `context/proposal-requirements.md` and `context/ai-workflow-rules.md` for any
-   product or implementation task.
+2. Read the relevant section of `context/pkm_proposal.md` for any product or
+   implementation task.
 3. Load the relevant domain context (`architecture.md`, `privacy-security.md`,
-   `website-product.md`, `ui-context.md`, or `research-evaluation.md`).
+   or `research-evaluation.md`).
 4. Before reading or changing a component, read that component's `AGENTS.md`.
    Starting an agent from this root does not automatically load descendant
    instructions.
@@ -41,6 +39,7 @@ does not override a PKM core requirement.
 | Flutter client    | `gamblock_ai_apps/`           | `flutter analyze`                        |
 | Browser extension | `browser_extension/`          | `npm run lint`                           |
 | Infrastructure    | `gamblock-ai-infrastructure/` | `make lint`                              |
+| Model             | `gamblock-ai-model/`          | *(no lint configured)*                   |
 
 Use `repos.yaml` for repository URLs and `context/manifest.yaml` for the
 versioned context contract. A component may be cloned alone; never assume a
@@ -106,8 +105,6 @@ Run `./scripts/verify-ai-context.sh` from this root after changing a catalog.
 - Confirm whether a capability is `implemented`, `stub`, `not wired`, or
   `planned` (or `prototype`/`blocked`); never promote a target-state statement
   into an implementation claim without evidence.
-- Label every feature as PKM core, supporting product, or operational. Cite the
-  relevant exact PKM requirement IDs for core behavior.
 - Put stable behavior and decisions in context/architecture docs. Keep current
   status and evidence in the affected component's `docs/ai/README.md`.
 - Update the affected component `README.md`, `AGENTS.md`, and `docs/ai/` when

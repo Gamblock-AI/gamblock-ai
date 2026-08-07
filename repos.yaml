@@ -17,3 +17,6 @@ components:
   infrastructure:
     path: gamblock-ai-infrastructure
     repository: https://github.com/Gamblock-AI/Gamblock-AI-Infrastructure.git
+  model:
+    path: gamblock-ai-model
+    repository: https://github.com/Gamblock-AI/Gamblock-AI-Model.git

@@ -1,11 +1,6 @@
 ---
-description: Canonical Gamblock-AI workspace rules and context routing
+description: Gamblock-AI workspace rules and context routing
 alwaysApply: true
 ---
 
-Follow @AGENTS.md as the canonical workspace instructions.
-
-Use @context/README.md to load only task-relevant context. Before reading or
-changing a component, follow that component's local `AGENTS.md` and
-`docs/ai/README.md`. Preserve the privacy, passive-extension, encryption, and
-safe anti-tamper invariants on every change.
+@AGENTS.md

@@ -3,64 +3,26 @@ context_version: 2026-08-02.24
 topology: multi-repository-with-umbrella
 canonical_files:
   - context/README.md
-  - context/proposal-requirements.md
-  - context/project-overview.md
   - context/architecture.md
   - context/privacy-security.md
-  - context/website-product.md
-  - context/mobile-product.md
-  - context/ui-context.md
   - context/research-evaluation.md
   - context/glossary.md
-  - context/ai-workflow-rules.md
-  - context/features/learning-hub/README.md
-  - context/features/learning-hub/api.md
-  - context/features/learning-hub/catalog.md
-  - context/features/learning-hub/seeding.md
-  - context/features/learning-hub/assets.md
-  - context/phases/README.md
-  - context/phases/03-self-regulation-loop.md
-  - context/phases/04-system-hardening.md
-  - context/phases/05-finalization-reporting.md
   - context/pkm_proposal.md
-  - context/decisions/0001-multi-repo-context.md
-  - context/decisions/0002-proposal-first-governance.md
-  - context/decisions/0003-three-account-roles.md
-  - context/decisions/0004-small-vps-production-delivery.md
-  - context/decisions/0005-transparent-adoption-and-thin-client.md
 component_snapshots:
   - browser_extension/docs/ai/manifest.yaml
   - gamblock-ai-backend/docs/ai/manifest.yaml
   - gamblock-ai-infrastructure/docs/ai/manifest.yaml
+  - gamblock-ai-model/docs/ai/manifest.yaml
   - gamblock-ai-website/docs/ai/manifest.yaml
   - gamblock_ai_apps/docs/ai/manifest.yaml
 contracts:
   proposal_authority: 1
-  proposal_traceability: 1
-  local_ai_lint_policy: 1
   privacy_boundary: 1
-  hybrid_artifact: 2
   websocket_loopback: 2
-  phase4_evidence: 1
-  phase5_evidence: 1
   api_error_catalog: 1
-  account_recovery: 1
-  account_roles: 1
-  accountability_state: 2
-  client_daily_aggregate: 1
-  emergency_two_operator: 1
-  education_revisioned_content: 1
-  daily_mission_experience: 3
-  weekly_review_experience: 1
 required_providers:
   - agents
   - claude
   - gemini
   - github-copilot
   - cursor
-global_templates:
-  - templates/global/codex-AGENTS.md
-  - templates/global/claude-CLAUDE.md
-  - templates/global/gemini-GEMINI.md
-  - templates/global/copilot-instructions.md
-  - templates/global/cursor-user-rules.txt

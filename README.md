@@ -1,13 +1,13 @@
 # Gamblock-AI Workspace
 
 This is the umbrella workspace for Gamblock-AI, an on-device gambling blocker
-and recovery platform for Indonesian university students. It coordinates five
+and recovery platform for Indonesian university students. It coordinates six
 independent component repositories while preserving shared product context and
 cross-repository contracts.
 
 ## Repository model
 
-The five components remain independently clonable and releasable:
+The six components remain independently clonable and releasable:
 
 | Directory                     | Repository                      | Purpose                                   |
 | ----------------------------- | ------------------------------- | ----------------------------------------- |
@@ -16,6 +16,7 @@ The five components remain independently clonable and releasable:
 | `gamblock_ai_apps/`           | `Gamblock-AI-Apps`              | Flutter Android/Windows protection client |
 | `browser_extension/`          | `Gamblock-AI-Browser-Extention` | Passive Chrome/Edge DOM sensor            |
 | `gamblock-ai-infrastructure/` | `Gamblock-AI-Infrastructure`    | Ansible deployment automation             |
+| `gamblock-ai-model/`          | `Gamblock-AI-Model`             | Hybrid gambling detection ML model        |
 
 The umbrella repository owns `context/`, `AGENTS.md`, workspace scripts, and
 the pinned component composition in `.gitmodules`. Every component duplicates

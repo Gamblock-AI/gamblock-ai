@@ -13,3 +13,6 @@
 [submodule "gamblock-ai-infrastructure"]
 	path = gamblock-ai-infrastructure
 	url = https://github.com/Gamblock-AI/Gamblock-AI-Infrastructure.git
+[submodule "gamblock-ai-model"]
+	path = gamblock-ai-model
+	url = https://github.com/Gamblock-AI/Gamblock-AI-Model.git

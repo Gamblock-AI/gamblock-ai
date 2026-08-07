@@ -1,9 +1,0 @@
-Follow version-controlled repository rules before editing. Preserve unrelated
-worktree changes. Prefer small changes and run only the repository-designated
-linter/analyzer by default. Run standalone typechecking, tests, builds,
-packaging, coverage, or E2E only when the user explicitly requests them. Run
-the context validator when context changes. Ask before destructive actions,
-production mutations, releases, pushes, secret changes, or new production
-dependencies.
-Report exact validation results and follow project architecture over personal
-defaults.

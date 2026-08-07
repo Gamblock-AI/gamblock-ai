@@ -1,7 +1,11 @@
 # Gamblock-AI Glossary
 
-Use these terms consistently in proposal-derived context, UI copy, code
-documentation, and status reports.
+
+Jika ada pertentangan antara glosarium ini dengan `pkm_proposal.md`, proposal
+PKM adalah sumber mutlak.
+
+Gunakan istilah ini secara konsisten dalam konteks turunan proposal, UI, kode,
+dan laporan status.
 
 ## Product and people
 
@@ -11,7 +15,6 @@ documentation, and status reports.
 | Protected Student / Mahasiswa Terlindungi | Primary proposal user. Existing API role code is `user`; “Member” is acceptable in group/account contexts. Avoid “target” or stigmatizing labels in UI. |
 | Accountability Partner / Pendamping | Parent or peer who mutually accepts responsibility for removal approval and supportive accountability. Existing code/UI may use `partner` or “Kepala”; proposal-facing copy should explain the equivalence. |
 | Self-directed recovery | A student-initiated adoption path where the student chooses protection and uses the private web recovery journey. It is not a separate role. |
-| Partner/institution-directed installation | Supporting adoption path `PROD-SUP-ADOPT-001` where an external lecturer/campus policy may require installation transparently. It never auto-enrolls a student or bundles consent to monitoring, sharing, recovery sync, or research. |
 | Admin | The single operational account role (`admin`) for content, release, support queue, research, platform, audit, and emergency work. It never grants raw browsing or private recovery access. |
 | Organization membership role | Relation-level `owner`, `admin`, `member`, or `viewer` inside an organization. It is not an account role. |
 | PKM Team | Researchers/developers responsible for prototype, evidence, content governance, and deliverables. Not automatically an application role. |
@@ -51,9 +54,9 @@ documentation, and status reports.
 |---|---|
 | Social Accountability Protocol | Consent-based partner relationship plus explicit removal approval and OS-compliant high-friction verification. It is not covert surveillance. |
 | Anti-uninstall | Resistance to unilateral removal using supported Android/Windows mechanisms. Never means critical-process APIs, device sabotage, or unrecoverable lockout. |
-| Local detection data (`D0`) | URL/domain, DOM text, history, screenshot, app/window identifier, features, rules hits, score, and block context. Never leaves the device. |
-| Aggregate event | Minimal non-reconstructive count/health event without URL, DOM, page fingerprint, precise browsing timestamp, or free text. |
-| Recovery-sensitive data (`D3`) | Intention, mood/urge, reflection/journal, and coping-plan data voluntarily entered for recovery. Private by default and governed separately from browsing data. |
+| Local detection data | URL, domain, DOM text, history, screenshot, dan konteks browsing lainnya. Diproses di perangkat, tidak pernah meninggalkan perangkat. |
+| Aggregate event | Event count/health minimal non-reconstructive tanpa URL, DOM, page fingerprint, timestamp browsing presisi, atau teks bebas. |
+| Recovery data | Intention, mood/urge, reflection/journal, dan coping-plan yang dimasukkan sukarela untuk recovery. Private by default. |
 | Quick approval | Single-use, expiring token flow that lets a partner resolve a specific request without a normal session. The token is not a permanent credential. |
 | Emergency recovery | Narrow, audited safety path for loss of partner/device access. It must not become an ordinary accountability bypass. |
 
@@ -73,7 +76,6 @@ documentation, and status reports.
 - Use “proposal target” for intended outcomes.
 - Use “current implementation” only with a path/runtime reference.
 - Use “evaluated” only with a documented protocol and result.
-- Use “UU PDP-aligned data-minimization design”, not “UU PDP compliant”,
   unless a qualified review has established that claim.
 - Use “associated with” rather than “caused” for observational outcomes.
 - Do not use “first”, “proven”, “accurate”, “stable”, “secure”, or
