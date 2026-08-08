@@ -30,6 +30,10 @@ Ini berarti:
 5. Anti-tamper hanya menggunakan mekanisme OS yang didukung (Accessibility
    Service di Android, LocalSystem + SCM recovery di Windows). Tidak menggunakan
    `RtlSetProcessIsCritical` atau mekanisme critical-process lainnya.
+6. Pengingat harian opt-in: preferensi waktu + timezone dan endpoint Web Push
+   (VAPID) adalah data pengiriman non-browsing yang dikirim pengguna secara
+   sukarela. Notifikasi lokal di Android/Windows tetap on-device; tidak ada
+   token FCM/APNs, dan pesan notifikasi tidak memuat data penjelajahan.
 
 ## Interpretasi engineering (bukan dari proposal)
 

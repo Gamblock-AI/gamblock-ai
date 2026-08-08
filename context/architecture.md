@@ -106,6 +106,23 @@ terpisah, bukan penggunaan ulang respons API privat student.
 - Tidak menyimpan per-page score/feature
 - Tidak memberikan akses raw recovery content ke partner/admin
 
+## Supporting feature: daily reminder (opt-in)
+
+Fitur pengingat harian bersifat *supporting* (bukan requirement proposal). Satu
+preferensi `{ enabled, local_time, timezone, locale }` per akun disimpan di
+PostgreSQL (`reminder_preferences`) dan disinkronkan lintas permukaan:
+
+- **Web**: situs PWA berlangganan Web Push (VAPID). Endpoint langganan
+  (`push_subscriptions`) hanyalah metadata pengiriman — bukan data browsing.
+  Scheduler backend (satu proses API, interval 1 menit) mengirim notifikasi
+  saat waktu lokal pengguna tercapai; endpoint 404/410 dipangkas.
+- **Android**: notifikasi lokal berulang via `flutter_local_notifications`.
+- **Windows**: toast satu-kali untuk kemunculan berikutnya (plugin Windows
+  tidak mendukung repeat), dijadwalkan ulang saat aplikasi berjalan berikutnya.
+
+Konten pesan netral dan tidak memuat data sensitif. Tidak ada token FCM/APNs;
+pengiriman web murni Web Push berbasis VAPID.
+
 ## Storage model
 
 | Store | Target data | Boundary |

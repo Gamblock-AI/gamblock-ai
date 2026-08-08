@@ -49,7 +49,6 @@ non-browsing dan event agregat.
 |---|---|---|
 | Onboarding 3 langkah (guest → login/register → dashboard) | Flutter | `implemented` (prototype code-complete) |
 | Registrasi email + password | Flutter, Backend | `implemented` |
-| Google OAuth login/link | Flutter, Backend, Website | `implemented` (Android butuh OAuth client nyata; Windows perlu bukti VM) |
 | Verifikasi telepon via WhatsApp (Fonnte) | Backend | `implemented` |
 | Verifikasi email + reset password (12 karakter) | Backend, Website | `implemented` |
 | Setup perlindungan Android (Accessibility Service) | Flutter (Android native) | `implemented` (prototype code-complete, butuh bukti perangkat) |
@@ -62,6 +61,8 @@ non-browsing dan event agregat.
 | Intention (niat perubahan) | Website, Backend | `implemented` |
 | Mood/urge check-in harian | Website, Backend | `implemented` |
 | Daily missions (5 slot, 10 EXP, custom) | Website, Backend | `implemented` |
+| Daily reminder / pengingat harian (opt-in) | Backend, Website (PWA), Flutter (Android/Windows) | `implemented` (supporting; sinkron via backend, web pakai Web Push, native pakai notifikasi lokal) |
+| Website sebagai PWA (installable + Web Push) | Website | `implemented` (supporting) |
 | Psychoeducation (dokumen bilingual) | Website, Backend | `implemented` |
 | Learning Hub / skills (22 program, 5 cluster) | Website, Backend | `implemented` |
 | Recovery room + grounding + jurnal terenkripsi | Website, Backend | `implemented` |
@@ -95,14 +96,10 @@ non-browsing dan event agregat.
 3. **Verifikasi telepon** (gate utama akun) dilakukan via kode sekali pakai yang
    dikirim WhatsApp melalui adapter **Fonnte**. Email tetap identitas login.
 4. Verifikasi email didukung dengan refresh/resend dan link verifikasi.
-5. Alternatif: **Google OAuth** (ID-token dengan allowlist audience + nonce
-   validasi). Akun Google dengan email sama bisa di-link setelah autentikasi
-   password saat ini (Android: butuh OAuth client/signing nyata; Windows: butuh
-   bukti VM).
 
 ### 3.3 Login dan Sesi
 
-1. Login via email+password, Google, atau `dev-login` (khusus development).
+1. Login via email+password atau `dev-login` (khusus development).
 2. Backend menerbitkan **JWT access token** + **refresh token berotasi**;
    `auth_time` utama dipertahankan melalui rotasi.
 3. Status disabled/role divalidasi ulang per request.
@@ -221,8 +218,23 @@ diri → evaluasi → penyesuaian perilaku. Seluruh permukaan privasi student.
 3. Check-in memperbarui hari `Asia/Jakarta` berjalan tanpa backfill; privasi
    dijaga (tidak otomatis terlihat partner).
 
-### 6.4 Daily Missions
+### 6.4 Daily Reminder (supporting)
 
+1. **Satu sumber kebenaran**: preferensi `{ enabled, local_time, timezone }`
+   disimpan per akun via `GET/PUT /v1/me/reminder-preference`, disinkronkan ke
+   web, Android, dan Windows.
+2. **Web (PWA)**: browser berlangganan Web Push (VAPID) via
+   `POST/DELETE /v1/me/push-subscription`; scheduler backend mengirim pengingat
+   saat waktu lokal pengguna tercapai (satu proses API, interval 1 menit).
+   Klik notifikasi membuka `/{locale}/recovery`.
+3. **Android**: `flutter_local_notifications` jadwal harian berulang (inexact);
+   **Windows**: toast satu-kali untuk kemunculan berikutnya, dijadwalkan ulang
+   saat aplikasi berjalan berikutnya (plugin Windows tidak mendukung repeat).
+4. **Konten**: pesan pengingat netral bergaya Duolingo (rotasi id/en), tidak
+   memuat data sensitif; fitur ini *supporting* dan tidak menggantikan
+   requirement proposal.
+
+### 6.5 Daily Missions
 1. Tersedia **5 slot harian** `Asia/Jakarta`, masing-masing **10 EXP**:
    proteksi aktif, check-in, section edukasi, modul edukasi, recovery practice.
 2. Mahasiswa dapat membuat hingga **5 custom mission** privat; judul
@@ -232,20 +244,20 @@ diri → evaluasi → penyesuaian perilaku. Seluruh permukaan privasi student.
    partner/admin.
 4. Misus selesai tidak dihapus; bisa diskip/diganti tanpa menghapus progress.
 
-### 6.5 Psychoeducation
+### 6.6 Psychoeducation
 
 - Modul dokumen **bilingual berversi** dengan progress **per revisi**.
 - Mahasiswa membaca bagian, menandai progress, dan menjawab check.
 - Media (gambar/video/PDF) hanya dari sumber yang di-allowlist backend.
 
-### 6.6 Learning Hub / Skills
+### 6.7 Learning Hub / Skills
 
 - Katalog **22 program UTY, 5 cluster** dengan progress scoped per akun
   (saved/started/completed).
 - Checkpoint/refleksi hasil terenkripsi; pemberian 10 EXP sekali per item
   dengan cap harian Jakarta 50.
 
-### 6.7 Recovery Room, Jurnal, dan Grounding
+### 6.8 Recovery Room, Jurnal, dan Grounding
 
 - **Recovery room:** unlock/placement state deterministik (rule version 2,
   tema kedua `sunrise_study` di level 18); hanya practice selesai yang dikirim.
@@ -254,13 +266,13 @@ diri → evaluasi → penyesuaian perilaku. Seluruh permukaan privasi student.
   **AES-256-GCM** sebelum persistensi; baca/tulis fail closed.
 - **Grounding tools:** membantu di luar intervensi.
 
-### 6.8 Weekly Review
+### 6.9 Weekly Review
 
 - Satu review terenkripsi per minggu Jakarta (`GET/PUT /weekly-reviews/current`)
   yang merestorasi dan upsert.
 - Memberikan **10 EXP** idempoten di bawah cap harian bersama.
 
-### 6.9 Progress 7/30/90
+### 6.10 Progress 7/30/90
 
 - Progress privat menyajikan aktivitas **7/30/90 hari** bertag kategori.
 - Tren ditekan di bawah 3 check-in; tidak ada detail browsing di mana pun.
@@ -318,7 +330,7 @@ tinggi tanpa melanggar OS.
 ### 8.1 Profil, Settings, dan Password
 
 - Mahasiswa melihat/mengubah profil (`/profile`, `PATCH /me`), avatar (WebP 2
-  MiB), password (`PATCH /me/password`), dan link akun Google.
+  MiB), dan password (`PATCH /me/password`).
 - Settings aplikasi: locale, haptics, dan kategori pembagian agregat.
 
 ### 8.2 Support Tickets
@@ -376,7 +388,7 @@ tinggi tanpa melanggar OS.
 
 | Tahap | Alur | Komponen utama | Status |
 |---|---|---|---|
-| 1 | Install → intro → register/login/Google | Flutter, Backend | `implemented` |
+| 1 | Install → intro → register/login | Flutter, Backend | `implemented` |
 | 2 | Verifikasi telepon (Fonnte) + email | Backend, Website | `implemented` |
 | 3 | Setup proteksi Android/Windows + pairing + artifact | Flutter, Extension | `implemented` (prototype) |
 | 4 | Deteksi hybrid → blokir → Pattern Interrupt | Flutter native, Model | `implemented`/`prototype` |
