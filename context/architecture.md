@@ -123,6 +123,19 @@ PostgreSQL (`reminder_preferences`) dan disinkronkan lintas permukaan:
 Konten pesan netral dan tidak memuat data sensitif. Tidak ada token FCM/APNs;
 pengiriman web murni Web Push berbasis VAPID.
 
+## Supporting feature: student mini-games (session-only)
+
+Website menyediakan empat mini-game sukarela untuk role `user` sebagai aktivitas
+jeda adaptif: interferensi warna-kata, susun gambar, pencocokan pasangan, dan
+trivia umum. Seluruh state, jawaban, skor, urutan kartu, serta waktu respons
+hanya hidup selama sesi halaman dan tidak disimpan atau dikirim ke backend,
+analytics, SPK/LLM, EXP, kalender pemulihan, partner, atau admin.
+
+Mini-games bukan intervensi klinis maupun requirement inti proposal. UI tidak
+menggunakan leaderboard, hadiah acak, mata uang, loot, streak hukuman, atau
+mekanik lain yang menyerupai reinforcement perjudian. Akses route ditegakkan
+khusus role `user`; partner dan admin tidak mendapat proyeksi hasil permainan.
+
 ## Storage model
 
 | Store | Target data | Boundary |
