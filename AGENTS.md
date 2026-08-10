@@ -53,8 +53,14 @@ change.
 
 All classification and inference run on-device. Raw DOM text, URLs, domains,
 screenshots, and browsing history never leave the device. The backend accepts
-aggregate protection events only. Do not weaken `PrivacyGuard` or expose raw
-browsing data in website analytics.
+aggregate protection events, system-generated blocked-event timestamps
+(metadata about when a block fired; never URL/domain/content), and LLM
+personalization that uses only the SPK decision plus the user's self-reported
+context. Students control the SPK recommendation and each data category
+(protection/recovery/personal) plus LLM personalization through per-category
+toggles on the Settings page; toggles govern usage, never storage. Do not
+weaken `PrivacyGuard`, widen the blocked-timestamp scope to any other browsing
+data, or send blocked-event timestamps or raw data to the LLM.
 
 ### Passive browser extension
 
