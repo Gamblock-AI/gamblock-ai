@@ -15,11 +15,11 @@ dan laporan status.
 | Protected Student / Mahasiswa Terlindungi | Primary proposal user. Existing API role code is `user`; “Member” is acceptable in group/account contexts. Avoid “target” or stigmatizing labels in UI. |
 | Accountability Partner / Pendamping | Parent or peer who mutually accepts responsibility for removal approval and supportive accountability. Existing code/UI may use `partner` or “Kepala”; proposal-facing copy should explain the equivalence. |
 | Self-directed recovery | A student-initiated adoption path where the student chooses protection and uses the private web recovery journey. It is not a separate role. |
-| Admin | The single operational account role (`admin`) for content, release, support queue, research, platform, audit, and emergency work. It never grants raw browsing or private recovery access. |
+| Admin | The single operational account role (`admin`) for content, support queue, platform, audit, and emergency work. It never grants raw browsing or private recovery access. |
 | Organization membership role | Relation-level `owner`, `admin`, `member`, or `viewer` inside an organization. It is not an account role. |
 | PKM Team | Researchers/developers responsible for prototype, evidence, content governance, and deliverables. Not automatically an application role. |
 | Supporting feature | Product capability not explicitly required by the proposal but useful for usability, safety, recovery, supervision, or dissemination. |
-| Operational feature | Administration, content/release management, support, infrastructure, or audit needed to operate the prototype. |
+| Operational feature | Administration, content management, support, infrastructure, or audit needed to operate the prototype. |
 
 ## Protection and AI
 

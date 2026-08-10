@@ -97,7 +97,7 @@ terpisah, bukan penggunaan ulang respons API privat student.
 - Encrypted sensitive reflections/journal (enkripsi dilakukan client-side
   sebelum persistensi)
 - Aggregate events dan device health
-- Support, content/release metadata, operational audit
+- Support, content, operational audit, and emergency administration
 
 ### Server prohibitions
 
