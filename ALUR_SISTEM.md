@@ -199,7 +199,7 @@ diri → evaluasi → penyesuaian perilaku. Seluruh permukaan privasi student.
 
 - Landing role `user` setelah login (route `/dashboard`).
 - Menampilkan ringkasan progress, status proteksi, misi hari ini, dan pintu
-  masuk ke modul recovery (progress, recovery, jurnal, education, skills,
+  masuk ke modul recovery (recovery, jurnal, education, skills,
   accountability, support, settings).
 
 ### 6.2 Intention (Niat Perubahan)
@@ -235,8 +235,9 @@ diri → evaluasi → penyesuaian perilaku. Seluruh permukaan privasi student.
    requirement proposal.
 
 ### 6.5 Daily Missions
-1. Tersedia **5 slot harian** `Asia/Jakarta`, masing-masing **10 EXP**:
-   proteksi aktif, check-in, section edukasi, modul edukasi, recovery practice.
+1. Tersedia **4 slot sistem harian** `Asia/Jakarta`, masing-masing **10 EXP**:
+   proteksi aktif, check-in, section edukasi, modul edukasi (slot "recovery
+   practice" dihapus bersama fitur room).
 2. Mahasiswa dapat membuat hingga **5 custom mission** privat; judul
    dienkripsi AES-256-GCM saat disimpan.
 3. Klaim sistem diverifikasi server; self-attestation custom memakai kontrak
