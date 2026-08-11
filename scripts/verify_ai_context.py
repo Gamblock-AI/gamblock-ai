@@ -26,6 +26,7 @@ COMPONENT_CONTRACTS = {
         "proposal_authority",
         "privacy_boundary",
         "api_error_catalog",
+        "protection_grant",
     ),
     "website": (
         "proposal_authority",
@@ -37,6 +38,7 @@ COMPONENT_CONTRACTS = {
         "privacy_boundary",
         "websocket_loopback",
         "api_error_catalog",
+        "protection_grant",
     ),
     "extension": (
         "proposal_authority",

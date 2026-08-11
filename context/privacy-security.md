@@ -56,6 +56,14 @@ Ini berarti:
    personal. Timestamps peristiwa blokir, URL, DOM, dan agregat halus tidak
    pernah dikirim ke LLM. Toggle hanya mengatur penggunaan data untuk
    rekomendasi/AI, bukan menghapus atau menghentikan penyimpanan data.
+9. Public key perangkat dan RFC 7638 JWK thumbprint boleh dikirim ke backend
+   hanya untuk mengikat grant approval ke native authority. Keduanya adalah
+   metadata keamanan pseudonim dan tidak boleh berisi atau dikorelasikan dengan
+   URL, domain, DOM, screenshot, riwayat browsing, maupun skor klasifikasi.
+10. Grant approval harus ditandatangani backend, memiliki action allowlist dan
+    expiry singkat, serta diverifikasi ulang oleh Android/Windows. Enkripsi
+    Keystore/DPAPI melindungi penyimpanan lokal tetapi tidak menggantikan
+    verifikasi keaslian grant.
 
 ## Interpretasi engineering (bukan dari proposal)
 

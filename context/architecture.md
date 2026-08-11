@@ -46,7 +46,49 @@ adalah sumber mutlak.
 
 1. Sinyal uninstall/settings dari native client → approval request ke backend
 2. Partner menerima dan memutuskan (approve/deny/expiry)
-3. Client validasi state otoritatif dari backend → controlled action
+3. Backend menerbitkan grant JWS ES256 berumur pendek yang memuat action,
+   device ID, dan thumbprint public key native
+4. Android Keystore atau Windows LocalSystem/CNG memverifikasi signature,
+   claim, batas waktu, dan device binding sebelum controlled action
+
+Grant signing key terpisah dari access-token, Android application-signing, dan
+Windows Authenticode key. Private key hanya berada di backend; client membawa
+trust store public key `kid` saat ini dan berikutnya untuk rotasi. Grant lama
+yang tidak ditandatangani ditolak.
+
+## Distribution architecture
+
+- **Android Play:** package publik mempertahankan sensing browser, inferensi
+  lokal, block, dan Pattern Interrupt, tetapi source set-nya tidak memuat
+  pemantauan Settings/package installer atau pencegahan uninstall.
+- **Android research:** package dan signing identity terpisah mempertahankan
+  seluruh prototipe Social Accountability untuk instalasi terbantu pada
+  perangkat pilot. Resistensi removal tetap best-effort dan memiliki
+  administrator break-glass.
+- **Windows pilot:** per-machine MSI memasang binary ke `Program Files`, state
+  ke `ProgramData`, dan LocalSystem service melalui Windows Installer/SCM.
+  Peserta berjalan sebagai standard user; grant partner adalah offboarding
+  normal dan administrator pilot tetap dapat melakukan clean break-glass
+  uninstall.
+
+Debug APK, unsigned ZIP, script dari folder user-writable, dan pemaksaan
+`ExecutionPolicy Bypass` bukan artifact distribusi.
+
+### Flutter build lanes
+
+The Flutter repository has two CI lanes that must remain separate:
+
+- **Diagnostic lane:** PR and `main` builds use loopback fixture configuration
+  and no production signing material. Android debug APKs, the Windows debug
+  ZIP, and an unsigned MSI packaging check are short-retention Actions
+  artifacts only.
+- **Signed lane:** an immutable `vMAJOR.MINOR.PATCH` tag in a protected
+  environment builds the Play AAB, Research APK, and Windows pilot MSI. Missing
+  keys or a malformed public grant trust store fail closed. Store submission,
+  pilot distribution, and runtime evidence remain outside the compile step.
+
+The variant/package/signing matrix is maintained in
+`gamblock_ai_apps/docs/ai/distribution-matrix.md`.
 
 ## Hybrid detection pipeline
 
