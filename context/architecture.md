@@ -29,7 +29,11 @@ adalah sumber mutlak.
 ### Protection flow
 
 1. Android (Accessibility Service) atau Windows (Extension → loopback WebSocket)
-   mengakuisisi input lokal
+   mengakuisisi input lokal **hanya pada komitmen navigasi** (Enter/submit/klik
+   link/perubahan halaman). Ketikan dan perubahan teks biasa tidak pernah
+   diekstrak atau diklasifikasi: Android melewati event
+   `CONTENT_CHANGE_TYPE_TEXT`, extension tidak membaca keystroke dan hanya
+   memicu pada load, Enter/submit, dan perubahan URL.
 2. Input masuk ke local protection runtime: normalisasi dan pembatasan input
    yang didukung
 3. Dua jalur paralel:
@@ -193,6 +197,10 @@ khusus role `user`; partner dan admin tidak mendapat proyeksi hasil permainan.
 
 - JWT access token + rotating refresh token
 - Backend RBAC otoritatif
+- Android/Windows client sends `X-Client-Type: native`; session-issuing auth
+  endpoints (`/v1/auth/login`, `/v1/auth/first-login/password`,
+  `/v1/auth/phone-verification/verify`) reject non-`user` accounts for it
+  (`student_only`, 403). Website login stays role-agnostic (no native header).
 - Partner invitation: email-bound, 7 hari kadaluarsa
 - Quick approval: high-entropy, 24 jam, single-use, hashed token
 - Emergency recovery: dual-operator, device-bound, 30 menit/24 jam window
