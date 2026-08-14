@@ -171,7 +171,9 @@ Website menyediakan empat mini-game sukarela untuk role `user` sebagai aktivitas
 jeda adaptif: interferensi warna-kata, susun gambar, pencocokan pasangan, dan
 trivia umum. Seluruh state, jawaban, skor, urutan kartu, serta waktu respons
 hanya hidup selama sesi halaman dan tidak disimpan atau dikirim ke backend,
-analytics, SPK/LLM, EXP, kalender pemulihan, partner, atau admin.
+analytics, SPK/LLM, EXP, kalender pemulihan, partner, atau admin. Pada klien
+mobile, permainan aktif meminta konfirmasi sebelum keluar; konfirmasi keluar
+membuang sesi sehingga permainan berikutnya selalu dimulai dari awal.
 
 Mini-games bukan intervensi klinis maupun requirement inti proposal. UI tidak
 menggunakan leaderboard, hadiah acak, mata uang, loot, streak hukuman, atau

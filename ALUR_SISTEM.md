@@ -96,6 +96,8 @@ non-browsing dan event agregat.
 3. **Verifikasi telepon** (gate utama akun) dilakukan via kode sekali pakai yang
    dikirim WhatsApp melalui adapter **Fonnte**. Email tetap identitas login.
 4. Verifikasi email didukung dengan refresh/resend dan link verifikasi.
+5. Setelah OTP register berhasil, mahasiswa **diarahkan ke halaman login**
+   (Flow register tetap: Register → OTP → Login → Dashboard).
 
 ### 3.3 Login dan Sesi
 
@@ -106,7 +108,13 @@ non-browsing dan event agregat.
 4. Akun yang diprovisioning admin mendapat **password sementara** dan wajib
    menyelesaikan **first-login password change** (jendela 10 menit, purpose-
    specific) sebelum sesi normal disimpan.
-5. Logout mencabut sesi; reset password mencabut sesi terkait.
+5. **Akun yang nomornya belum terverifikasi**: `Login`/first-password-change
+   mengembalikan `verification_required` + `verification_token` (tanpa token
+   sesi). Client menyimpan konteks OTP dengan `origin: login` dan mengarahkan
+   ke `/verify-phone`. Setelah OTP sukses, backend menerbitkan access/refresh
+   token baru, client mempersistensikan sesi dan **langsung masuk dashboard**
+   (tanpa kembali ke halaman login). Flow ini berlaku di website dan Flutter.
+6. Logout mencabut sesi; reset password mencabut sesi terkait.
 
 ---
 
