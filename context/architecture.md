@@ -123,6 +123,16 @@ feature limits, vocabulary, unknown terms.
 ## Web recovery architecture
 
 Next.js pages mengonsumsi typed hooks → API client → Go response envelope.
+
+### Query-driven server pagination
+
+Collection views on the website use server pagination. The API returns a
+`PaginatedList` envelope (`items`, `total_count`, `page`, `page_size`,
+`total_pages`, `has_more`), while the reusable Next.js pagination hooks keep
+the active page in a namespaced query key such as `page[content]` or
+`page[groupMembers][<group-id>]`. This allows multiple independent lists on
+one route to navigate without overwriting one another. Filters preserve
+unrelated query keys and reset only the paginator they control.
 Core recovery services: intention lifecycle, mood/urge check-in,
 psychoeducation, daily mission, skill recommendations, weekly review.
 
