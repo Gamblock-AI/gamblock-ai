@@ -133,6 +133,27 @@ the active page in a namespaced query key such as `page[content]` or
 `page[groupMembers][<group-id>]`. This allows multiple independent lists on
 one route to navigate without overwriting one another. Filters preserve
 unrelated query keys and reset only the paginator they control.
+
+### Query-driven dashboard tabs
+
+In-page dashboard tab selectors are URL state, not component-local state. Each
+independent selector uses a namespaced key such as `tab[support]`,
+`tab[recovery]`, or `tab[adminTickets]`; analytics period selectors use the
+semantic `period` key. The reusable website `useQueryTab` hook validates values,
+preserves unrelated query parameters, resets only explicitly owned pagination,
+and uses browser history for tab changes. Generic legacy keys such as `tab`,
+`channel`, `range`, and `section` are no longer part of the dashboard
+contract.
+
+### Query-driven dashboard filters and editor state
+
+Dashboard filters use the reusable website `useQueryFilters` and
+`useQueryFilterInput` hooks. Browser filter keys follow
+`filter[resource][field]`, search is debounced, and select changes are
+immediate. Editor state uses resource-scoped keys such as `lang[content]`,
+`lang[learningHub]`, and `item[learningHub]`. These browser keys are kept
+separate from backend API parameters (`page`, `limit`, `q`, `group_id`, and
+similar); legacy flat browser keys are removed without compatibility reads.
 Core recovery services: intention lifecycle, mood/urge check-in,
 psychoeducation, daily mission, skill recommendations, weekly review.
 
