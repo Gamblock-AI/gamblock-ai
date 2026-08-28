@@ -76,7 +76,9 @@ Target proposal: block latency di bawah 200 ms.
 - start event: input lokal lengkap tersedia
 - end event: block/intervention terlihat committed
 - Pisahkan durasi extraction, preprocessing, rule, inference, decision, IPC, UI
-- Report median, p95, p99, maximum
+- Engineering gate: p95 `input_to_visible_ms` harus secara ketat di bawah 200 ms
+  pada setiap grup platform/perangkat/skenario, dengan minimal 30 sampel dan
+  tanpa kegagalan aksi blok atau visibility; report juga median, p99, maksimum
 - Bedakan warm/cold start, online/offline, foreground/background
 
 ## Functional and resilience evaluation

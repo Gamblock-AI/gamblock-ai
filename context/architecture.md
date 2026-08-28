@@ -42,7 +42,9 @@ adalah sumber mutlak.
      Logistic Regression menghasilkan skor
 4. Hybrid decision menggabungkan hasil rule + model dengan threshold dan
    fusion policy
-5. Keputusan positif → local block + aggregate counter (offline-capable)
+5. Keputusan positif → local block + aggregate counter (offline-capable); the
+   authenticated client may publish the current UTC-day cumulative snapshot
+   immediately, while completed-day rows remain retryable and idempotent
 6. Pattern Interrupt 5-10 detik yang tenang dan non-klinis
 7. Privacy-safe recovery web handoff (tanpa URL, DOM, atau skor)
 
@@ -174,6 +176,8 @@ terpisah, bukan penggunaan ulang respons API privat student.
 - Encrypted sensitive reflections/journal (enkripsi dilakukan client-side
   sebelum persistensi)
 - Aggregate events dan device health
+- Aggregate ingestion accepts a monotonic current-day snapshot so client and
+  partner/admin analytics can reflect a recent block before UTC day rollover
 - Support, content, operational audit, and emergency administration
 
 ### Server prohibitions
