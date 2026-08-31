@@ -49,9 +49,7 @@ Training bundle berversi harus mencakup:
 - Model, vectorizer, ruleset, metadata, cryptographic hashes
 - Evaluation script/report dan model card
 
-## Detection metrics
-
-## Threshold selection
+## Detection metrics and targets
 
 - Confusion matrix (TP, FP, TN, FN)
 - Precision, Recall, F1-Score
@@ -60,8 +58,17 @@ Training bundle berversi harus mencakup:
   ordinary benign, government, education
 - Hybrid system + rule-only + model-only ablations
 
-Target numerik untuk Precision, Recall, F1, dan FPR adalah keputusan pemilik
-riset; tidak dibuat dalam dokumentasi implementasi.
+Untuk evaluasi kemajuan prototipe, target pemilik riset yang dikunci adalah:
+
+- Accuracy >= 95%
+- Precision >= 95%
+- Recall >= 95%
+- F1-score >= 95%
+- False Positive Rate (FPR) <= 2%
+
+Target ini adalah gate pelaporan, bukan alasan untuk menyesuaikan threshold
+pada final test set. Bila snapshot prediksi dan proyeksi deployment berbeda,
+keduanya harus dilaporkan dan klaim hanya boleh mengikuti hasil deployment.
 
 ## Threshold selection
 
@@ -77,8 +84,9 @@ Target proposal: block latency di bawah 200 ms.
 - end event: block/intervention terlihat committed
 - Pisahkan durasi extraction, preprocessing, rule, inference, decision, IPC, UI
 - Engineering gate: p95 `input_to_visible_ms` harus secara ketat di bawah 200 ms
-  pada setiap grup platform/perangkat/skenario, dengan minimal 30 sampel dan
-  tanpa kegagalan aksi blok atau visibility; report juga median, p99, maksimum
+  pada setiap grup platform/perangkat/skenario/browser/build mode, dengan
+  minimal 30 sampel dan tanpa kegagalan aksi blok atau visibility; report juga
+  median, p99, maksimum
 - Bedakan warm/cold start, online/offline, foreground/background
 
 ## Functional and resilience evaluation
@@ -102,11 +110,31 @@ Sebelum studi subjek manusia, dapatkan review etis/akademik untuk:
 - Product consent, partner consent, dan research consent berbeda
 - Withdrawal harus menghentikan pengumpulan riset di masa depan
 
+## Reproducible prototype evidence
+
+`evaluation/pkm-progress/` di umbrella adalah harness lintas-repositori yang
+menulis JSON agregat/hash-only dan PDF ringkasan berbahasa Indonesia. Harness
+ini memanggil audit dataset/model di `gamblock-ai-model`, memproyeksikan jalur
+`browser_extension -> payload terbatas -> Hybrid-v2 Windows`, dan mencatat
+status pengujian backend, website, extension, serta client. Tidak ada URL,
+DOM, riwayat browsing, screenshot, atau data partisipan yang boleh ditulis ke
+hasilnya.
+
+Jalankan:
+
+```sh
+python3 evaluation/pkm-progress/run_evaluation.py --run-code-tests
+```
+
+JSONL latensi perangkat tetap lokal pada `evaluation/pkm-progress/private/`
+(diabaikan Git). Harness hanya menyatakan latency runtime terverifikasi bila
+ekspor tersebut ada dan lolos validator client; narasi atau angka tanpa ekspor
+mentah berstatus dokumentasi, bukan bukti reproduktif.
+
 ## Decisions still required
 
 - Restorasi proposal asli
 - Dataset governance owner dan labeling protocol
-- Target numerik deteksi dan FPR
 - Final latency gate dan device matrix
 - Definisi retensi
 - Rute review etis dan desain studi Pattern Interrupt

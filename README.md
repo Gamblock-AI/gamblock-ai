@@ -23,13 +23,12 @@ the pinned component composition in `.gitmodules`. Every component duplicates
 the minimum safety and architecture context it needs under `docs/ai/`, so its
 context does not disappear in a standalone clone.
 
-Phase 5 reporting and dissemination artifacts live under
-`deliverables/phase5/`. The package includes report drafts, the Android/Windows
-user guide and traceability report, social-media governance, an accessible
-educational-video production package, a scientific manuscript, and a
-fail-closed evidence manifest. Repository preparation is implemented, while
-approval, submission, evaluated release, account ownership, and publication
-remain external evidence gates.
+Reproducible PKM prototype evidence lives under `evaluation/pkm-progress/`.
+It combines the independently cloned components without creating a new
+submodule, writes aggregate/hash-only JSON plus an Indonesian PDF summary, and
+keeps raw local device exports in ignored `private/`. Repository preparation is
+implemented; device/VM validation, academic review, and publication remain
+external evidence gates.
 
 ## Clone the full workspace
 

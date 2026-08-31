@@ -33,6 +33,12 @@ models/*.pkl
 # ===== Local Phase 4 research evidence =====
 evaluation/phase4/private-data/
 evaluation/phase4/results/
+evaluation/pkm-progress/output/
+evaluation/pkm-progress/private/
 
 # ===== Claude Code local settings =====
 .claude/settings.local.json
+
+# ===== Python verification cache =====
+__pycache__/
+*.pyc
