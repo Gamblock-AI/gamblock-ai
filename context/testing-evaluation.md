@@ -11,6 +11,12 @@ runtime evidence promotion, and the public testing summary. Product
 repositories retain production code, component unit tests, lint configuration,
 and source-specific fixtures.
 
+Within the testing repository, system-specific tooling is separated into
+`flutter/`, `golang/`, `next/`, and `browser/`; model scope is documented in
+`model/`. Cross-system checks live only under `orchestration/`. This keeps
+system-specific test assets from being mixed while preserving one shared
+ledger and one canonical summary.
+
 The only committed human-readable cross-repository summary is:
 
 ```text
@@ -63,14 +69,14 @@ From the umbrella:
 
 ```sh
 ./scripts/verify-ai-context.sh
-python3 gamblock-ai-testing/scripts/verify_public_evidence.py
+python3 gamblock-ai-testing/orchestration/scripts/verify_public_evidence.py
 ```
 
 From the testing repository:
 
 ```sh
 ./scripts/verify-ai-context.sh
-python3 scripts/verify_public_evidence.py
+python3 orchestration/scripts/verify_public_evidence.py
 ```
 
 Device actions, builds, and full component test suites remain explicit checks.
