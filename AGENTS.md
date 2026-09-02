@@ -130,6 +130,35 @@ Run `./scripts/verify-ai-context.sh` from this root after changing a catalog.
   allowed by default; syntax/check-mode validation is opt-in, and any command
   that contacts a configured host also requires external-contact approval.
 
+## Cross-repository testing handoff
+
+When the user explicitly requests a test, evaluation, or re-evaluation whose
+result should be retained as project evidence, the task is incomplete until
+the testing repository has been synchronized. Run the relevant component
+check and then invoke the testing runner from the umbrella when the required
+checkout is available:
+
+```sh
+python3 gamblock-ai-testing/docs/tools/run_evaluation.py --workspace-root . --run-code-tests
+```
+
+Use `--run-model-replay` for model evaluation and the Android runbook for
+device evidence. A direct component command alone is not a substitute for
+updating the matching report in `gamblock-ai-testing/`. If a checkout, device,
+dependency, or environment prevents synchronization, leave the report
+`pending`/`blocked` and state the exact reason; never claim that the evidence
+was recorded.
+
+Before handoff, inspect the source repository and testing repository with
+`git status`/`git diff`, run the relevant context and public-evidence
+validators, and preserve unrelated changes. A test receipt is mandatory in
+the final response. It must identify the run, technology, command, status,
+source commit, testing-repository files added/modified, public data contents,
+private/local artifacts created and their retention status, validation
+results, and commit/push status. Explicitly write `none` for an empty public
+or private category. The receipt is a handoff record, not a second testing
+summary; the technology report remains the only canonical result.
+
 ## Protected files and generated output
 
 - Do not edit website `components/ui/*` unless explicitly requested; those are

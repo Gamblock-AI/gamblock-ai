@@ -32,6 +32,38 @@ results. JSONL files under a technology's `evidence/ledger/` are structured
 source records for that technology's report. The umbrella stores context and
 the pinned submodule commit only.
 
+## Test execution handoff and receipt
+
+An explicit test, evaluation, or re-evaluation request is not complete when a
+component command merely succeeds. The agent must synchronize the relevant
+technology report in `gamblock-ai-testing/` through the cross-system runner,
+or record the exact reason that synchronization is `pending` or `blocked`.
+Direct component commands remain useful for diagnosis, but they do not by
+themselves publish project evidence.
+
+Every completed test requires a final test receipt. The receipt is delivered
+in the agent's handoff response and is not a second report. It must contain:
+
+- run ID or sample label, technology, scope, command, status, and source
+  repository commit(s);
+- testing-repository public files added or modified and a short description of
+  the aggregate-safe data in each file;
+- private/local artifacts created, their location class (testing checkout,
+  component checkout, or external temporary directory), contents at a safe
+  level, and whether they were deleted or remain local;
+- validator results, testing-repository commit status, and push status;
+- `none` for any empty public or private category.
+
+The agent must inspect both repositories' `git status` and `git diff` before
+writing the receipt. Raw command output, screenshots, ADB traces, URLs,
+domains, DOM, browsing history, serials, credentials, and participant data
+must never be included in the receipt or public report. Hashes and aggregate
+metrics are allowed only within the existing evidence contract.
+
+The receipt format is maintained in
+`gamblock-ai-testing/docs/ai/testing-run-receipt.md`. It is a response-level
+handoff record, not a second committed result file.
+
 ## Evidence contract
 
 Evidence must distinguish source-code checks, offline replay, and physical
