@@ -148,6 +148,11 @@ updating the matching report in `gamblock-ai-testing/`. If a checkout, device,
 dependency, or environment prevents synchronization, leave the report
 `pending`/`blocked` and state the exact reason; never claim that the evidence
 was recorded.
+Model replay permanent outputs belong under
+`gamblock-ai-testing/model/evidence/` (aggregate JSON and explicitly
+allowlisted aggregate-generated charts). Raw prediction inputs belong under
+the ignored `gamblock-ai-testing/model/private/` staging area; no permanent
+model evaluation output should be written under `gamblock-ai-model/reports/evaluation/`.
 
 Before handoff, inspect the source repository and testing repository with
 `git status`/`git diff`, run the relevant context and public-evidence

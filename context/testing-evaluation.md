@@ -16,6 +16,11 @@ Within the testing repository, system-specific tooling is separated into
 documented in `model/`. Cross-system checks live only under `docs/tools/`. This
 keeps system-specific test assets from being mixed while preserving one ledger
 per owning technology and one canonical report per technology.
+Model replay evidence has a dedicated storage contract: permanent aggregate
+JSON belongs under `gamblock-ai-testing/model/evidence/aggregate/` and charts
+generated only from aggregate metrics belong under the exact allowlisted paths
+in `gamblock-ai-testing/model/evidence/visuals/`. Raw prediction tables and other
+sensitive replay inputs belong under ignored `gamblock-ai-testing/model/private/`.
 
 The committed human-readable reports are:
 
@@ -91,6 +96,10 @@ URLs, domains, DOM text, browsing history, keystrokes, screenshots, serial
 numbers, credentials, participant data, raw ADB/logcat output, and local paths
 must never be published. A screenshot digest does not authorize publishing the
 image itself.
+Model aggregate charts are not screenshots: they are permitted only when
+generated from aggregate metrics and written to the exact allowlisted visual
+paths by the testing runner; they must not contain sample-level or browsing
+content.
 
 ## Firebase and device policy
 

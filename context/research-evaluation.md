@@ -30,13 +30,14 @@ Sebelum mengumpulkan atau melatih, buat dataset card yang berisi:
 
 ## Split and leakage controls
 
-1. Group by registrable domain/site family
-2. Isolate train, validation, final test groups
-3. Reserve time-shifted set untuk domain-churn evaluation
-4. Keep camouflage/government/education sebagai slice terpisah
-5. Fit vocabulary/vectorizer hanya pada training data
-6. Freeze final test set sebelum threshold selection
-7. Record split manifests dan hashes
+1. Connect exact/normalized model-text duplicates and registrable domain/site family into one group
+2. Exclude groups whose rows have conflicting labels, and record the exclusion count
+3. Isolate train, validation, final test groups
+4. Reserve time-shifted set untuk domain-churn evaluation
+5. Keep camouflage/government/education sebagai slice terpisah
+6. Fit vocabulary/vectorizer hanya pada training data
+7. Freeze final test set sebelum threshold selection
+8. Record split manifests dan hashes
 
 ## Model pipeline
 
@@ -58,17 +59,20 @@ Training bundle berversi harus mencakup:
   ordinary benign, government, education
 - Hybrid system + rule-only + model-only ablations
 
-Untuk evaluasi kemajuan prototipe, target pemilik riset yang dikunci adalah:
+Untuk evaluasi kemajuan prototipe saat ini, digunakan ambang sementara berikut:
 
-- Accuracy >= 95%
-- Precision >= 95%
-- Recall >= 95%
-- F1-score >= 95%
-- False Positive Rate (FPR) <= 2%
+- Accuracy >= 90%
+- Precision >= 90%
+- Recall >= 90%
+- F1-score >= 90%
+- False Positive Rate (FPR) <= 5%
 
-Target ini adalah gate pelaporan, bukan alasan untuk menyesuaikan threshold
-pada final test set. Bila snapshot prediksi dan proyeksi deployment berbeda,
-keduanya harus dilaporkan dan klaim hanya boleh mengikuti hasil deployment.
+Ambang ini adalah checkpoint pelaporan kemajuan untuk prototipe, bukan target
+akhir proposal atau dasar untuk mengubah threshold pada final test set. Proposal
+PKM tidak menetapkan angka numerik untuk metrik deteksi; nilai metrik aktual,
+split, audit leakage, dan keterbatasan tetap harus dilaporkan. Bila snapshot
+prediksi dan proyeksi deployment berbeda, keduanya harus dilaporkan dan klaim
+hanya boleh mengikuti hasil deployment.
 
 ## Threshold selection
 

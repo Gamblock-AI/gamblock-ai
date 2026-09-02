@@ -1,5 +1,5 @@
 schema_version: 1
-context_version: 2026-09-02.5
+context_version: 2026-09-03.1
 topology: multi-repository-with-umbrella
 canonical_files:
   - context/README.md
@@ -23,7 +23,7 @@ contracts:
   websocket_loopback: 2
   api_error_catalog: 1
   protection_grant: 1
-  testing_evidence: 3
+  testing_evidence: 4
 required_providers:
   - agents
   - claude
