@@ -26,9 +26,9 @@ the minimum safety and architecture context it needs under `docs/ai/`, so its
 context does not disappear in a standalone clone.
 
 `gamblock-ai-testing/` is the public testing submodule. It owns the
-cross-repository harness, aggregate evidence ledger, and the single canonical
-testing summary at `reports/testing-summary.md`. Raw local exports remain
-ignored in the testing repository and are never copied into public evidence.
+cross-repository harness, technology-owned aggregate evidence, and one
+canonical report per technology. Raw local exports remain ignored in the
+testing repository and are never copied into public evidence.
 
 ## Clone the full workspace
 

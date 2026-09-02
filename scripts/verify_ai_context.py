@@ -95,10 +95,14 @@ COMPONENT_REQUIRED = (
     ".cursor/rules/gamblock-ai.mdc",
     "docs/ai/README.md",
     "docs/ai/manifest.yaml",
-    "scripts/verify-ai-context.sh",
     ".agents/skills/verify-gamblock-change/SKILL.md",
     ".agents/skills/verify-gamblock-change/agents/openai.yaml",
 )
+
+COMPONENT_CONTEXT_VALIDATOR = {
+    name: "docs/tools/verify-ai-context.sh" if name == "testing" else "scripts/verify-ai-context.sh"
+    for name in COMPONENTS
+}
 
 
 def run(*args: str, cwd: Path) -> subprocess.CompletedProcess[str]:
@@ -192,7 +196,8 @@ def main() -> int:
         if not component.is_dir():
             errors.append(f"missing component directory: {component.name}")
             continue
-        for relative in COMPONENT_REQUIRED:
+        required = (*COMPONENT_REQUIRED, COMPONENT_CONTEXT_VALIDATOR[name])
+        for relative in required:
             path = component / relative
             if not path.is_file():
                 errors.append(f"{name}: missing {relative}")

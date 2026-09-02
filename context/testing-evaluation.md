@@ -7,25 +7,30 @@ ownership; it is not a replacement for academic review or a completed study.
 ## Ownership
 
 `gamblock-ai-testing/` is the canonical owner of cross-repository evaluation,
-runtime evidence promotion, and the public testing summary. Product
+runtime evidence promotion, and per-technology testing reports. Product
 repositories retain production code, component unit tests, lint configuration,
 and source-specific fixtures.
 
 Within the testing repository, system-specific tooling is separated into
-`flutter/`, `golang/`, `next/`, and `browser/`; model scope is documented in
-`model/`. Cross-system checks live only under `orchestration/`. This keeps
-system-specific test assets from being mixed while preserving one shared
-ledger and one canonical summary.
+`flutter/`, `golang/`, `next/`, and `browser-extention/`; model scope is
+documented in `model/`. Cross-system checks live only under `docs/tools/`. This
+keeps system-specific test assets from being mixed while preserving one ledger
+per owning technology and one canonical report per technology.
 
-The only committed human-readable cross-repository summary is:
+The committed human-readable reports are:
 
 ```text
-gamblock-ai-testing/reports/testing-summary.md
+gamblock-ai-testing/flutter/report.md
+gamblock-ai-testing/golang/report.md
+gamblock-ai-testing/next/report.md
+gamblock-ai-testing/browser-extention/report.md
+gamblock-ai-testing/model/report.md
 ```
 
-The JSONL files in the testing repository's `evidence/ledger/` are structured
-source records for that summary, not alternate summaries. The umbrella stores
-context and the pinned submodule commit only.
+`docs/testing-index.md` only links to these reports and does not repeat their
+results. JSONL files under a technology's `evidence/ledger/` are structured
+source records for that technology's report. The umbrella stores context and
+the pinned submodule commit only.
 
 ## Evidence contract
 
@@ -35,7 +40,7 @@ or old number without a validated export is not promoted to runtime evidence.
 
 Android Research anti-uninstall evidence covers supported OS surfaces and
 lifecycle recovery. The required OEM families and scenarios are versioned in
-the testing repository's `config/device-matrix.json`.
+the testing repository's `flutter/config/device-matrix.json`.
 
 ## Public privacy boundary
 
@@ -69,14 +74,14 @@ From the umbrella:
 
 ```sh
 ./scripts/verify-ai-context.sh
-python3 gamblock-ai-testing/orchestration/scripts/verify_public_evidence.py
+python3 gamblock-ai-testing/docs/tools/verify_public_evidence.py
 ```
 
 From the testing repository:
 
 ```sh
-./scripts/verify-ai-context.sh
-python3 orchestration/scripts/verify_public_evidence.py
+./docs/tools/verify-ai-context.sh
+python3 docs/tools/verify_public_evidence.py
 ```
 
 Device actions, builds, and full component test suites remain explicit checks.

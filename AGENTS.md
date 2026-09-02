@@ -41,7 +41,7 @@ does not override a PKM core requirement.
 | Browser extension | `browser_extension/`          | `npm run lint`                           |
 | Infrastructure    | `gamblock-ai-infrastructure/` | `make lint`                              |
 | Model             | `gamblock-ai-model/`          | *(no lint configured)*                   |
-| Testing           | `gamblock-ai-testing/`        | `python3 orchestration/scripts/verify_public_evidence.py` |
+| Testing           | `gamblock-ai-testing/`        | `python3 docs/tools/verify_public_evidence.py` |
 
 Use `repos.yaml` for repository URLs and `context/manifest.yaml` for the
 versioned context contract. A component may be cloned alone; never assume a
