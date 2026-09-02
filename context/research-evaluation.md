@@ -112,24 +112,16 @@ Sebelum studi subjek manusia, dapatkan review etis/akademik untuk:
 
 ## Reproducible prototype evidence
 
-`evaluation/pkm-progress/` di umbrella adalah harness lintas-repositori yang
-menulis JSON agregat/hash-only dan PDF ringkasan berbahasa Indonesia. Harness
-ini memanggil audit dataset/model di `gamblock-ai-model`, memproyeksikan jalur
-`browser_extension -> payload terbatas -> Hybrid-v2 Windows`, dan mencatat
-status pengujian backend, website, extension, serta client. Tidak ada URL,
-DOM, riwayat browsing, screenshot, atau data partisipan yang boleh ditulis ke
-hasilnya.
+Cross-repository orchestration and the single public testing summary now belong
+to the `Gamblock-AI-Testing` repository, mounted in the umbrella at
+`gamblock-ai-testing/`. The testing repository consumes component artifacts
+and privacy-safe aggregate exports; it does not copy source code or browsing
+data into the umbrella.
 
-Jalankan:
-
-```sh
-python3 evaluation/pkm-progress/run_evaluation.py --run-code-tests
-```
-
-JSONL latensi perangkat tetap lokal pada `evaluation/pkm-progress/private/`
-(diabaikan Git). Harness hanya menyatakan latency runtime terverifikasi bila
-ekspor tersebut ada dan lolos validator client; narasi atau angka tanpa ekspor
-mentah berstatus dokumentasi, bukan bukti reproduktif.
+The canonical operational rules are in `context/testing-evaluation.md` and
+`gamblock-ai-testing/docs/ai/android-anti-uninstall-testing.md`. Component
+`docs/ai/README.md` files contain status and links only; they do not duplicate
+run-specific results.
 
 ## Decisions still required
 

@@ -1,7 +1,8 @@
 # Gamblock-AI Umbrella Agent Rules
 
 
-This workspace coordinates five independent Git repositories. The umbrella
+This workspace coordinates six independent product repositories plus one
+testing repository. The umbrella
 repository owns shared product context, cross-repository contracts, and
 workspace validation. Every component repository also carries a self-contained
 `AGENTS.md` so a standalone clone remains safe to work on.
@@ -40,12 +41,15 @@ does not override a PKM core requirement.
 | Browser extension | `browser_extension/`          | `npm run lint`                           |
 | Infrastructure    | `gamblock-ai-infrastructure/` | `make lint`                              |
 | Model             | `gamblock-ai-model/`          | *(no lint configured)*                   |
+| Testing           | `gamblock-ai-testing/`        | `python3 scripts/verify_public_evidence.py` |
 
 Use `repos.yaml` for repository URLs and `context/manifest.yaml` for the
 versioned context contract. A component may be cloned alone; never assume a
-sibling checkout exists. For a cross-repository change, update each available
-repository independently and report any sibling that still needs a matching
-change.
+sibling checkout exists. Cross-repository test orchestration and its public
+summary belong to `gamblock-ai-testing`; product components retain their own
+source code and unit tests. For a cross-repository change, update each
+available repository independently and report any sibling that still needs a
+matching change.
 
 ## Non-negotiable product invariants
 

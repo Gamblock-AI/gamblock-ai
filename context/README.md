@@ -27,6 +27,7 @@ saat tersedia.
 | Product/implementation change | `pkm_proposal.md`, component `docs/ai/README.md` |
 | Detection, native client, API, storage | `architecture.md`, `privacy-security.md` |
 | Dataset, model, metric, experiment | `research-evaluation.md` |
+| Cross-repository testing/evidence | `testing-evaluation.md`, testing repo `docs/ai/` |
 | Implementation status | affected component `docs/ai/README.md` |
 | Terminology | `glossary.md` |
 
@@ -78,6 +79,7 @@ infrastructure → validasi. Contoh koordinasi wajib:
 - WebSocket shape: extension + Windows service
 - Kode error API: backend + website + Flutter
 - Client-facing endpoint: backend + konsumen
+- Test/evidence workflow: testing repository + affected component snapshots
 
 ### 6. Protected files
 

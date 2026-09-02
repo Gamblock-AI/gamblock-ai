@@ -27,6 +27,7 @@ components=(
   "browser_extension"
   "gamblock-ai-infrastructure"
   "gamblock-ai-model"
+  "gamblock-ai-testing"
 )
 
 for component in "${components[@]}"; do

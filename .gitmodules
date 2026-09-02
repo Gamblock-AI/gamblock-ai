@@ -16,3 +16,7 @@
 [submodule "gamblock-ai-model"]
 	path = gamblock-ai-model
 	url = https://github.com/Gamblock-AI/Gamblock-AI-Model.git
+[submodule "gamblock-ai-testing"]
+	path = gamblock-ai-testing
+	url = https://github.com/Gamblock-AI/Gamblock-AI-Testing.git
+	branch = main

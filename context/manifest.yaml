@@ -1,11 +1,12 @@
 schema_version: 1
-context_version: 2026-08-31.2
+context_version: 2026-09-02.1
 topology: multi-repository-with-umbrella
 canonical_files:
   - context/README.md
   - context/architecture.md
   - context/privacy-security.md
   - context/research-evaluation.md
+  - context/testing-evaluation.md
   - context/glossary.md
   - context/pkm_proposal.md
 component_snapshots:
@@ -15,12 +16,14 @@ component_snapshots:
   - gamblock-ai-model/docs/ai/manifest.yaml
   - gamblock-ai-website/docs/ai/manifest.yaml
   - gamblock_ai_apps/docs/ai/manifest.yaml
+  - gamblock-ai-testing/docs/ai/manifest.yaml
 contracts:
   proposal_authority: 1
   privacy_boundary: 1
   websocket_loopback: 2
   api_error_catalog: 1
   protection_grant: 1
+  testing_evidence: 1
 required_providers:
   - agents
   - claude

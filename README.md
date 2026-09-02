@@ -2,12 +2,13 @@
 
 This is the umbrella workspace for Gamblock-AI, an on-device gambling blocker
 and recovery platform for Indonesian university students. It coordinates six
-independent component repositories while preserving shared product context and
-cross-repository contracts.
+independent product repositories plus one testing repository while preserving
+shared product context and cross-repository contracts.
 
 ## Repository model
 
-The six components remain independently clonable and releasable:
+The six product components remain independently clonable and releasable; the
+testing repository is independently clonable and pinned below as a submodule:
 
 | Directory                     | Repository                      | Purpose                                   |
 | ----------------------------- | ------------------------------- | ----------------------------------------- |
@@ -17,18 +18,17 @@ The six components remain independently clonable and releasable:
 | `browser_extension/`          | `Gamblock-AI-Browser-Extention` | Passive Chrome/Edge DOM sensor            |
 | `gamblock-ai-infrastructure/` | `Gamblock-AI-Infrastructure`    | Ansible deployment automation             |
 | `gamblock-ai-model/`          | `Gamblock-AI-Model`             | Hybrid gambling detection ML model        |
+| `gamblock-ai-testing/`        | `Gamblock-AI-Testing`            | Cross-repository evaluation and evidence  |
 
 The umbrella repository owns `context/`, `AGENTS.md`, workspace scripts, and
 the pinned component composition in `.gitmodules`. Every component duplicates
 the minimum safety and architecture context it needs under `docs/ai/`, so its
 context does not disappear in a standalone clone.
 
-Reproducible PKM prototype evidence lives under `evaluation/pkm-progress/`.
-It combines the independently cloned components without creating a new
-submodule, writes aggregate/hash-only JSON plus an Indonesian PDF summary, and
-keeps raw local device exports in ignored `private/`. Repository preparation is
-implemented; device/VM validation, academic review, and publication remain
-external evidence gates.
+`gamblock-ai-testing/` is the public testing submodule. It owns the
+cross-repository harness, aggregate evidence ledger, and the single canonical
+testing summary at `reports/testing-summary.md`. Raw local exports remain
+ignored in the testing repository and are never copied into public evidence.
 
 ## Clone the full workspace
 

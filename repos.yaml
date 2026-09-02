@@ -20,3 +20,6 @@ components:
   model:
     path: gamblock-ai-model
     repository: https://github.com/Gamblock-AI/Gamblock-AI-Model.git
+  testing:
+    path: gamblock-ai-testing
+    repository: https://github.com/Gamblock-AI/Gamblock-AI-Testing.git

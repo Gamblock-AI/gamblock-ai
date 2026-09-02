@@ -19,6 +19,7 @@ COMPONENTS = {
     "extension": ROOT / "browser_extension",
     "infrastructure": ROOT / "gamblock-ai-infrastructure",
     "model": ROOT / "gamblock-ai-model",
+    "testing": ROOT / "gamblock-ai-testing",
 }
 
 COMPONENT_CONTRACTS = {
@@ -53,6 +54,11 @@ COMPONENT_CONTRACTS = {
         "proposal_authority",
         "privacy_boundary",
     ),
+    "testing": (
+        "proposal_authority",
+        "privacy_boundary",
+        "testing_evidence",
+    ),
 }
 
 ROOT_REQUIRED = (
@@ -69,6 +75,7 @@ ROOT_REQUIRED = (
     "context/architecture.md",
     "context/privacy-security.md",
     "context/research-evaluation.md",
+    "context/testing-evaluation.md",
     "context/glossary.md",
     "repos.yaml",
     ".gitmodules",
