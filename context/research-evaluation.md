@@ -26,18 +26,17 @@ Sebelum mengumpulkan atau melatih, buat dataset card yang berisi:
 - Label definition: `Judi`, `Non-Judi`, excluded/uncertain
 - Class counts, duplicate removal
 - Handling of camouflage cases dan benign controls
-- Known bias, language, time-drift, coverage limitations
+- Known bias, language, coverage limitations
 
 ## Split and leakage controls
 
 1. Connect exact/normalized model-text duplicates and registrable domain/site family into one group
 2. Exclude groups whose rows have conflicting labels, and record the exclusion count
 3. Isolate train, validation, final test groups
-4. Reserve time-shifted set untuk domain-churn evaluation
-5. Keep camouflage/government/education sebagai slice terpisah
-6. Fit vocabulary/vectorizer hanya pada training data
-7. Freeze final test set sebelum threshold selection
-8. Record split manifests dan hashes
+4. Keep camouflage/government/education sebagai slice terpisah
+5. Fit vocabulary/vectorizer hanya pada training data
+6. Freeze final test set sebelum threshold selection
+7. Record split manifests dan hashes
 
 ## Model pipeline
 
@@ -55,8 +54,8 @@ Training bundle berversi harus mencakup:
 - Confusion matrix (TP, FP, TN, FN)
 - Precision, Recall, F1-Score
 - False Positive Rate
-- Performance by slice: ordinary gambling, dynamic/new-domain, camouflage,
-  ordinary benign, government, education
+- Performance by slice: ordinary gambling, camouflage, ordinary benign,
+  government, education
 - Hybrid system + rule-only + model-only ablations
 
 Untuk evaluasi kemajuan prototipe saat ini, digunakan ambang sementara berikut:
