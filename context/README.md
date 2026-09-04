@@ -8,10 +8,14 @@ PKM adalah sumber mutlak.
 
 1. `pkm_proposal.md` — otoritas utama: masalah, target pengguna, fitur PKM,
    dasar ilmiah, tujuan evaluasi, deliverables PKM
-2. Domain documents (`architecture.md`, `privacy-security.md`,
+2. `progress-targets.md` — registri target per versi dan keputusan perubahan;
+   target baru tidak boleh disisipkan ke laporan versi yang sudah dibekukan
+3. `laporan-kemajuan-v5.md` (dan kelak salinan versi berikutnya) — konteks
+   pelaporan kemajuan dan target/temuan yang sedang dilaporkan; v5 read-only
+4. Domain documents (`architecture.md`, `privacy-security.md`,
    `research-evaluation.md`) — menjelaskan bagaimana produk memenuhi
    persyaratan teknis
-4. Component `docs/ai/README.md` — kebenaran implementasi saat ini per repositori
+5. Component `docs/ai/README.md` — kebenaran implementasi saat ini per repositori
 
 ## Proposal integrity warning
 
@@ -27,6 +31,8 @@ saat tersedia.
 | Product/implementation change | `pkm_proposal.md`, component `docs/ai/README.md` |
 | Detection, native client, API, storage | `architecture.md`, `privacy-security.md` |
 | Dataset, model, metric, experiment | `research-evaluation.md` |
+| PKM progress targets | `progress-targets.md`, report copy yang sedang aktif |
+| PKM progress testing/status | `laporan-kemajuan-v5.md` atau report copy aktif, `progress-testing.md`, `research-evaluation.md` |
 | Cross-repository testing/evidence | `testing-evaluation.md`, testing repo `docs/ai/` |
 | Implementation status | affected component `docs/ai/README.md` |
 | Terminology | `glossary.md` |
@@ -99,6 +105,16 @@ infrastructure → validasi. Contoh koordinasi wajib:
 | Workflow / validation policy | `AGENTS.md` / `context/README.md` | component `AGENTS.md`, manifests |
 | Current capability evidence | component `docs/ai/README.md` | affected README |
 
+## Versioned progress-report rule
+
+`laporan-kemajuan-v5.md` is a frozen report snapshot. Later measurements,
+proposed targets, and target changes belong in `progress-testing.md` or the
+versioned target registry `progress-targets.md`; they must not be appended to
+the v5 report. A future v6 report is made by copying v5 and then explicitly
+activating the approved v6 targets from the registry. Until that happens,
+`gamblock-ai-testing/docs/config/targets.json` remains the active v5 machine
+configuration, and proposed targets have no effect on its gates.
+
 Meaningful scope/architecture/workflow/contract changes require `context_version`
 bump di `manifest.yaml` dan setiap snapshot komponen yang terpengaruh.
 
@@ -107,3 +123,17 @@ bump di `manifest.yaml` dan setiap snapshot komponen yang terpengaruh.
 Selama development AI normal, hanya jalankan linter/analyzer yang relevan dan
 context-integrity validator (jika file konteks berubah). Test, build, packaging,
 coverage, E2E hanya dijalankan jika user meminta secara eksplisit.
+
+## Read-only testing audits
+
+Permintaan dengan kata “cek”, “periksa”, “review”, “audit”, atau “ringkasan
+pengujian yang ada” berarti inspeksi read-only. Agen membaca test source,
+konfigurasi, workflow, report/evidence yang sudah tersimpan, status repository,
+dan dokumentasi untuk menyimpulkan kekurangan atau status pending. Permintaan
+tersebut tidak memberi izin untuk menjalankan test, build, packaging, model
+replay, prosedur perangkat/VM, atau `run_evaluation.py`.
+
+Eksekusi hanya dilakukan bila user secara eksplisit meminta menjalankan,
+menguji, memvalidasi, mengevaluasi ulang, melakukan prosedur runtime, atau
+merekam evidence baru. Dalam audit read-only, report lama dilabeli sebagai
+“status tercatat” dan tidak diregenerasi atau diperlakukan sebagai hasil terbaru.

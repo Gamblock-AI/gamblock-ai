@@ -119,6 +119,16 @@ Run `./scripts/verify-ai-context.sh` from this root after changing a catalog.
   status and evidence in the affected component's `docs/ai/README.md`.
 - Update the affected component `README.md`, `AGENTS.md`, and `docs/ai/` when
   commands, paths, architecture, or capability status change.
+- Interpret Indonesian or English requests to “cek”, “periksa”, “review”,
+  “audit”, or “ringkas pengujian yang ada” as a read-only inspection request:
+  inspect test files, test configuration, existing reports/evidence, repository
+  status, and documentation, but do not execute tests, builds, packaging,
+  model replay, device/VM procedures, or the cross-repository runner.
+- Execute a test or regenerate evidence only when the user explicitly asks to
+  run/execute a test, validate it, re-evaluate the model, perform a device/VM
+  procedure, or record new evidence. If a request combines inspection and
+  execution, run only the explicitly named scope; do not infer execution from
+  “all tests” when the request otherwise asks only for a check or summary.
 - At the end of normal development work, run only the narrowest relevant
   linter/analyzer and the context validator when context changed. Do not run
   tests, builds, packaging, coverage, end-to-end suites, or composite full

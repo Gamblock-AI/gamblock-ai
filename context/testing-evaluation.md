@@ -39,6 +39,21 @@ the pinned submodule commit only.
 
 ## Test execution handoff and receipt
 
+### Audit versus execution
+
+“Cek”, “periksa”, “review”, “audit”, dan “ringkas pengujian yang ada” adalah
+permintaan audit read-only. Audit membaca source test, konfigurasi/workflow,
+report/evidence yang sudah ada, status repository, dan runbook; audit tidak
+menjalankan command test, membangun artifact, meregenerasi report, atau
+melakukan prosedur Android/Windows/model. Status pada report yang sudah ada
+harus disebut sebagai status tercatat karena mungkin bukan hasil terbaru.
+
+Command hanya boleh dijalankan bila user meminta secara eksplisit untuk
+menjalankan/menguji/validasi/evaluasi ulang atau merekam evidence baru. Jika
+scope eksekusi disebutkan, jangan memperluasnya ke semua komponen. Test receipt
+dan sinkronisasi report diwajibkan untuk eksekusi/evidence yang benar-benar
+dijalankan, bukan untuk audit read-only.
+
 An explicit test, evaluation, or re-evaluation request is not complete when a
 component command merely succeeds. The agent must synchronize the relevant
 technology report in `gamblock-ai-testing/` through the cross-system runner,
@@ -69,6 +84,16 @@ The receipt format is maintained in
 `gamblock-ai-testing/docs/ai/testing-run-receipt.md`. It is a response-level
 handoff record, not a second committed result file.
 
+## PKM progress-report traceability
+
+`context/laporan-kemajuan-v5.md` is the frozen proposal-facing progress-report
+context. The status, limitation, and remaining-final-gate interpretation for
+each claim is maintained in `context/progress-testing.md`, while target
+definitions and changes are maintained in `context/progress-targets.md`. The
+status file may be updated as evidence changes, but neither it nor a component
+report may silently redefine a v5 target. A future v6 copy must activate its
+approved targets explicitly.
+
 ## Evidence contract
 
 Evidence must distinguish source-code checks, offline replay, and physical
@@ -83,11 +108,25 @@ context, and current device-status interpretation are maintained in
 `gamblock-ai-testing/docs/ai/android-anti-uninstall-context.md`; detailed
 validated scenario results remain in `flutter/report.md`.
 
+The testing repository's `docs/config/targets.json` is the active v5
+machine-readable configuration. A proposed or approved future target is
+recorded in `context/progress-targets.md` and does not affect this runner until
+the corresponding report version is activated.
+
+Phase 4 latency has three named, separately rendered gates. `latency_feasibility`
+is one homogeneous 30-sample group below the p95 200 ms target. The
+`pkm_progress_v5_demo` checkpoint is intentionally narrower: the demonstrated
+Android `researchRelease` APK, Chrome, and `warm_foreground_online`, with 30
+successful samples and no block/visibility failure. `final_readiness` retains
+the Android/Windows × Chrome/Edge/Opera × profile/release matrix. A debug
+measurement is diagnostic and cannot satisfy either report acceptance or final
+readiness. The progress checkpoint does not remove the final matrix.
+
 ## Public privacy boundary
 
 The public ledger may contain only aggregate-safe labels and state:
 
-- OEM family, Android API, build mode, scenario, outcome, and recovery duration
+- OEM family, Android API, build mode, product flavor, scenario, outcome, and recovery duration
 - opaque run/sample labels
 - allowlisted component status and output hashes
 - local visual-evidence availability and a SHA-256 digest, when supplied
@@ -100,6 +139,12 @@ Model aggregate charts are not screenshots: they are permitted only when
 generated from aggregate metrics and written to the exact allowlisted visual
 paths by the testing runner; they must not contain sample-level or browsing
 content.
+
+Human-participant testing is separate from product consent. Identifiers, raw
+responses, recordings, screenshots, consent forms, and raw task observations
+stay outside the repository under the approved institutional process. Public
+documentation may retain only approved aggregate counts, protocol version,
+and aggregate outcomes.
 
 ## Firebase and device policy
 

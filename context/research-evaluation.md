@@ -58,7 +58,11 @@ Training bundle berversi harus mencakup:
   government, education
 - Hybrid system + rule-only + model-only ablations
 
-Untuk evaluasi kemajuan prototipe saat ini, digunakan ambang sementara berikut:
+Evaluasi memakai dua gate bernama. Keduanya harus ditampilkan terpisah; lulus
+checkpoint pengembangan bukan lulus target laporan kemajuan.
+
+`developmental_checkpoint` dipakai untuk penyaringan kandidat dan regresi
+engineering, dengan ambang berikut:
 
 - Accuracy >= 90%
 - Precision >= 90%
@@ -66,12 +70,24 @@ Untuk evaluasi kemajuan prototipe saat ini, digunakan ambang sementara berikut:
 - F1-score >= 90%
 - False Positive Rate (FPR) <= 5%
 
-Ambang ini adalah checkpoint pelaporan kemajuan untuk prototipe, bukan target
-akhir proposal atau dasar untuk mengubah threshold pada final test set. Proposal
-PKM tidak menetapkan angka numerik untuk metrik deteksi; nilai metrik aktual,
-split, audit leakage, dan keterbatasan tetap harus dilaporkan. Bila snapshot
-prediksi dan proyeksi deployment berbeda, keduanya harus dilaporkan dan klaim
-hanya boleh mengikuti hasil deployment.
+`pkm_progress_v5` adalah gate penerimaan untuk angka yang ditulis sebagai
+capaian laporan kemajuan: Accuracy, Precision, Recall, dan F1-score >= 95%,
+dan FPR <= 2%, pada split final yang bebas leakage. Angka tersebut adalah target
+pelaporan v5, bukan persyaratan numerik yang ditemukan di proposal PKM. Nilai
+metrik aktual, split, audit leakage, dan keterbatasan tetap harus dilaporkan.
+Bila snapshot prediksi dan proyeksi deployment berbeda, keduanya harus
+dilaporkan dan klaim hanya boleh mengikuti hasil deployment.
+
+Ambang dan cakupan yang sedang aktif untuk laporan v5 diringkas di
+`progress-targets.md` dan diwujudkan oleh konfigurasi testing v5. Target baru
+dicatat terlebih dahulu di registri tersebut sebagai `proposed` atau
+`approved`; target itu tidak boleh dipakai untuk menafsirkan ulang laporan v5
+sebelum diaktifkan untuk versi laporan berikutnya.
+
+Artefak yang diperiksa adalah artefak Hybrid yang benar-benar dimuat runtime
+Android/Windows, bukan sekadar format sumber pelatihan. Kontrak ukuran adalah
+total artefak Hybrid lokal < 5 MB, hash/provenance dapat diperiksa, dan inferensi
+tetap lokal. Proposal tidak mensyaratkan runtime ONNX.
 
 ## Threshold selection
 
@@ -86,10 +102,23 @@ Target proposal: block latency di bawah 200 ms.
 - start event: input lokal lengkap tersedia
 - end event: block/intervention terlihat committed
 - Pisahkan durasi extraction, preprocessing, rule, inference, decision, IPC, UI
-- Engineering gate: p95 `input_to_visible_ms` harus secara ketat di bawah 200 ms
-  pada setiap grup platform/perangkat/skenario/browser/build mode, dengan
-  minimal 30 sampel dan tanpa kegagalan aksi blok atau visibility; report juga
-  median, p99, maksimum
+- Gunakan tiga tingkat bukti yang tidak boleh dipertukarkan:
+  1. **Kelayakan latency:** sedikitnya satu kelompok lingkungan homogen,
+     minimal 30 sampel berhasil, tanpa kegagalan aksi blok/visibility, dan p95
+     `input_to_visible_ms` secara ketat di bawah 200 ms. Ini menjawab apakah
+     prototipe mampu mencapai target pada lingkungan yang diukur.
+  2. **Checkpoint laporan kemajuan PKM v5:** satu demonstrasi yang dapat
+     diulang pada APK **Research release**, Android, Chrome,
+     `warm_foreground_online`, dengan minimal 30 sampel berhasil dan p95
+     secara ketat di bawah 200 ms. Mode debug tidak dapat memenuhi checkpoint
+     ini karena ia mengukur assertion/instrumentasi debug, bukan APK yang
+     didemonstrasikan.
+  3. **Kesiapan akhir:** setiap sel Android/Windows × Chrome/Edge/Opera ×
+     profile/release, masing-masing minimal 30 sampel berhasil tanpa kegagalan
+     dan p95 di bawah 200 ms. Report juga mencatat median, p99, dan maksimum.
+- Pengukuran lokal yang belum dipromosikan sebagai ledger agregat tervalidasi
+  hanya berstatus *recorded, unpromoted*. Ia dapat mendukung catatan sumber,
+  tetapi bukan klaim checkpoint atau hasil final.
 - Bedakan warm/cold start, online/offline, foreground/background
 
 ## Functional and resilience evaluation
@@ -121,7 +150,8 @@ to the `Gamblock-AI-Testing` repository, mounted in the umbrella at
 and privacy-safe aggregate exports; it does not copy source code or browsing
 data into the umbrella.
 
-The canonical operational rules are in `context/testing-evaluation.md` and
+The canonical operational rules are in `context/testing-evaluation.md`,
+`context/progress-testing.md`, and
 `gamblock-ai-testing/docs/ai/android-anti-uninstall-testing.md`. Component
 `docs/ai/README.md` files contain status and links only; they do not duplicate
 run-specific results.
