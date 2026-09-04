@@ -46,6 +46,24 @@ the report version and target ID that it supports.
 | Formative user feedback, 9 UTY students | **completed formative activity, off-repository**. Participants tried the prototype, described flow/bug feedback, and exposed an uninstall-permission issue; the emergency route was the follow-up. | This was not SUS, a quantitative usability score, or an efficacy result. No identities, raw feedback, consent records, or recordings are retained in the repository. |
 | Structured task usability + SUS | **planned.** | Confirm the appropriate campus/authority governance before recruitment; use the privacy-safe protocol in `gamblock-ai-testing/docs/ai/pkm-usability-testing.md` and publish only approved aggregates. |
 
+### Android anti-uninstall limitation
+
+The Research APK provides best-effort removal resistance through the supported
+Android Device Administrator and Accessibility mechanisms. Device Administrator
+blocks uninstall while it remains active, but Android/OEM Settings may require
+the user to deactivate that administrator before continuing with removal. The
+`DeviceAdminReceiver` callback can warn and persist a tamper event; it cannot
+veto the OS deactivation. Accessibility can detect the system-UI transition and
+attempt a safe back/home action, but it cannot override Settings or the package
+installer, and an OEM may stop the protection process during the transition.
+
+The Redmi 12C Research release evidence demonstrates this boundary: the
+Settings path reached “Nonaktifkan & uninstal” and removed the package after
+user confirmation. This remains a recorded `failed` result and is not relabeled
+as a pass. The current prototype scope therefore covers detection, warning,
+audit, recovery, and approved-grant removal; guaranteed prevention using
+Device Owner/MDM/kiosk provisioning is outside the current APK scope.
+
 ## Named metric gates
 
 | Gate | Accuracy / Precision / Recall / F1 | FPR | Purpose |
