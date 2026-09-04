@@ -108,19 +108,24 @@ context, and current device-status interpretation are maintained in
 `gamblock-ai-testing/docs/ai/android-anti-uninstall-context.md`; detailed
 validated scenario results remain in `flutter/report.md`.
 
-The testing repository's `docs/config/targets.json` is the active v5
-machine-readable configuration. A proposed or approved future target is
-recorded in `context/progress-targets.md` and does not affect this runner until
-the corresponding report version is activated.
+The testing repository's `docs/config/targets.json` is the v5
+machine-readable configuration retained for historical reproduction. Future
+versions use separate `docs/config/targets-vN.json` files selected with the
+runner's report-version option. A proposed or approved future target is
+recorded in `context/progress-targets.md` and does not affect the runner until
+the corresponding report copy, registry entry, and configuration are active.
 
 Phase 4 latency has three named, separately rendered gates. `latency_feasibility`
-is one homogeneous 30-sample group below the p95 200 ms target. The
-`pkm_progress_v5_demo` checkpoint is intentionally narrower: the demonstrated
-Android `researchRelease` APK, Chrome, and `warm_foreground_online`, with 30
-successful samples and no block/visibility failure. `final_readiness` retains
-the Android/Windows × Chrome/Edge/Opera × profile/release matrix. A debug
-measurement is diagnostic and cannot satisfy either report acceptance or final
-readiness. The progress checkpoint does not remove the final matrix.
+is one homogeneous 30-sample group below the p95 200 ms target. The selected
+report version's `pkm_progress_vN_demo` checkpoint is intentionally narrower:
+the demonstrated Android `researchRelease` APK, Chrome, and
+`warm_foreground_online`, with 30 successful samples and no block/visibility
+failure. For v5 this is `pkm_progress_v5_demo`; a future active report selects
+the matching `pkm_progress_vN_demo` entry from its versioned configuration.
+`final_readiness` retains the Android/Windows × Chrome/Edge/Opera ×
+profile/release matrix. A debug measurement is diagnostic and cannot satisfy
+either report acceptance or final readiness. The progress checkpoint does not
+remove the final matrix.
 
 ## Public privacy boundary
 

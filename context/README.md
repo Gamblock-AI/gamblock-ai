@@ -110,10 +110,14 @@ infrastructure → validasi. Contoh koordinasi wajib:
 `laporan-kemajuan-v5.md` is a frozen report snapshot. Later measurements,
 proposed targets, and target changes belong in `progress-testing.md` or the
 versioned target registry `progress-targets.md`; they must not be appended to
-the v5 report. A future v6 report is made by copying v5 and then explicitly
-activating the approved v6 targets from the registry. Until that happens,
-`gamblock-ai-testing/docs/config/targets.json` remains the active v5 machine
-configuration, and proposed targets have no effect on its gates.
+the v5 report. When the user requests a new progress report based on the
+latest report, the AI agent must treat it as the next integer version (v5 →
+v6, v6 → v7, and so on), copy the latest report without changing its source,
+and apply only the explicitly approved targets for the new version. If the
+latest report or its version number is ambiguous, ask before creating or
+activating a target. Until the new report and registry target are activated,
+the previous version's machine configuration remains authoritative and the
+new target has no effect on its gates.
 
 Meaningful scope/architecture/workflow/contract changes require `context_version`
 bump di `manifest.yaml` dan setiap snapshot komponen yang terpengaruh.

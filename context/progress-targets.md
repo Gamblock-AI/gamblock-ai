@@ -17,6 +17,9 @@ report or test runner.
   the target of an existing report version.
 - `gamblock-ai-testing/docs/config/targets.json` remains the active v5 machine
   configuration until a later report version is explicitly activated.
+- A new progress report is always the next integer version after the latest
+  report in scope (for example, v5 becomes v6 and v6 becomes v7). The previous
+  report remains read-only and is never silently revised.
 
 The same target may be retained in a later report, but it must still be
 referenced by its report version and target ID. A new target is never silently
@@ -24,7 +27,7 @@ inserted into an older report's table.
 
 ## Target lifecycle
 
-| Status | Meaning | Effect on v5 runner/report |
+| Status | Meaning | Effect on the selected runner/report |
 | --- | --- | --- |
 | `proposed` | A candidate target or change has been recorded for discussion. | None. It is documentation only. |
 | `approved` | The PKM team/owner has accepted the target for a future report version. | None until that report version is activated. |
@@ -55,27 +58,30 @@ their presence here is a record, not permission to edit the v5 report.
 
 ## Target change register
 
-No additional v6 target is active or approved in this registry yet. When a new
-target is considered, add it here using this format and leave it `proposed`
-until the report-version decision is made:
+The following v6 target is approved but not active. It may not reinterpret v5
+evidence or be used by the runner until the v6 report copy exists and the
+activation procedure below is completed. Future versions follow the same
+append-only pattern.
 
 | Target ID | Intended report version | Status | Proposed target/change | Reason and evidence need | Activation condition |
 | --- | --- | --- | --- | --- | --- |
-| — | `v6` | — | No entry yet. | — | Create the v6 copy, then record and approve the target before activation. |
+| `v6-detection-progress` | `v6` | `approved` | Accuracy, precision, recall, and F1 >=90%; FPR <=5% on a leakage-safe split. | Align the progress gate with the already-passed developmental checkpoint without removing any proposal metric or false-positive analysis. No retraining is required. | Create `laporan-kemajuan-v6.md`, review the v6 config, then change this row and the config activation status to `active`. |
+| `v6-latency-final-chrome-release` | `v6` | `approved` | Final-readiness latency is limited to Android/Windows × Chrome × release; each cell requires >=30 successful samples, no block/visibility failure, and p95 `input_to_visible_ms` <200 ms. | Focuses the retained final check on the production build and the primary supported browser while preserving the proposal's real-time latency intent. The v5 broader matrix remains historical and unchanged. | Create `laporan-kemajuan-v6.md`, review the v6 config and this registry entry together, then change this row and the config activation status to `active`. |
 
 ## Activation procedure for v6
 
 1. Copy `laporan-kemajuan-v5.md` to `laporan-kemajuan-v6.md`; preserve v5 as
-   the historical source snapshot.
-2. Add or update the target entry here, keeping the v6 target ID and status
-   explicit. Do not alter the v5 baseline rows.
-3. Move only the accepted target to `approved`, then `active` after the v6
-   report and the corresponding machine-readable runner configuration are
-   reviewed together.
-4. Update `progress-testing.md` so each evidence status identifies the report
-   version and target ID it supports.
+   the historical source snapshot. If the user asks for a newer report after
+   v6, repeat this step with v7 (the next integer version).
+2. Update only the new report copy to reference the approved versioned target;
+   do not alter the v5 baseline rows or source report.
+3. Change the accepted target row from `approved` to `active` and set the
+   matching `targets-v6.json` `activation_status` to `active` after both files
+   are reviewed together.
+4. Run the versioned evaluator with `--report-version v6`; each evidence row
+   must identify the report version and target ID it supports.
 5. Retain the v5 runner/configuration for historical reproduction; do not
-   reinterpret old v5 evidence using v6 thresholds.
+   reinterpret old v5 evidence using later-version thresholds.
 
 Until these steps occur, all new measurements are either evidence against the
 active v5 targets or exploratory material. They are not silently eligible for

@@ -38,7 +38,8 @@ the report version and target ID that it supports.
 | Domain-grouped candidate evaluation (2,523 rows) | **passed (recorded)** only for `developmental_checkpoint`: Accuracy 96.59%, Precision 94.22%, Recall 94.71%, F1 94.47%, FPR 2.57%. | Split audit is leakage-safe, but this candidate does not meet the stricter `pkm_progress_v5` 95%/2% gate and is not a deployed-result claim. |
 | Hybrid artifact loaded locally | **pending** artifact-contract execution. Current Android/Windows implementations load serialized Hybrid model/rules JSON; the repository source ONNX is provenance, not a demonstrated runtime format. | Verify the actual loaded artifacts, combined size < 5 MB, hash/provenance, parity/integrity, and local-only execution. |
 | Android anti-uninstall | **partial, recorded**: seven valid AOSP Pixel lifecycle records. | Complete all required OEM-family and scenario cells in the versioned device matrix. |
-| Android latency (31 samples) | **recorded, unpromoted** source-side measurement; no public Phase 4 ledger is committed. It may be reconsidered only as a single-environment feasibility source measurement after the safe record is validated. | The v5 progress checkpoint is still **pending**: promote 30+ safe records from the demonstrated APK (`researchRelease`) on Android + Chrome + `warm_foreground_online`, with no failure and p95 <200 ms. The broader Android/Windows × Chrome/Edge/Opera × profile/release matrix remains a final-readiness gate, not a progress-report prerequisite. |
+| Android latency (Redmi 12C, 30 samples) | **passed (recorded)** in run `redmi12c_release_probe` in the privacy-safe Phase 4 ledger for Research release, Chrome, `warm_foreground_online`; 30/30 visible and completed, p95 `input_to_visible_ms` 182.34 ms, no failures. | The v5 progress-demo checkpoint is **passed** for this homogeneous demonstrated group. The broader Android/Windows × Chrome/Edge/Opera × profile/release matrix remains a final-readiness gate, not a progress-report prerequisite. |
+| Android Research UI runtime observation (Redmi 12C, v1.6.5) | **passed (recorded)** for the user-visible demonstration: the operator confirms the dashboard displayed “Proteksi Aktif” and Pattern Interrupt was visibly rendered; the same run now has 30 privacy-safe Phase 4 records in the testing ledger. | The official metric is the Phase 4 `input_to_visible_ms` ledger (p95 182.34 ms). The earlier external overlay proxy remains diagnostic only and is not used for the gate. |
 | Windows extension-to-model / blocking E2E | **pending** interactive Windows VM evidence. | Keep the Windows final-readiness procedure and promote only aggregate-safe results. |
 | Pattern Interrupt, recovery, and accountability flow | Product source/unit coverage exists; the cross-repository Flutter unit receipt is **pending** because its runner has not included Flutter. | Run the explicit Flutter scope and retain its canonical report result; runtime and accessibility scenarios remain part of final readiness. |
 | Backend integration | **pending** because an isolated `DATABASE_URL` was not available for the retained integration procedure. | Execute only with an isolated approved database and publish its testing-repository result. |
@@ -50,11 +51,22 @@ the report version and target ID that it supports.
 | Gate | Accuracy / Precision / Recall / F1 | FPR | Purpose |
 | --- | --- | --- | --- |
 | `developmental_checkpoint` | >=90% each | <=5% | Candidate screening and engineering regression. |
-| `pkm_progress_v5` | >=95% each | <=2% | Acceptance gate for a leakage-safe model result represented as a v5 progress-report achievement. |
+| `pkm_progress_v5` | >=95% each | <=2% | Historical acceptance gate for a leakage-safe model result represented as a v5 progress-report achievement. |
+| `pkm_progress_v6` | >=90% each | <=5% | Approved v6 progress gate; inactive until the v6 report and registry target are activated. |
 
 Both gate outputs must be retained in evaluator output. A legacy unqualified
 `numeric_gate_passed` field, where retained for compatibility, denotes only
 the developmental checkpoint and must not be used for report acceptance.
+
+The recorded 2,523-row grouped candidate is numerically eligible for the
+approved v6 90%/5% gate, but it is not a v6 claim yet. A versioned replay and
+evidence report must be generated only after `laporan-kemajuan-v6.md` exists
+and `v6-detection-progress` is active in the target registry.
+
+The approved v6 latency scope is narrower than the frozen v5 final-readiness
+matrix: Android/Windows × Chrome × release only. It remains inactive until
+`laporan-kemajuan-v6.md` exists and `v6-latency-final-chrome-release` is
+activated together with the v6 configuration.
 
 ## Final-readiness gates retained
 

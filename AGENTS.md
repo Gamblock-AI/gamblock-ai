@@ -25,6 +25,13 @@ features. It is protected academic source material: do not rewrite it to match
 code or invent its missing extracted sections. Supporting features must be
 labeled and may not displace proposal requirements.
 
+When the user requests a new PKM progress report based on the latest report,
+interpret it as the next integer version (for example, v5 → v6 or v6 → v7).
+Keep the previous report read-only, record new targets in the versioned target
+registry first, and activate a new machine configuration only after the new
+report copy and registry entry are reviewed together. Ask if the latest report
+or version number is ambiguous.
+
 Do not rely on instruction-file precedence to resolve contradictions. If root,
 component, README, context, tests, and implementation disagree, stop the
 affected change, establish current behavior from code/tests, preserve the
