@@ -99,7 +99,7 @@ Target proposal: block latency di bawah 200 ms.
 - start event: input lokal lengkap tersedia
 - end event: block/intervention terlihat committed
 - Pisahkan durasi extraction, preprocessing, rule, inference, decision, IPC, UI
-- Gunakan tiga tingkat bukti yang tidak boleh dipertukarkan:
+- Gunakan dua tingkat bukti latency yang tidak boleh dipertukarkan:
   1. **Kelayakan latency:** sedikitnya satu kelompok lingkungan homogen,
      minimal 30 sampel berhasil, tanpa kegagalan aksi blok/visibility, dan p95
      `input_to_visible_ms` secara ketat di bawah 200 ms. Ini menjawab apakah
@@ -110,14 +110,16 @@ Target proposal: block latency di bawah 200 ms.
      secara ketat di bawah 200 ms. Mode debug tidak dapat memenuhi checkpoint
      ini karena ia mengukur assertion/instrumentasi debug, bukan APK yang
      didemonstrasikan.
-  3. **Pengujian runtime klien:** gate latency final-readiness sebelumnya
-     diganti oleh dua kontrak terpisah. Evaluasi model lokal yang seimbang
-     menggunakan 50 sampel judi dan 50 non-judi pada Android dan Windows,
-     dengan accuracy, precision, recall, dan F1 minimal 90% serta FPR maksimal
-     5%. Regresi dukungan peramban menggunakan satu perangkat Android dan satu
-     VM Windows; masing-masing platform menguji lima peramban dengan 5 sampel
-     judi dan 5 non-judi per peramban. Hasil runtime harus menunjukkan
-     `intervention` untuk judi dan `allow` untuk non-judi.
+- **Pengujian runtime klien:** ini bukan tingkat latency ketiga. Gate
+  final-readiness sebelumnya diganti oleh dua kontrak runtime terpisah.
+  Evaluasi model lokal yang seimbang menggunakan 50 sampel judi dan 50
+  non-judi pada Android dan Windows, dengan accuracy, precision, recall, dan F1
+  minimal 90% serta FPR maksimal 5%. Regresi dukungan peramban menggunakan
+  satu perangkat Android dan satu VM Windows; masing-masing platform menguji
+  lima kandidat peramban dengan 5 sampel judi dan 5 non-judi per peramban.
+  Hasil runtime harus menunjukkan `intervention` untuk judi dan `allow` untuk
+  non-judi. Evidence ini disimpan di `flutter/evidence/client-runtime/` dan
+  divalidasi terpisah dari ledger latency.
 - Pengukuran lokal yang belum dipromosikan sebagai ledger agregat tervalidasi
   hanya berstatus *recorded, unpromoted*. Ia dapat mendukung catatan sumber,
   tetapi bukan klaim checkpoint atau hasil final.
@@ -164,6 +166,5 @@ run-specific results.
 
 - Restorasi proposal asli
 - Dataset governance owner dan labeling protocol
-- Final latency gate dan device matrix
 - Definisi retensi
 - Rute review etis dan desain studi Pattern Interrupt
