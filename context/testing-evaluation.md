@@ -111,14 +111,23 @@ The testing repository's `docs/config/targets.json` is the single active
 machine-readable configuration. The runner uses it directly and does not
 select among parallel report or target configurations.
 
-Phase 4 latency has three named, separately rendered gates. `latency_feasibility`
+Phase 4 latency has two named, separately rendered gates. `latency_feasibility`
 is one homogeneous 30-sample group below the p95 200 ms target. The current
 `progress_demo` checkpoint is intentionally narrower: the demonstrated Android
 `researchRelease` APK, Chrome, and `warm_foreground_online`, with 30 successful
-samples and no block/visibility failure. `final_readiness` covers Android /
-Windows × Chrome × release. A debug measurement is diagnostic and cannot
-satisfy either report acceptance or final readiness. The progress checkpoint
-does not remove the final matrix.
+samples and no block/visibility failure. The former final-readiness latency
+gate has been replaced by two separate client runtime contracts: balanced local
+model evaluation on Android and Windows, and cross-platform browser support
+regression on one Android device and one Windows VM. A debug measurement is
+diagnostic and cannot satisfy the progress checkpoint.
+
+The two client-runtime evidence sets use explicit case folders rather than a
+flat ledger: the balanced model evaluation uses
+`<platform>/<case>`, while browser support uses
+`<platform>/<browser>/<case>` under
+`gamblock-ai-testing/flutter/evidence/client-runtime/`. The active target
+configuration and `docs/ai/client-runtime-evidence.md` define the exact
+directory and aggregate-file contract.
 
 ## Public privacy boundary
 

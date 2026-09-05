@@ -110,9 +110,14 @@ Target proposal: block latency di bawah 200 ms.
      secara ketat di bawah 200 ms. Mode debug tidak dapat memenuhi checkpoint
      ini karena ia mengukur assertion/instrumentasi debug, bukan APK yang
      didemonstrasikan.
-  3. **Kesiapan akhir:** setiap sel Android/Windows × Chrome × release,
-     masing-masing minimal 30 sampel berhasil tanpa kegagalan
-     dan p95 di bawah 200 ms. Report juga mencatat median, p99, dan maksimum.
+  3. **Pengujian runtime klien:** gate latency final-readiness sebelumnya
+     diganti oleh dua kontrak terpisah. Evaluasi model lokal yang seimbang
+     menggunakan 50 sampel judi dan 50 non-judi pada Android dan Windows,
+     dengan accuracy, precision, recall, dan F1 minimal 90% serta FPR maksimal
+     5%. Regresi dukungan peramban menggunakan satu perangkat Android dan satu
+     VM Windows; masing-masing platform menguji lima peramban dengan 5 sampel
+     judi dan 5 non-judi per peramban. Hasil runtime harus menunjukkan
+     `intervention` untuk judi dan `allow` untuk non-judi.
 - Pengukuran lokal yang belum dipromosikan sebagai ledger agregat tervalidasi
   hanya berstatus *recorded, unpromoted*. Ia dapat mendukung catatan sumber,
   tetapi bukan klaim checkpoint atau hasil final.
