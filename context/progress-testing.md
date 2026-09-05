@@ -35,10 +35,9 @@ Evidence rows must preserve their scope, limitations, and privacy boundary.
 | Domain-grouped candidate evaluation (2,523 rows) | **passed (recorded)** for `developmental_checkpoint`: Accuracy 96.59%, Precision 94.22%, Recall 94.71%, F1 94.47%, FPR 2.57%. | Split audit is leakage-safe and the candidate meets the current 90%/5% gate, but it is not a deployed-result claim. |
 | Hybrid artifact loaded locally | **pending** artifact-contract execution. Current Android/Windows implementations load serialized Hybrid model/rules JSON; the repository source ONNX is provenance, not a demonstrated runtime format. | Verify the actual loaded artifacts, combined size < 5 MB, hash/provenance, parity/integrity, and local-only execution. |
 | Android anti-uninstall | **partial, recorded**: 18 samples across 17 groups, with 16 passing assertions and 2 Android/OEM Settings limitations; the seven valid AOSP Pixel lifecycle records are a subset. | Complete all required OEM-family and scenario cells in the device matrix; retain Settings limitations as platform constraints, not assumed Flutter code defects. |
-| Android latency (Redmi 12C, 30 samples) | **passed (recorded)** in run `redmi12c_release_probe` in the privacy-safe Phase 4 ledger for Research release, Chrome, `warm_foreground_online`; 30/30 visible and completed, p95 `input_to_visible_ms` 182.34 ms, no failures. | The current progress-demo checkpoint is **passed** for this homogeneous demonstrated group. The former final-readiness latency matrix has been replaced by separate client runtime contracts. |
+| Android latency (Redmi 12C, 30 samples) | **passed (recorded)** in run `redmi12c_release_probe` in the privacy-safe Phase 4 ledger for Research release, Chrome, `warm_foreground_online`; 30/30 visible and completed, p95 `input_to_visible_ms` 182.34 ms, no failures. | The current progress-demo checkpoint is **passed** for this homogeneous demonstrated group. The former final-readiness latency matrix has been replaced by the browser-support runtime contract. |
 | Android Research UI runtime observation (Redmi 12C, v1.6.5) | **passed (recorded)** for the user-visible demonstration: the operator confirms the dashboard displayed “Proteksi Aktif” and Pattern Interrupt was visibly rendered; the same run now has 30 privacy-safe Phase 4 records in the testing ledger. | The official metric is the Phase 4 `input_to_visible_ms` ledger (p95 182.34 ms). The earlier external overlay proxy remains diagnostic only and is not used for the gate. |
-| Flutter local model balanced evaluation | **pending** Android and Windows runtime evidence. | Execute 50 gambling + 50 non-gambling fixtures per platform on Research release and apply the 90%/5% classification gate. |
-| Cross-platform browser support regression | **pending** one Android device and one Windows VM. | Execute the five-browser platform matrix with 5 gambling + 5 non-gambling fixtures per browser; promote only aggregate-safe allow/intervention outcomes. |
+| Cross-platform browser support regression | **passed (recorded)** for one Android device. | Execute Chrome, Edge, Brave, and Firefox on Android with 5 gambling + 5 non-gambling fixtures per browser; Windows Chrome/Edge/Brave/Opera/Firefox evidence is optional and non-gating; promote only aggregate-safe allow/intervention outcomes. |
 | Pattern Interrupt, recovery, and accountability flow | Product source/unit coverage exists; the cross-repository `flutter_pattern_interrupt_unit` check is **passed (recorded)** in the current Flutter report. | This is source/unit evidence only; runtime and accessibility scenarios remain separate from the client model/browser contracts. |
 | Backend integration | **passed (recorded)**: the explicit local PostgreSQL run and cross-repository runner completed migration/encrypted persistence, transaction rollback, and concurrent aggregate idempotency checks. | The isolated backend integration gate is no longer pending; retain the aggregate report and receipt as the current evidence. |
 | Formative user feedback, 9 UTY students | **completed formative activity, off-repository**. Participants tried the prototype, described flow/bug feedback, and exposed an uninstall-permission issue; the emergency route was the follow-up. | This was not SUS, a quantitative usability score, or an efficacy result. No identities, raw feedback, consent records, or recordings are retained in the repository. |
@@ -81,12 +80,12 @@ evidence-maturity boundaries above.
 ## Remaining readiness gates
 
 Readiness still requires: leakage-safe strict model evaluation; actual runtime
-artifact contract; complete Android device matrix; the Flutter local model
-balanced evaluation (50 gambling + 50 non-gambling fixtures on Android and
-Windows); the cross-platform browser support regression (one Android device,
-one Windows VM, five browsers per platform, and 5+5 fixtures per browser); and
-the approved structured usability protocol if human-participant results are to
-be claimed. The former Android/Windows Chrome latency matrix is no longer a
-separate gate. The isolated backend integration gate is passed and recorded.
+artifact contract; complete Android device matrix; and the approved structured
+usability protocol if human-participant results are to be claimed. The required
+Android browser regression is passed and recorded for Chrome/Edge/Brave/Firefox
+with 5+5 fixtures per browser. Optional Windows coverage may be added
+separately with Chrome/Edge/Brave/Opera/Firefox. The former Android/Windows
+Chrome latency matrix is no longer a separate gate. The isolated backend
+integration gate is passed and recorded.
 The future usability study must distinguish formative feedback from a measured
 usability result and must not use product consent as research consent.

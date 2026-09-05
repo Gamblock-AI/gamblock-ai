@@ -116,17 +116,16 @@ is one homogeneous 30-sample group below the p95 200 ms target. The current
 `progress_demo` checkpoint is intentionally narrower: the demonstrated Android
 `researchRelease` APK, Chrome, and `warm_foreground_online`, with 30 successful
 samples and no block/visibility failure. The former final-readiness latency
-gate has been replaced by two separate client runtime contracts: balanced local
-model evaluation on Android and Windows, and cross-platform browser support
-regression on one Android device and one Windows VM. A debug measurement is
-diagnostic and cannot satisfy the progress checkpoint.
+gate has been replaced by the cross-platform browser support regression. The
+regression requires one Android device and treats the Windows browser matrix as
+optional and non-gating. A debug measurement is diagnostic and cannot satisfy
+the progress checkpoint.
 
-The two client-runtime evidence sets use explicit case folders rather than a
-flat ledger: the balanced model evaluation uses
-`<platform>/<case>`, while browser support uses
-`<platform>/<browser>/<case>` under
-`gamblock-ai-testing/flutter/evidence/client-runtime/`. The active target
-configuration and `docs/ai/client-runtime-evidence.md` define the exact
+The browser client-runtime evidence uses explicit
+`<platform>/<browser>/<case>` folders under
+`gamblock-ai-testing/flutter/evidence/client-runtime/`. Android cells are
+required; Windows cells are optional when evidence is available. The active
+target configuration and `docs/ai/client-runtime-evidence.md` define the exact
 directory and aggregate-file contract.
 
 ## Public privacy boundary

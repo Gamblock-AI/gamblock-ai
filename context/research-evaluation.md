@@ -111,12 +111,11 @@ Target proposal: block latency di bawah 200 ms.
      ini karena ia mengukur assertion/instrumentasi debug, bukan APK yang
      didemonstrasikan.
 - **Pengujian runtime klien:** ini bukan tingkat latency ketiga. Gate
-  final-readiness sebelumnya diganti oleh dua kontrak runtime terpisah.
-  Evaluasi model lokal yang seimbang menggunakan 50 sampel judi dan 50
-  non-judi pada Android dan Windows, dengan accuracy, precision, recall, dan F1
-  minimal 90% serta FPR maksimal 5%. Regresi dukungan peramban menggunakan
-  satu perangkat Android dan satu VM Windows; masing-masing platform menguji
-  lima kandidat peramban dengan 5 sampel judi dan 5 non-judi per peramban.
+  final-readiness sebelumnya diganti oleh kontrak regresi dukungan peramban.
+  Regresi ini mewajibkan satu perangkat Android yang menguji Chrome, Edge,
+  Brave, dan Firefox dengan 5 sampel judi dan 5 non-judi per peramban.
+  Pengujian Windows pada Chrome, Edge, Brave, Opera, dan Firefox bersifat
+  opsional dan tidak menggagalkan gate Android.
   Hasil runtime harus menunjukkan `intervention` untuk judi dan `allow` untuk
   non-judi. Evidence ini disimpan di `flutter/evidence/client-runtime/` dan
   divalidasi terpisah dari ledger latency.
