@@ -72,7 +72,7 @@ ROOT_REQUIRED = (
     "context/README.md",
     "context/manifest.yaml",
     "context/pkm_proposal.md",
-    "context/laporan-kemajuan-v5.md",
+    "context/laporan-kemajuan.md",
     "context/architecture.md",
     "context/privacy-security.md",
     "context/research-evaluation.md",

@@ -1,5 +1,5 @@
 schema_version: 1
-context_version: 2026-09-04.5
+context_version: 2026-09-05.1
 topology: multi-repository-with-umbrella
 canonical_files:
   - context/README.md
@@ -11,7 +11,7 @@ canonical_files:
   - context/progress-testing.md
   - context/glossary.md
   - context/pkm_proposal.md
-  - context/laporan-kemajuan-v5.md
+  - context/laporan-kemajuan.md
 component_snapshots:
   - browser_extension/docs/ai/manifest.yaml
   - gamblock-ai-backend/docs/ai/manifest.yaml

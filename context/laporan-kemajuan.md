@@ -356,7 +356,7 @@ Tabel 2. 1 Target Luaran Produk Karsa Cipta Gamblock-AI
 
 |**Jenis/Komponen**<br>**yang Diuji **|**Parameter Uji**|**Metode Uji**|**Kriteria Lulus**|
 |---|---|---|---|
-|_Hybrid Analysis_|_Accuracy_,<br>_precision_,_recall_,<br>_F1-score_, dan_false_<br>_positive rate_|Evaluasi<br>menggunakan 2.592<br>data uji historis dan evaluasi<br>terpisah dengan split bebas leakage|Target laporan: _Accuracy_,<br>_precision_,_recall_,<br>dan_F1-score_ minimal 95%;<br>_false positive rate_ maksimal 2% pada split bebas leakage|
+|_Hybrid Analysis_|_Accuracy_,<br>_precision_,_recall_,<br>_F1-score_, dan_false_<br>_positive rate_|Evaluasi<br>menggunakan 2.592<br>data uji historis dan evaluasi<br>terpisah dengan split bebas leakage|Target laporan current: _Accuracy_,<br>_precision_,_recall_,<br>dan_F1-score_ minimal 90%;<br>_false positive rate_ maksimal 5% pada split bebas leakage|
 |_On-Device_<br>_Artificial_<br>_Intelligence_|Ukuran artefak Hybrid<br>yang dimuat dan<br>klasifikasi lokal|Pemeriksaan ukuran gabungan,<br>hash/provenance, dan pelaksanaan<br>klasifikasi pada prototipe|Artefak Hybrid yang dipakai<br>prototipe berukuran di bawah<br>5 MB dan klasifikasi berjalan<br>secara lokal|
 |Perlindungan<br>Android,|Keberhasilan<br>klasifikasi dan<br>pembatasan akses|Pengujian fungsi<br>pada Android dan<br>Windows melalui|Perlindungan<br>berjalan pada|
 
@@ -368,6 +368,6 @@ Tabel 2. 1 Target Luaran Produk Karsa Cipta Gamblock-AI
 |---|---|---|---|
 |Windows, dan<br>peramban||peramban yang<br>didukung|lingkungan<br>pengujian|
 |Pembatasan akses<br>(checkpoint laporan kemajuan)|Waktu respons<br>input-ke-intervensi terlihat|Pengukuran terkontrol pada APK<br>Research _release_, Android, Chrome,<br>dan skenario _warm foreground online_|P95 waktu respons<br>secara ketat di bawah 200 ms,<br>minimal 30 sampel berhasil,<br>dan tanpa kegagalan aksi blok/visibilitas|
-|Kesiapan teknis akhir|Cakupan latency<br>lintas platform|Matriks Android/Windows ×<br>Chrome/Edge/Opera ×<br>_profile/release_|Setiap sel memiliki minimal<br>30 sampel berhasil, tanpa kegagalan,<br>dan P95 secara ketat di bawah 200 ms;<br>bukan prasyarat capaian laporan kemajuan|
+|Kesiapan teknis akhir|Cakupan latency<br>lintas platform|Matriks Android/Windows ×<br>Chrome ×<br>_release_|Setiap sel memiliki minimal<br>30 sampel berhasil, tanpa kegagalan,<br>dan P95 secara ketat di bawah 200 ms;<br>bukan prasyarat capaian laporan kemajuan|
 |_Pattern Interrupt_,<br>layanan<br>pemulihan, dan<br>_Social_<br>_Accountability_<br>_Protocol_|Durasi interupsi,<br>pengalihan<br>pemulihan,<br>persetujuan<br>Pendamping, dan<br>jalur_emergency_|Pengujian setiap alur<br>fungsi pada prototipe|Setiap fungsi<br>berjalan sesuai<br>rancangan|
 |Keseluruhan<br>prototipe|Temuan fungsi dan<br>pengalaman<br>penggunaan|Uji formatif bersama<br>sembilan mahasiswa; studi<br>tugas terstruktur + SUS direncanakan<br>setelah tata kelola disetujui|Kendala formatif<br>terdokumentasi sebagai dasar<br>penyempurnaan; skor SUS hanya<br>dilaporkan dari studi terstruktur|

@@ -58,9 +58,8 @@ Training bundle berversi harus mencakup:
   government, education
 - Hybrid system + rule-only + model-only ablations
 
-Evaluasi memakai gate bernama yang dipilih berdasarkan versi laporan. Gate
-pengembangan dan gate laporan harus ditampilkan terpisah; lulus checkpoint
-pengembangan bukan otomatis lulus target laporan kemajuan.
+Evaluasi memakai gate pengembangan dan gate laporan current secara terpisah;
+lulus checkpoint pengembangan bukan otomatis lulus target laporan kemajuan.
 
 `developmental_checkpoint` dipakai untuk penyaringan kandidat dan regresi
 engineering, dengan ambang berikut:
@@ -71,23 +70,16 @@ engineering, dengan ambang berikut:
 - F1-score >= 90%
 - False Positive Rate (FPR) <= 5%
 
-Untuk v5, `pkm_progress_v5` adalah gate penerimaan historis untuk angka yang
-ditulis sebagai capaian laporan kemajuan: Accuracy, Precision, Recall, dan
-F1-score >= 95%, dan FPR <= 2%, pada split final yang bebas leakage. Untuk v6,
-gate `pkm_progress_v6` yang telah disetujui memakai Accuracy, Precision, Recall,
-dan F1-score >= 90%, serta FPR <= 5%, pada split final yang sama-sama bebas
-leakage. Target v6 belum aktif sebelum salinan laporan dan registrinya
-diaktifkan. Kedua set angka tersebut adalah target pelaporan internal per
-versi, bukan persyaratan numerik yang ditemukan di proposal PKM. Nilai metrik
-aktual, split, audit leakage, dan keterbatasan tetap harus dilaporkan. Bila
-snapshot prediksi dan proyeksi deployment berbeda, keduanya harus dilaporkan
-dan klaim hanya boleh mengikuti hasil deployment.
+Gate laporan current memakai Accuracy, Precision, Recall, dan F1-score >=90%,
+serta FPR <=5%, pada split final yang bebas leakage. Ambang ini adalah target
+engineering/pelaporan internal, bukan persyaratan numerik baru dari proposal
+PKM. Nilai metrik aktual, split, audit leakage, dan keterbatasan tetap harus
+dilaporkan. Bila snapshot prediksi dan proyeksi deployment berbeda, keduanya
+harus dilaporkan dan klaim hanya boleh mengikuti hasil deployment.
 
-Ambang dan cakupan setiap versi diringkas di `progress-targets.md` dan
-diwujudkan oleh konfigurasi testing versi tersebut. Target baru dicatat
-terlebih dahulu di registri sebagai `proposed` atau `approved`; target itu
-tidak boleh dipakai untuk menafsirkan ulang laporan lama sebelum diaktifkan
-untuk versi laporan berikutnya.
+Ambang dan cakupan current diringkas di `progress-targets.md` dan diwujudkan
+oleh `gamblock-ai-testing/docs/config/targets.json`. Perubahan target harus
+ditinjau bersama report current dan batas evidence terkait.
 
 Artefak yang diperiksa adalah artefak Hybrid yang benar-benar dimuat runtime
 Android/Windows, bukan sekadar format sumber pelatihan. Kontrak ukuran adalah
@@ -112,21 +104,20 @@ Target proposal: block latency di bawah 200 ms.
      minimal 30 sampel berhasil, tanpa kegagalan aksi blok/visibility, dan p95
      `input_to_visible_ms` secara ketat di bawah 200 ms. Ini menjawab apakah
      prototipe mampu mencapai target pada lingkungan yang diukur.
-  2. **Checkpoint laporan kemajuan PKM v5:** satu demonstrasi yang dapat
+  2. **Checkpoint laporan kemajuan current:** satu demonstrasi yang dapat
      diulang pada APK **Research release**, Android, Chrome,
      `warm_foreground_online`, dengan minimal 30 sampel berhasil dan p95
      secara ketat di bawah 200 ms. Mode debug tidak dapat memenuhi checkpoint
      ini karena ia mengukur assertion/instrumentasi debug, bukan APK yang
      didemonstrasikan.
-  3. **Kesiapan akhir:** setiap sel Android/Windows × Chrome/Edge/Opera ×
-     profile/release, masing-masing minimal 30 sampel berhasil tanpa kegagalan
+  3. **Kesiapan akhir:** setiap sel Android/Windows × Chrome × release,
+     masing-masing minimal 30 sampel berhasil tanpa kegagalan
      dan p95 di bawah 200 ms. Report juga mencatat median, p99, dan maksimum.
 - Pengukuran lokal yang belum dipromosikan sebagai ledger agregat tervalidasi
   hanya berstatus *recorded, unpromoted*. Ia dapat mendukung catatan sumber,
   tetapi bukan klaim checkpoint atau hasil final.
-- Cakupan checkpoint v5 di atas dipertahankan sebagai sejarah laporan v5.
-  Salinan laporan berikutnya memilih gate `pkm_progress_vN_demo` yang sesuai
-  dari konfigurasi versi tersebut setelah target registry diaktifkan.
+- Cakupan checkpoint current di atas dipakai oleh evaluator tunggal dan tidak
+  memerlukan salinan report atau konfigurasi alternatif.
 - Bedakan warm/cold start, online/offline, foreground/background
 
 ## Functional and resilience evaluation

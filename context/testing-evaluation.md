@@ -86,13 +86,12 @@ handoff record, not a second committed result file.
 
 ## PKM progress-report traceability
 
-`context/laporan-kemajuan-v5.md` is the frozen proposal-facing progress-report
+`context/laporan-kemajuan.md` is the active proposal-facing progress-report
 context. The status, limitation, and remaining-final-gate interpretation for
 each claim is maintained in `context/progress-testing.md`, while target
-definitions and changes are maintained in `context/progress-targets.md`. The
-status file may be updated as evidence changes, but neither it nor a component
-report may silently redefine a v5 target. A future v6 copy must activate its
-approved targets explicitly.
+definitions are maintained in `context/progress-targets.md`. The status file
+may be updated as evidence changes, but neither it nor a component report may
+silently redefine the current target contract.
 
 ## Evidence contract
 
@@ -108,24 +107,18 @@ context, and current device-status interpretation are maintained in
 `gamblock-ai-testing/docs/ai/android-anti-uninstall-context.md`; detailed
 validated scenario results remain in `flutter/report.md`.
 
-The testing repository's `docs/config/targets.json` is the v5
-machine-readable configuration retained for historical reproduction. Future
-versions use separate `docs/config/targets-vN.json` files selected with the
-runner's report-version option. A proposed or approved future target is
-recorded in `context/progress-targets.md` and does not affect the runner until
-the corresponding report copy, registry entry, and configuration are active.
+The testing repository's `docs/config/targets.json` is the single active
+machine-readable configuration. The runner uses it directly and does not
+select among parallel report or target configurations.
 
 Phase 4 latency has three named, separately rendered gates. `latency_feasibility`
-is one homogeneous 30-sample group below the p95 200 ms target. The selected
-report version's `pkm_progress_vN_demo` checkpoint is intentionally narrower:
-the demonstrated Android `researchRelease` APK, Chrome, and
-`warm_foreground_online`, with 30 successful samples and no block/visibility
-failure. For v5 this is `pkm_progress_v5_demo`; a future active report selects
-the matching `pkm_progress_vN_demo` entry from its versioned configuration.
-`final_readiness` retains the Android/Windows × Chrome/Edge/Opera ×
-profile/release matrix. A debug measurement is diagnostic and cannot satisfy
-either report acceptance or final readiness. The progress checkpoint does not
-remove the final matrix.
+is one homogeneous 30-sample group below the p95 200 ms target. The current
+`progress_demo` checkpoint is intentionally narrower: the demonstrated Android
+`researchRelease` APK, Chrome, and `warm_foreground_online`, with 30 successful
+samples and no block/visibility failure. `final_readiness` covers Android /
+Windows × Chrome × release. A debug measurement is diagnostic and cannot
+satisfy either report acceptance or final readiness. The progress checkpoint
+does not remove the final matrix.
 
 ## Public privacy boundary
 

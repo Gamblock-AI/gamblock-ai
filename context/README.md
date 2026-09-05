@@ -8,10 +8,9 @@ PKM adalah sumber mutlak.
 
 1. `pkm_proposal.md` — otoritas utama: masalah, target pengguna, fitur PKM,
    dasar ilmiah, tujuan evaluasi, deliverables PKM
-2. `progress-targets.md` — registri target per versi dan keputusan perubahan;
-   target baru tidak boleh disisipkan ke laporan versi yang sudah dibekukan
-3. `laporan-kemajuan-v5.md` (dan kelak salinan versi berikutnya) — konteks
-   pelaporan kemajuan dan target/temuan yang sedang dilaporkan; v5 read-only
+2. `progress-targets.md` — kontrak target current dan batas evidence
+3. `laporan-kemajuan.md` — konteks pelaporan kemajuan dan target/temuan yang
+   sedang dilaporkan
 4. Domain documents (`architecture.md`, `privacy-security.md`,
    `research-evaluation.md`) — menjelaskan bagaimana produk memenuhi
    persyaratan teknis
@@ -32,7 +31,7 @@ saat tersedia.
 | Detection, native client, API, storage | `architecture.md`, `privacy-security.md` |
 | Dataset, model, metric, experiment | `research-evaluation.md` |
 | PKM progress targets | `progress-targets.md`, report copy yang sedang aktif |
-| PKM progress testing/status | `laporan-kemajuan-v5.md` atau report copy aktif, `progress-testing.md`, `research-evaluation.md` |
+| PKM progress testing/status | `laporan-kemajuan.md`, `progress-testing.md`, `research-evaluation.md` |
 | Cross-repository testing/evidence | `testing-evaluation.md`, testing repo `docs/ai/` |
 | Implementation status | affected component `docs/ai/README.md` |
 | Terminology | `glossary.md` |
@@ -105,19 +104,14 @@ infrastructure → validasi. Contoh koordinasi wajib:
 | Workflow / validation policy | `AGENTS.md` / `context/README.md` | component `AGENTS.md`, manifests |
 | Current capability evidence | component `docs/ai/README.md` | affected README |
 
-## Versioned progress-report rule
+## Current progress-report rule
 
-`laporan-kemajuan-v5.md` is a frozen report snapshot. Later measurements,
-proposed targets, and target changes belong in `progress-testing.md` or the
-versioned target registry `progress-targets.md`; they must not be appended to
-the v5 report. When the user requests a new progress report based on the
-latest report, the AI agent must treat it as the next integer version (v5 →
-v6, v6 → v7, and so on), copy the latest report without changing its source,
-and apply only the explicitly approved targets for the new version. If the
-latest report or its version number is ambiguous, ask before creating or
-activating a target. Until the new report and registry target are activated,
-the previous version's machine configuration remains authoritative and the
-new target has no effect on its gates.
+`laporan-kemajuan.md` is the single active proposal-facing report. New
+measurements and target changes are applied to this report only after the
+current target contract and evidence boundaries have been reviewed together.
+Do not create parallel progress-report copies or alternate target
+configurations. Keep proposal source material unchanged and preserve every
+evidence limitation when updating the current report.
 
 Meaningful scope/architecture/workflow/contract changes require `context_version`
 bump di `manifest.yaml` dan setiap snapshot komponen yang terpengaruh.
