@@ -39,7 +39,7 @@ Evidence rows must preserve their scope, limitations, and privacy boundary.
 | Android Research UI runtime observation (Redmi 12C, v1.6.5) | **passed (recorded)** for the user-visible demonstration: the operator confirms the dashboard displayed “Proteksi Aktif” and Pattern Interrupt was visibly rendered; the same run now has 30 privacy-safe Phase 4 records in the testing ledger. | The official metric is the Phase 4 `input_to_visible_ms` ledger (p95 182.34 ms). The earlier external overlay proxy remains diagnostic only and is not used for the gate. |
 | Windows extension-to-model / blocking E2E | **pending** interactive Windows VM evidence. | Keep the Windows final-readiness procedure and promote only aggregate-safe results. |
 | Pattern Interrupt, recovery, and accountability flow | Product source/unit coverage exists; the cross-repository Flutter unit receipt is **pending** because its runner has not included Flutter. | Run the explicit Flutter scope and retain its canonical report result; runtime and accessibility scenarios remain part of final readiness. |
-| Backend integration | **pending** because an isolated `DATABASE_URL` was not available for the retained integration procedure. | Execute only with an isolated approved database and publish its testing-repository result. |
+| Backend integration | **passed (recorded)**: the explicit local PostgreSQL run and cross-repository runner completed migration/encrypted persistence, transaction rollback, and concurrent aggregate idempotency checks. | The isolated backend integration gate is no longer pending; retain the aggregate report and receipt as the current evidence. |
 | Formative user feedback, 9 UTY students | **completed formative activity, off-repository**. Participants tried the prototype, described flow/bug feedback, and exposed an uninstall-permission issue; the emergency route was the follow-up. | This was not SUS, a quantitative usability score, or an efficacy result. No identities, raw feedback, consent records, or recordings are retained in the repository. |
 | Structured task usability + SUS | **planned.** | Confirm the appropriate campus/authority governance before recruitment; use the privacy-safe protocol in `gamblock-ai-testing/docs/ai/pkm-usability-testing.md` and publish only approved aggregates. |
 
@@ -78,12 +78,11 @@ evidence-maturity boundaries above.
 
 ## Final-readiness gates retained
 
-No pending final technical gate is removed by this traceability update. Final
-readiness requires: leakage-safe strict model evaluation; actual runtime
-artifact contract; complete Android device matrix; complete privacy-safe
-latency matrix (Android/Windows × Chrome × release);
-Windows VM end-to-end evidence; isolated backend integration;
-and the approved structured usability protocol if human-participant results
-are to be claimed. The future usability study must distinguish formative
-feedback from a measured usability result and must not use product consent as
-research consent.
+Final readiness still requires: leakage-safe strict model evaluation; actual
+runtime artifact contract; complete Android device matrix; complete
+privacy-safe latency matrix (Android/Windows × Chrome × release); Windows VM
+end-to-end evidence; and the approved structured usability protocol if
+human-participant results are to be claimed. The isolated backend integration
+gate is passed and recorded. The future usability study must distinguish
+formative feedback from a measured usability result and must not use product
+consent as research consent.
