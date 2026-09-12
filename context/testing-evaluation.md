@@ -121,9 +121,9 @@ regression requires one Android device and treats the Windows browser matrix as
 optional and non-gating. A debug measurement is diagnostic and cannot satisfy
 the progress checkpoint.
 
-The browser client-runtime regression uses one Android device across the five
-configured Android browsers—Chrome, Edge, Brave, Firefox, and Samsung
-Internet—and explicit
+The browser client-runtime regression uses one Android device across the seven
+configured Android browsers—Chrome, Edge, Brave, Firefox, Samsung Internet,
+Xiaomi Browser, and UPX Browser—and explicit
 `<platform>/<browser>/<case>` folders under
 `gamblock-ai-testing/flutter/evidence/client-runtime/`. Android cells are
 required; Windows cells are optional when evidence is available. The active
