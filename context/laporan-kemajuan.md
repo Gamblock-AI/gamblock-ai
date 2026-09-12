@@ -154,7 +154,7 @@ sraroa wodous<br>coe Tare Geen e @ 6<br>Perlindungan : al =<br>petangkat aktif â
 
 # **3.4 Pengujian** 
 
-Pengujian fungsi dan pengalaman penggunaan dilakukan bersama sembilan mahasiswa Universitas Teknologi Yogyakarta. Peserta mencoba alur Gamblock-AI dan menyampaikan temuan mengenai fungsi serta penggunaan prototipe. Kegiatan ini bersifat formatif untuk menemukan kendala alur, bukan pengukuran _System Usability Scale_ (SUS), skor kuantitatif kegunaan, atau uji efektivitas. Salah satu temuan berkaitan dengan proses uninstall yang tetap gagal meskipun Administrator telah memberikan persetujuan. Temuan tersebut menjadi dasar pengembangan jalur emergency sebagai alternatif ketika Pendamping tidak dapat menyelesaikan proses perizinan. 
+Pengujian fungsi dan pengalaman penggunaan dilakukan bersama sembilan mahasiswa Universitas Teknologi Yogyakarta. Peserta mencoba alur Gamblock-AI dan menyampaikan temuan mengenai fungsi serta penggunaan prototipe. Kegiatan ini bersifat formatif untuk menemukan kendala alur, bukan pengukuran _System Usability Scale_ (SUS), skor kuantitatif kegunaan, atau uji efektivitas. Salah satu temuan berkaitan dengan proses uninstall yang tetap gagal meskipun Administrator telah memberikan persetujuan. Temuan tersebut menjadi dasar pengembangan jalur emergency sebagai alternatif ketika Pendamping tidak dapat menyelesaikan proses perizinan. Penguatan sumber terbaru menghapus pembukaan Settings otomatis dan membatasi pencopotan terkendali pada persetujuan Pendamping atau jalur emergency dua-Administrator; perubahan ini belum menjadi bukti runtime baru.
 
 
 

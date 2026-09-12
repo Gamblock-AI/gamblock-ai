@@ -56,6 +56,18 @@ adalah sumber mutlak.
    device ID, dan thumbprint public key native
 4. Android Keystore atau Windows LocalSystem/CNG memverifikasi signature,
    claim, batas waktu, dan device binding sebelum controlled action
+5. Grant `uninstall_detected` dari Pendamping atau `emergency_access` dari
+   jalur dua-Administrator dikonsumsi tepat sekali oleh native runtime; tidak
+   ada grant pencopotan mandiri tanpa Pendamping
+
+Pada Android Research, halaman Device Admin dan Accessibility hanya dibuka
+setelah tindakan setup/pemulihan eksplisit. Lifecycle aplikasi dan
+Accessibility Service hanya memperbarui status; keduanya tidak boleh membuka
+Settings secara otomatis. Karena deaktivasi Device Admin dan pembukaan UI
+uninstall tidak atomik, native menyimpan transaksi pencopotan terenkripsi dan
+menandai proteksi terdegradasi bila UI sistem dibatalkan. Android/OEM tetap dapat
+menyediakan jalur deaktivasi administrator yang tidak dapat diveto oleh APK
+biasa; batasan tersebut dicatat sebagai keterbatasan platform.
 
 Grant signing key terpisah dari access-token, Android application-signing, dan
 Windows Authenticode key. Private key hanya berada di backend; client membawa
