@@ -9,7 +9,7 @@ adalah sumber mutlak.
 | Repository | Stack | Primary responsibility |
 |---|---|---|
 | `gamblock_ai_apps/` | Flutter + Android/Windows native | Local protection, Pattern Interrupt, device/accountability |
-| `browser_extension/` | Chrome/Edge MV3 | Passive Windows browser DOM/URL sensor via loopback IPC |
+| `browser_extension/` | Chromium/Firefox MV3 | Passive Windows browser DOM/URL sensor via loopback IPC |
 | `gamblock-ai-website/` | Next.js, React | Web psychoeducation/self-regulation, accountability, public |
 | `gamblock-ai-backend/` | Go + ent + PostgreSQL | Identity, relationships, approvals, recovery state, aggregates |
 | `gamblock-ai-infrastructure/` | Ansible + Docker + Caddy | Backend/website delivery, TLS, database |
@@ -113,7 +113,10 @@ yang tidak ditandatangani ditolak.
   ke `ProgramData`, dan LocalSystem service melalui Windows Installer/SCM.
   Peserta berjalan sebagai standard user; grant partner adalah offboarding
   normal dan administrator pilot tetap dapat melakukan clean break-glass
-  uninstall.
+  uninstall. Kebijakan force-install extension dan penonaktifan mode privat/
+  developer tools untuk Chrome, Edge, dan Firefox hanya diterapkan melalui
+  opsi MSI pilot yang eksplisit, menggunakan ID listing store resmi, dan gagal
+  tertutup jika bertabrakan dengan kebijakan administrator yang sudah ada.
 
 Debug APK, unsigned ZIP, script dari folder user-writable, dan pemaksaan
 `ExecutionPolicy Bypass` bukan artifact distribusi.
@@ -140,8 +143,13 @@ The variant/package/signing matrix is maintained in
 
 - URL characteristics dan DOM text (title, headings, anchor text) dari surface
   yang didukung
-- Windows extension merelay ke loopback service yang dipasangkan; Android
-  menggunakan bridge/accessibility path
+- Windows extension merelay hanya dari tab top-level aktif pada window browser
+  yang fokus. Pairing memakai mutual HMAC challenge tanpa mengirim token;
+  `scan_id` buram mengikat verifikasi konteks sebelum native agent mencoba Back
+  lalu close-tab. Tab/window ID tetap di memori extension. Agent LocalSystem
+  memakai pipe acak yang mengikat PID, session, installed path, Release
+  signature, dan inherited bootstrap secret. Android menggunakan
+  bridge/accessibility path.
 
 ### Preprocessing
 

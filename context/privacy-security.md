@@ -64,6 +64,14 @@ Ini berarti:
     expiry singkat, serta diverifikasi ulang oleh Android/Windows. Enkripsi
     Keystore/DPAPI melindungi penyimpanan lokal tetapi tidak menggantikan
     verifikasi keaslian grant.
+11. Pairing token extension Windows tidak dikirim melalui WebSocket. Token
+    menjadi kunci mutual HMAC challenge-response; nonce dan proof saja yang
+    melintasi loopback. Identitas tab/window tetap di extension, sedangkan
+    service menerima `scan_id` buram dan hasil probe konteks terbatas.
+12. Pipe LocalSystem-to-agent memakai nama acak per runtime dan menerima hanya
+    PID yang diluncurkan service pada session aktif, installed executable yang
+    cocok, Release Authenticode signature yang valid, serta bootstrap secret
+    yang diwariskan melalui handle terbatas. Named mutex bukan trust boundary.
 
 ## Interpretasi engineering (bukan dari proposal)
 
