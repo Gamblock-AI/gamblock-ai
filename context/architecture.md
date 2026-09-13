@@ -69,6 +69,16 @@ menandai proteksi terdegradasi bila UI sistem dibatalkan. Android/OEM tetap dapa
 menyediakan jalur deaktivasi administrator yang tidak dapat diveto oleh APK
 biasa; batasan tersebut dicatat sebagai keterbatasan platform.
 
+Deteksi removal Research mengikat konteks aplikasi target dalam sesi lokal
+berumur maksimum 30 detik di antara Settings, security center OEM, launcher,
+transisi system UI, dan package installer yang telah di-resolve. Sinyal paket,
+resource ID, class kontrol, dan urutan event diprioritaskan sebelum fallback
+teks lokal; target/surface yang tidak terkait atau expiry menghapus sesi.
+Respons dibatasi pada satu Back dan maksimal satu Home bila surface terlindungi
+masih aktif. Snapshot lokal menampilkan profil OEM dan kesehatan Device Admin,
+Accessibility, foreground service, serta battery exemption tanpa menambahkan
+field ke payload backend.
+
 Grant signing key terpisah dari access-token, Android application-signing, dan
 Windows Authenticode key. Private key hanya berada di backend; client membawa
 trust store public key `kid` saat ini dan berikutnya untuk rotasi. Grant lama

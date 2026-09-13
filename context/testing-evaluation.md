@@ -101,7 +101,10 @@ or old number without a validated export is not promoted to runtime evidence.
 
 Android Research anti-uninstall evidence covers supported OS surfaces and
 lifecycle recovery. The required OEM families and scenarios are versioned in
-the testing repository's `flutter/config/device-matrix.json`.
+the testing repository's `flutter/config/device-matrix.json`. The required
+families are AOSP/Pixel, Samsung, Xiaomi/Redmi, OPPO/realme/OnePlus,
+vivo/iQOO, and Transsion (Infinix/TECNO/itel); source aliases and unit tests do
+not replace signed device observations.
 The cross-OEM problem statement, Firebase Test Lab Android Device Streaming
 context, and current device-status interpretation are maintained in
 `gamblock-ai-testing/docs/ai/android-anti-uninstall-context.md`; detailed
