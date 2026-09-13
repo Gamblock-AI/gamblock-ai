@@ -106,17 +106,27 @@ yang tidak ditandatangani ditolak.
   lokal, block, dan Pattern Interrupt, tetapi source set-nya tidak memuat
   pemantauan Settings/package installer atau pencegahan uninstall.
 - **Android research:** package dan signing identity terpisah mempertahankan
-  seluruh prototipe Social Accountability untuk instalasi terbantu pada
-  perangkat pilot. Resistensi removal tetap best-effort dan memiliki
-  administrator break-glass.
+  seluruh prototipe Social Accountability. APK rilis stabil dapat didistribusikan
+  publik hanya sebagai asset GitHub Release resmi yang checksum-nya dicatat
+  pada katalog rilis; build debug, staging, atau unsigned tetap bukan unduhan
+  pengguna. Resistensi removal tetap best-effort dan memiliki administrator
+  break-glass.
 - **Windows pilot:** per-machine MSI memasang binary ke `Program Files`, state
   ke `ProgramData`, dan LocalSystem service melalui Windows Installer/SCM.
+  MSI rilis stabil dapat didistribusikan publik hanya dari asset GitHub Release
+  resmi; ZIP dan script pemasangan manual tidak menjadi artifact distribusi.
   Peserta berjalan sebagai standard user; grant partner adalah offboarding
-  normal dan administrator pilot tetap dapat melakukan clean break-glass
-  uninstall. Kebijakan force-install extension dan penonaktifan mode privat/
-  developer tools untuk Chrome, Edge, dan Firefox hanya diterapkan melalui
-  opsi MSI pilot yang eksplisit, menggunakan ID listing store resmi, dan gagal
-  tertutup jika bertabrakan dengan kebijakan administrator yang sudah ada.
+  normal dan administrator tetap dapat melakukan clean break-glass uninstall.
+  Kebijakan force-install extension dan penonaktifan mode privat/developer
+  tools untuk Chrome, Edge, dan Firefox hanya diterapkan melalui opsi MSI
+  eksplisit, menggunakan ID listing store resmi, dan gagal tertutup jika
+  bertabrakan dengan kebijakan administrator yang sudah ada.
+
+Landing page mengambil katalog rilis publik dari backend. Administrator
+memperbarui metadata bilingual, asset, ukuran, checksum SHA-256, dan status
+publik melalui operasi yang diaudit; backend menerima hanya URL HTTPS asset
+langsung dari organisasi GitHub resmi dan menolak staging. Metadata katalog
+bukan data penjelajahan dan tidak membawa telemetri perangkat atau pengguna.
 
 Debug APK, unsigned ZIP, script dari folder user-writable, dan pemaksaan
 `ExecutionPolicy Bypass` bukan artifact distribusi.
