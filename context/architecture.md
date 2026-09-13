@@ -34,6 +34,22 @@ adalah sumber mutlak.
    diekstrak atau diklasifikasi: Android melewati event
    `CONTENT_CHANGE_TYPE_TEXT`, extension tidak membaca keystroke dan hanya
    memicu pada load, Enter/submit, dan perubahan URL.
+   Android Play mempertahankan filter Chrome/Edge. Android Research menemukan
+   browser mandiri dari handler HTTP/HTTPS dan browser selector yang dideklarasikan,
+   mempertahankan Chrome/Edge sebagai baseline, dan mengecualikan package
+   Settings/installer/launcher anti-tamper. Sinyal struktur WebView/GeckoView/
+   page-container dipakai sebelum OCR lokal yang dibatasi. Hanya halaman
+   mandiri yang sudah committed dapat diklasifikasi, di-OCR, atau dihitung
+   sebagai kegagalan. Custom Tabs/Trusted Web Activities, halaman internal
+   browser, editing, dialog, tab overview, surface sementara/tidak dikenal,
+   serta WebView milik aplikasi non-browser tidak masuk cakupan. Jika tiga
+   observasi halaman committed tidak menyediakan URL, tree content, maupun
+   OCR, versi browser tersebut ditandai `opaque`: frame pertama penjelasan
+   overlay native harus tampil sebelum pengguna dialihkan ke Home. Activity
+   native menjadi fallback penjelasan; jika keduanya gagal, browser tetap
+   terbuka dan Home tidak dijalankan. Hanya package/version dan status kesehatan
+   sensor yang disimpan lokal; package, URL, screenshot, dan teks halaman tidak
+   masuk payload backend.
 2. Input masuk ke local protection runtime: normalisasi dan pembatasan input
    yang didukung
 3. Dua jalur paralel:
